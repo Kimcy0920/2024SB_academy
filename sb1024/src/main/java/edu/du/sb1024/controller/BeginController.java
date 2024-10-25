@@ -28,8 +28,8 @@ public class BeginController {
     public void init() {
         Member member = Member.builder()
                 .id(1001L)
-                .email("hong1@aaa.com")
-                .username("hong1")
+                .email("admin@mail.com")
+                .username("관리자")
                 .password(passwordEncoder().encode("1234"))
                 .role("ADMIN")
                 .registerDateTime(LocalDateTime.now())
@@ -38,8 +38,8 @@ public class BeginController {
 
         member = Member.builder()
                 .id(1002L)
-                .email("test1@aaa.com")
-                .username("test1")
+                .email("user@mail.com")
+                .username("유저")
                 .password(passwordEncoder().encode("1234"))
                 .role("USER")
                 .registerDateTime(LocalDateTime.now())

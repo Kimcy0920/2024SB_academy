@@ -1,11 +1,12 @@
 package edu.du.sb1024.controller;
 
 import edu.du.sb1024.entity.Member;
-import edu.du.sb1024.repository.MemberRepository;
 import edu.du.sb1024.survey.AnsweredData;
 import edu.du.sb1024.survey.Question;
+import edu.du.sb1024.survey.Respondent;
 import edu.du.sb1024.survey.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,25 +25,19 @@ public class SurveyController {
 	@Autowired
 	SurveyService surveyService;
 
-	@Autowired
-	private MemberRepository memberRepository;
-
-	// member_id로 member 1명의 정보를 검색하고, answered_id가 null 인지 체크하고,
-	// null이 아닌경우 if, null인 경우 else 실행.
 	@GetMapping("/surveyForm")
 	public String form(Member member, Model model) {
-		if (memberRepository.findById(member.getId()) != null) {
-			List<Question> questions = createQuestions();
-			for (Question question : questions) {
-				System.out.println(question);
-			}
-			model.addAttribute("questions", questions);
-			return "/survey/surveyForm";
-		} else {
-			System.out.println("이미 설문조사를 완료하셨습니다.");
-			return "redirect:/sample/all";
+		List<Question> questions = createQuestions();
+		for (Question question : questions) {
+			System.out.println(question);
 		}
-
+		model.addAttribute("questions", questions);
+		// 기본 AnsweredData 객체 생성 및 초기화
+		AnsweredData ansData = new AnsweredData();
+		ansData.setResponses(new ArrayList<>());  // 빈 리스트로 초기화
+		ansData.setRes(new Respondent());         // Respondent 객체도 초기화
+		model.addAttribute("ansData", ansData);   // 모델에 추가
+		return "/survey/surveyForm";
 	}
 
 	private List<Question> createQuestions() {
@@ -54,9 +50,19 @@ public class SurveyController {
 	}
 
 	@PostMapping("/submitted")
-	public String submit(@ModelAttribute("ansData") AnsweredData data) {
-		surveyService.save(data);
+	public String submit(@ModelAttribute("ansData") AnsweredData data,
+						 @AuthenticationPrincipal Member member) {
+		data.setMember(member); // 로그인한 멤버 설정
+
+		Respondent respondent = data.getRes();
+		respondent.setMember(member); // Respondent에도 Member 설정
+
+		surveyService.save(data); // 저장
 		return "/survey/submitted";
 	}
-
+//	@GetMapping("/submitted")
+//	public String submit2(Model model) {
+//
+//		return "/survey/submitted";
+//	}
 }

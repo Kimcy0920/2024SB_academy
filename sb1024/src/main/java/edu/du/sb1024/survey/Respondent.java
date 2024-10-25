@@ -23,7 +23,7 @@ public class Respondent {
 	private int age;
 	private String location;
 
-	@OneToOne
+	@ManyToOne // 여러 Respondent가 하나의 Member에 속할 수 있음
 	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 }

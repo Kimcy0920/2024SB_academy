@@ -5,83 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d9e24d4-587f-477e-b009-d3dc2fbf8f93" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/ChangePasswordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/DuplicateMemberException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/MemberNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/MemberRegisterService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/WrongIdPasswordException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/static/assets/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/static/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/static/js/scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/register/step1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/register/step2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/register/step3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/board/board/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/board/board/controller/BoardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/board/board/dto/BoardDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/board/board/dto/BoardDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/log4jdbc.log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/log4jdbc.log4j2.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/mapper/sql-board.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/mapper/sql-board.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/board/boardDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/board/boardDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/board/boardList.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/board/boardList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/board/boardWrite.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/board/boardWrite.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/error/error_default.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/error/error_default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/bootWar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/bootWar/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/war/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/war/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/20241017/877967892865600.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/aop/LoggerAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/aop/LoggerAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/aop/TransactionAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/aop/TransactionAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/board/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/board/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/board/dto/BoardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/board/dto/BoardDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/board/dto/BoardFileDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/board/dto/BoardFileDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/board/mapper/BoardMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/board/mapper/BoardMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/board/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/board/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/board/service/BoardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/board/service/BoardServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/common/ExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/common/ExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/common/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/common/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/configuration/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/configuration/DatabaseConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/configuration/WebMvcConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/configuration/WebMvcConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/board/interceptor/LoggerInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/board/interceptor/LoggerInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4jdbc.log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4jdbc.log4j2.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/sql-board.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/sql-board.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/board/boardDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/board/boardDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/board/boardList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/board/boardList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/board/boardWrite.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/board/boardWrite.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error/error_default.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error/error_default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/src/main/java/edu/du/sb1023_3/Sb10233Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sb1023_3/src/test/java/edu/du/sb1023_3/Sb10233ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/controller/SurveyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/controller/SurveyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/survey/AnsweredData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/survey/AnsweredData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/survey/Respondent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/survey/Respondent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/survey/surveyForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/survey/surveyForm.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +48,7 @@
     "Spring Boot.BoardApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/DU/IdeaProjects/sb1015",
+    "last_opened_file_path": "C:/Users/DU/IdeaProjects/fileUploadBoard",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -166,6 +96,7 @@
       <workItem from="1729749863152" duration="1256000" />
       <workItem from="1729752642498" duration="1901000" />
       <workItem from="1729757314814" duration="3164000" />
+      <workItem from="1729833863120" duration="137000" />
     </task>
     <servers />
   </component>

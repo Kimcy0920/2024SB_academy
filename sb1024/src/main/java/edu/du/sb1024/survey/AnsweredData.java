@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,14 +29,14 @@ public class AnsweredData { // AnsweredData 클래스를 두 개로 쪼개놓음
 	)
 	@OrderColumn // 배열을 입력받는데 순번을 정해줌.
 	@Column(name = "seq") // responses 테이블에 "seq" 칼럼이 만들어짐
-	private List<String> responses; // ArrayList 형식의 responses
+	private List<String> responses = new ArrayList<>(); // ArrayList 형식의 responses
 	// } *
 
 	@OneToOne // 1:1관계
 	@JoinColumn(name = "RESPONDENT_ID") // respondent와 "RESPONDENT_ID" 조인함
 	private Respondent res;
 
-	@OneToOne
+	@ManyToOne // 여러 AnsweredData가 하나의 Member에 속할 수 있음
 	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 }

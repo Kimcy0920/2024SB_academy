@@ -22,11 +22,6 @@ public class MemberController {
         this.memberRegisterService = memberRegisterService;
     }
 
-//    @GetMapping("/")
-//    public String root() {
-//        return "redirect:/register/step1";
-//    }
-
     @RequestMapping("/register/step1")
     public String handleStep1() {
         return "register/step1";

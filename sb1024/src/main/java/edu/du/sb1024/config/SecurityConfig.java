@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,37 +31,25 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withUsername("user1")
-//                .password(passwordEncoder().encode("1234"))
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("---------filterChain-------------");
         http.authorizeHttpRequests()
 //                .antMatchers("/**").denyAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/assets/**").permitAll()
                 .antMatchers("/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/board/**").authenticated()
+                .antMatchers("/error/**").permitAll()
                 .antMatchers("/sample/all").permitAll()
-                .antMatchers("/register/step1").permitAll()
-                .antMatchers("/register/step2").permitAll()
-                .antMatchers("/register/step3").permitAll()
-                .antMatchers("/survey/surveyForm").permitAll()
-                .antMatchers("/survey/submitted").permitAll()
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/survey/**").authenticated()
                 .antMatchers("/sample/login").permitAll()
                 .antMatchers("/sample/admin").hasRole("ADMIN")
                 .anyRequest().authenticated();
-
-//        http.formLogin();
-//        http.formLogin().loginPage("/sample/login").permitAll();
         http.csrf().disable();
-//        http.logout();
         http.formLogin()
                 .loginPage("/sample/login") // 로그인 페이지 URL 설정
                 .defaultSuccessUrl("/sample/all", true) // 로그인 성공 후 리다이렉트 URL 설정

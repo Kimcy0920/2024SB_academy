@@ -24,24 +24,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("==========>사용자: " + username);
-//        UserDetails user = User.withUsername("user123")
-//                .password(passwordEncoder().encode("1234"))
-//                .roles("ADMIN")
-//                .build();
-//        return user;
-
-//        Member member = Member.builder()
-//                .id(1001L)
-//                .username("홍길동")
-//                .password(passwordEncoder().encode("1234"))
-//                .email("hong@aaa.com")
-//                .build();
-//        return toUserDetails(member);
 
         Optional<Member> member = memberRepository.findByUsername(username);
-//        if (!member.isPresent()) {
-//            throw new UsernameNotFoundException(username);
-//        }
         return toUserDetails(member.get());
 
     }
@@ -51,11 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private UserDetails toUserDetails(Member member) {
         return User.builder()
-//                .username(member.getUsername())
-                .username(member.getEmail())
+                .username(member.getUsername())
                 .password(member.getPassword())
-//                .authorities(new SimpleGrantedAuthority(member.getRole().toString()))
                 .roles(member.getRole())
                 .build();
     }
+
 }

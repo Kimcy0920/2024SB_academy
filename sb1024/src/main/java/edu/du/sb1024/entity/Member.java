@@ -36,13 +36,13 @@ public class Member {
 
     private LocalDateTime registerDateTime;
 
-    @OneToOne
-    @JoinColumn(name = "ANSWERED_ID")
-    private AnsweredData ans;
-
-    @OneToOne
-    @JoinColumn(name = "RESPONDENT_ID")
-    private Respondent res;
+//    @OneToOne
+//    @JoinColumn(name = "ANSWERED_ID")
+//    private AnsweredData ans;
+//
+//    @OneToOne
+//    @JoinColumn(name = "RESPONDENT_ID")
+//    private Respondent res;
 
     public Member(String email, String password,
                   String username, String role, LocalDateTime regDateTime) {
