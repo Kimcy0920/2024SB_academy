@@ -4,12 +4,15 @@
       layout:decorate="~{layout/basic.html}">
 
 <div layout:fragment="content">
-<head>
-  <title>회원가입</title>
-</head>
-<body>
-<p><strong th:text="${registerRequest.name} + '님'">이름</strong>
-  회원 가입을 완료했습니다.</p>
-<p><a th:href="@{/sample/all}">[첫 화면 이동]</a></p>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title th:text="#{member.register}">Member Register</title>
+  </head>
+  <body>
+  <p th:text="#{register.done(${registerRequest.name}, ${registerRequest.email})}">
+    Registration completed for [Name] and [Email]
+  </p>
+  <p><a th:href="@{/sample/all}">[첫 화면 이동]</a></p>
+  </body>
+</div>
 </html>
