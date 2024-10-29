@@ -1,6 +1,6 @@
 package edu.du.sb1024.fileuploadboard.entity;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -8,6 +8,10 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name= "t_board")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Board {
 
 	@Id

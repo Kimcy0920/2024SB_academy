@@ -1,11 +1,14 @@
 package edu.du.sb1024.fileuploadboard.entity;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
-@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name= "t_board")
 public class Board {
