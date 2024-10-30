@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{change.pwd.title}"></title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<form th:action="@{/edit/changePassword}" th:object="${command}" method="post"> <!-- "passwordForm"을 "command"로 수정 -->
+    <p>
+        <label>
+            <span th:text="#{currentPassword}"></span>:<br>
+            <input type="text" th:field="*{currentPassword}" />
+            <div th:if="${#fields.hasErrors('currentPassword')}" th:errors="*{currentPassword}"></div>
+        </label>
+    </p>
+    <p>
+        <label>
+            <span th:text="#{newPassword}"></span>:<br>
+            <input type="password" th:field="*{newPassword}" />
+            <div th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></div>
+        </label>
+    </p>
+    <input type="submit" th:value="#{change.btn}" />
+</form>
+</body>
+</html>
