@@ -1,4 +1,4 @@
-package edu.du.sb1029.validator;
+package edu.du.sb1029.board.validator;
 
 import edu.du.sb1029.board.entity.Board;
 import org.springframework.validation.Errors;
