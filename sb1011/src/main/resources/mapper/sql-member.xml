@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.du.sb1011.mapper.MemberMapper">
+	<insert id="insertMember" parameterType="edu.du.sb1011.dto.MemberDto">
+		<![CDATA[
+			INSERT INTO member
+			(
+				id,
+				pw,
+				name
+			) 
+			VALUES 
+			(
+				#{id},
+				#{pw},
+				#{name}
+			)
+		]]>
+	</insert>
+	
+	<select id="selectMember" parameterType="String" resultType="edu.du.sb1011.dto.MemberDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				member
+			WHERE
+				id = #{id}
+			  AND pw = #{pw}
+		]]>
+	</select>
+</mapper>

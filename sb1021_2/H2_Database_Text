@@ -1,0 +1,9 @@
+1.
+sb1021의 build.gradle 복사 후 Security 부분만 삭제
+main 실행 -> /h2-console 입력하면 h2.db 페이지 나옴
+콘솔창에 H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:~'
+'jdbc:h2:mem:4e80c199-3303-4093-bc34-8e6b06606152' 코드를 JDBC URL 에 입력
+
+2. properties h2-db 연결 코드
+JDBC URL 에 jdbc:h2:mem:Spring5DB; 입력
+*비밀번호는 원래 없음

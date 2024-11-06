@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+<div layout:fragment="content">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 조회</title>
+</head>
+<body>
+<form th:action="@{/members}" th:object="${cmd}" method="post">
+  <div>
+    <label>from: <input type="date" th:field="*{from}" /></label>
+    <div th:if="${#fields.hasErrors('from')}" th:errors="*{from}">잘못된 입력입니다</div>
+    ~
+    <label>to: <input type="date" th:field="*{to}" /></label>
+    <div th:if="${#fields.hasErrors('to')}" th:errors="*{to}">잘못된 입력입니다</div>
+    <input type="submit" value="조회">
+  </div>
+</form>
+
+<div th:if="${members != null}">
+  <table border="1">
+    <thead>
+    <tr>
+      <th>번호</th>
+      <th>이메일</th>
+      <th>이름</th>
+      <th>가입일</th>
+    </tr>
+    </thead>
+    <div th:if="${#lists.isEmpty(members)}">조회된 회원이 없습니다.</div>
+    <tbody>
+    <tr th:each="mem : ${members}">
+      <td th:text="${mem.id}">번호</td>
+      <td><a th:href="@{/members/{id}(id=${mem.id})}" th:text="${mem.email}">이메일</a></td>
+      <td th:text="${mem.name}">이름</td>
+      <td th:text="${#temporals.format(mem.registerDateTime, 'yyyy-MM-dd HH:mm:ss')}">가입일</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</div>
+</html>

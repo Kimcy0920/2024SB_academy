@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>응답 내용</title>
+</head>
+<body>
+<p>응답 내용:</p>
+<ul>
+  <li th:each="response, iterStat : ${ansData.responses}">
+    <span th:text="${iterStat.index + 1} + '번 문항: ' + ${response}"></span>
+  </li>
+</ul>
+<p>응답자 위치: <span th:text="${ansData.res.location}"></span></p>
+<p>응답자 나이: <span th:text="${ansData.res.age}"></span></p>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9d9e24d4-587f-477e-b009-d3dc2fbf8f93" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/static/css/app.62cbffcb.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/static/js/app.069e3d1e.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/static/js/chunk-vendors.1a657902.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/static/js/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/templates/board/boardDetail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/templates/board/boardList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sb1029/src/main/resources/templates/board/boardWrite.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/Sb1024Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/Sb1024Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/entity/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/fileuploadboard/board/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/fileuploadboard/board/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/fileuploadboard/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/java/edu/du/sb1024/fileuploadboard/entity/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/board/boardList.html" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/board/boardList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/register/step2.html" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/main/resources/templates/register/step2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1024/src/test/java/edu/du/sb1024/Sb1024ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1024/src/test/java/edu/du/sb1024/Sb1024ApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/Sb1025Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/Sb1025Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/controller/RegisterRequestValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/controller/RegisterRequestValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/fileuploadboard/board/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/fileuploadboard/board/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/fileuploadboard/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/fileuploadboard/entity/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/spring/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/java/edu/du/sb1024/spring/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/resources/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/resources/templates/board/boardList.html" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/resources/templates/board/boardList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/main/resources/templates/register/step2.html" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/main/resources/templates/register/step2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sb1025/src/test/java/edu/du/sb1024/Sb1024ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sb1025/src/test/java/edu/du/sb1024/Sb1024ApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2nYh18whESQOMaagxW3nhC6r9lq" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.06장 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BoardApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DU/IdeaProjects/fileUploadBoard&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="BoardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="board.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="board.BoardApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="9d9e24d4-587f-477e-b009-d3dc2fbf8f93" name="변경" comment="" />
+      <created>1729155698780</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729155698780</updated>
+      <workItem from="1729155699807" duration="2284000" />
+      <workItem from="1729225858343" duration="841000" />
+      <workItem from="1729748791130" duration="384000" />
+      <workItem from="1729749863152" duration="1256000" />
+      <workItem from="1729752642498" duration="1901000" />
+      <workItem from="1729757314814" duration="3164000" />
+      <workItem from="1729833863120" duration="137000" />
+      <workItem from="1730191799431" duration="7000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

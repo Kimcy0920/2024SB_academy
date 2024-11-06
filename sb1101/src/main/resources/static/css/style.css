@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+html{overflow:scorll;}
+html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {
+	margin:0; outline:0; border:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent;
+}
+body { 
+	font-size:0.875em; line-height:1.5; color:#666; -webkit-text-size-adjust:none; min-width:320px;
+	font-family:'NanumGothic','나눔고딕',dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-Serief;
+}
+h1, h2, h3 {font-size: 1.5em;}
+p{margin:0; padding:0;}
+ul{margin:0;}
+a:link, a:visited {text-decoration:none; color: #656565;}
+input{vertical-align:middle;}
+input:focus {outline:0;}
+caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visibility:hidden; font-size:0; line-height:0;}
+
+.container {max-width:1024px; margin:30px auto;}
+.board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
+.board_list thead th:first-child {background-image:none;}
+.board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}
+.board_list tbody td {border-top:1px solid #ccc; padding:13px 0; text-align:center; vertical-align:middle;}
+.board_list tbody tr:first-child td {border:none;}
+.board_list tbody tr:hover{background:#ffff99;} 
+.board_list tbody td.title {text-align:left; padding-left:20px;}
+.board_list tbody td a {display:inline-block}
+
+.board_detail {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; border-collapse:collapse;}
+.board_detail tbody input {width:100%;}
+.board_detail tbody th {text-align:left; background:#f7f7f7; color:#3b3a3a; vertical-align:middle; text-align: center;}
+.board_detail tbody th, .board_detail tbody td {padding:10px 15px; border-bottom:1px solid #ccc;}
+.board_detail tbody textarea {width:100%; min-height:170px}
+
+.btn {margin:5px; padding:5px 11px; color:#fff !important; display:inline-block; background-color:#7D7F82; vertical-align:middle; border-radius:0 !important; cursor:pointer; border:none;}
+.btn:hover {background: #6b9ab8;}
+
+.file_list a {display:inherit !important;}
+
+.pagination-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.pagination {
+	display: inline-flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pagination .page-item {
+	margin: 0 5px;
+}
+
+.pagination .page-item .page-link {
+	padding: 8px 12px;
+	background-color: #f5f5f5; /* 기본 버튼 연한 회색 */
+	color: #333;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	text-decoration: none;
+}
+
+.pagination .page-item .page-link:hover {
+	background-color: #e8e8e8; /* 마우스 오버 시 약간 더 진한 회색 */
+}
+
+.pagination .page-item.active .page-link {
+	background-color: #cccccc; /* 선택된 페이지 버튼 진한 회색 */
+	color: #333;
+	border-color: #bbb;
+}
+
+.pagination .page-item.disabled .page-link {
+	background-color: #f9f9f9; /* 비활성화된 버튼 거의 흰색 */
+	color: #bbb;
+	cursor: not-allowed;
+}
+
+.pagination .page-item.first .page-link,
+.pagination .page-item.last .page-link,
+.pagination .page-item.next .page-link,
+.pagination .page-item.previous .page-link {
+	background-color: #d1d1d1; /* 사이드 버튼 slightly darker gray */
+	color: #333;
+}
+
+

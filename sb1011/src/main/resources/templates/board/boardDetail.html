@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>게시글 정보</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="container">
+		<h2>게시글 정보</h2>
+	    <form id="frm" method="post">
+	    	<table class="board_detail">
+				<colgroup>
+					<col width="15%"/>
+					<col width="35%"/>
+					<col width="15%"/>
+					<col width="35%"/>
+				</colgroup>
+				<caption>게시글 상세내용</caption>
+				<tbody>
+					<tr>
+						<th scope="row">글 번호</th>
+						<td th:text="${board.boardIdx }"></td>
+						<th scope="row">조회수</th>
+						<td th:text="${board.hitCnt }"></td>
+					</tr>
+					<tr>
+						<th scope="row">작성자</th>
+						<td th:text="${board.creatorId }"></td>
+						<th scope="row">작성일</th>
+						<td th:text="${board.createdDatetime }"></td>
+					</tr>
+					<tr>
+						<th scope="row">제목</th>
+						<td th:text="${board.title }" colspan="3" id="title" name="title"></td>
+					</tr>
+					<tr>
+						<td th:text="${board.contents }" colspan="4" class="view_text" title="내용" id="contents" name="contents" style="height: 200px;"></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx }">
+		</form>
+
+		<h3>답글 작성</h3>
+		<form id="replyForm" method="post" action="/board/insertReply.do">
+			<input type="hidden" id="parentBoardIdx" name="parentBoardIdx" th:value="${board.boardIdx }">
+			<div>
+				<textarea id="replyContents" name="replyContents" rows="4" style="width: 100%;"></textarea>
+				<input type="submit" value="입력" class="btn">
+			</div>
+		</form>
+		<hr>
+		<a href="#this" id="list" class="btn">목록으로</a>
+		<a href="#this" id="edit" class="btn">수정하기</a>
+		<a href="#this" id="delete" class="btn">삭제하기</a>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list").on("click", function(){
+				location.href = "/board/openBoardList.do";
+			});
+			
+			$("#edit").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/board/updateBoard.do";
+				frm.submit();
+			});
+			
+			$("#delete").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/board/deleteBoard.do";
+				frm.submit();
+			});
+		});
+	</script>
+</body>
+</html>

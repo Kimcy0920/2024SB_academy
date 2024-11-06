@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메인 화면</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 100px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    .btn {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>환영합니다!</h1>
+  <p>아래 버튼을 클릭하여 원하는 작업을 진행하세요.</p>
+  <a href="/board/openBoardList.do" class="btn btn-primary">게시글 목록</a>
+  <a href="/board/openBoardWrite.do" class="btn btn-success">게시글 작성</a>
+  <a th:href="@{/board/openLoginMember.do}">로그인</a>
+  <a th:href="@{/board/openInsertMember.do}">회원가입</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

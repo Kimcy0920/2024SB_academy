@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--thymeleaf 사용할 때 필요한 코드. 생략 가능 -->
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf ex1</title>
+</head>
+<body>
+  <h1 th:text="${msg}">안녕하세요</h1>
+<!--컨트롤러에서 코드로 값을 주면 값이 먼저 화면에 출력됨 -->
+  <ul>
+    <li th:each="dto : ${list}">
+        [[ ${dto} ]]
+    </li>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>board</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="container">
+	    <h2>게시글 등록</h2>
+	    <form id="frm" name="frm" method="post" action="/board/insertBoard.do">
+	    	<table class="board_detail">
+	    		<tr>
+	    			<td>제목</td>
+	    			<td><input type="text" id="title" name="title"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">
+		    			<textarea id="contents" name="contents"></textarea>
+	    			</td>
+	    		</tr>
+	    	</table>
+			<a href="#this" id="list" class="btn">목록</a>
+	    	<input type="submit" id="submit" value="저장" class="btn">
+	    </form>
+    </div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list").on("click", function(){
+				location.href = "/board/openBoardList.do";
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.css"> <!-- 이 경로가 올바른지 확인 -->
+</head>
+<body>
+<div layout:fragment="content">
+    <header class="container mt-4">
+        <h1 class="text-center">☆"김창용님의 수제 핸드 메이드 홈페이지"☆</h1>
+        <hr>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <section class="col-md-12 mb-4 p-4 rounded section-box" style="background-image: url('/logo/road.jpg'); background-size: cover;">
+            </section>
+        </div>
+
+        <div class="row">
+            <!-- 공지사항 섹션 (하단) -->
+            <section class="col-md-6 mb-4 p-4 rounded section-box">
+                <h2><a href="/notice" class="text-decoration-none">공지사항</a></h2>
+                <div class="main--page--split"></div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>제목</th>
+                        <th>작성일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="notice : ${noticeList}">
+                        <td><a th:href="@{/notice/read(id=${notice.id})}" th:text="${notice.title}">공지사항 제목</a></td>
+                        <td th:text="${notice.date}">2024-01-01</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="col-md-6 mb-4 p-4 rounded section-box">
+                <h2>
+                    <a th:href="@{/board/openBoardList.do}">게시판</a>
+                </h2>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="post : ${recentList}">
+                        <div class="card mb-3">
+                            <a th:href="@{/board/openBoardDetail.do(boardIdx=${post.boardIdx})}" class="card-body" style="text-decoration: none;">
+                                <h5 class="card-title">
+                                    <span th:text="${post.title}"></span>
+                                </h5>
+                                <p class="card-text" th:text="${post.contents}" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">내용이 여기에 표시됩니다.</p>
+                                <p class="card-text"><small class="text-muted">글번호: <span th:text="${post.boardIdx}"></span></small></p>
+                                <p th:if="${username == null}">로그인 후 이용이 가능합니다.</p>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

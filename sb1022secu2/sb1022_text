@@ -1,0 +1,13 @@
+※ sb1022secu1
+
+[1]
+build.gradle - dependencies 확보, main 실행 후 구동 테스트
+
+[2]
+config.SecurityConfig 구성
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Log4j2 어노테이션 추가
+
+[3]
+filterChain에 대한 이해

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Top Page</title>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=UTF-8" />
+  <style>
+    h1 { font-size:18pt; font-weight:bold; color:gray; }
+    body { font-size:13pt; color:gray; margin:5px 25px; }
+    tr { margin:5px; }
+    th { padding: 5px; color:white; background: darkgray; }
+    td { padding: 5px; color:black; background: #e0e0ff; }
+  </style>
+</head>
+<body>
+<h1>Hello Page</h1>
+<p th:if="${check}" th:text="|${id} is ${trueVal}|">message.</p>
+<p th:unless="${check}" th:text="|${id} is ${falseVal}|">messag.</p>
+<!-- 컨트롤러 참거짓 if-else문 -->
+<hr/>
+<h1 th:text="#{content.title}">Hello Page</h1>
+<p th:text="#{content.message}"></p>
+<!-- messages.properties - content.title/message 를 만들고 값을 넣어준 걸 불러옴 -->
+<p th:utext="${msg}">please wait...</p>
+<!-- utext -> 컨트롤러 "message 1<hr/>message 2<br/>message 3" -->
+<form method="post" action="/">
+  <input type="text" name="text1" th:value="${value}" />
+  <input type="submit" value="입력" />
+</form>
+<table th:object="${object}">
+  <tr><th>ID</th><td th:text="*{id}">hong01</td></tr>
+  <tr><th>NAME</th><td th:text="*{name}">홍길동</td></tr>
+  <tr><th>MAIL</th><td th:text="*{value}">hong@korea.com</td></tr>
+<!-- "*{id/name/value}" DataObject 만들어서 getter, 생성자를 만듦 -->
+</table>
+
+<div th:object="${object}">
+  <p th:text="|my name is *{name}. mail adress is *{value}.|">message.</p>
+<!-- |를 사용해 아래 코드를 위처럼 쓸 수 있음 + 기호 생략 -->
+<!--  <p th:text='${"my name is" + *{name} + ". mail adress is" + *{value} + "."}'>message.</p>-->
+</div>
+</body>
+</html>

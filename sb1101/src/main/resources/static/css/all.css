@@ -1,0 +1,122 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+html { overflow: scroll; }
+body {
+    font-size: 0.875em; line-height: 1.5; color: #666;
+    -webkit-text-size-adjust: none; min-width: 320px;
+    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+}
+h1, h2, h3 { font-size: 1.5em; }
+a:link, a:visited { text-decoration: none; color: #656565; }
+.container { max-width: 1024px; margin: 30px auto; }
+
+/* 기본 스타일 */
+.section-box {
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.section-box h2 a {
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th, .table tbody td {
+    text-align: center;
+    padding: 12px;
+}
+
+.table tbody tr:hover {
+    background-color: #ffff99;
+}
+
+/* Pagination 스타일 */
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-item .page-link {
+    padding: 8px 12px;
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #e8e8e8;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #cccccc;
+    color: #333;
+    border-color: #bbb;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f9f9f9;
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+.card {
+    border: 1px solid #ccc; /* 카드 경계 색상 */
+    border-radius: 0.25rem; /* 둥근 모서리 */
+    height: 120px; /* 카드 높이 조정 */
+    overflow: hidden; /* 내용 넘침 방지 */
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 마우스 오버 시 그림자 효과 */
+    transition: 0.3s; /* 애니메이션 효과 */
+}
+
+.card-title {
+    font-size: 1.25em; /* 제목 크기 조정 */
+    color: #3b3a3a; /* 제목 색상 */
+}
+
+.card-text {
+    color: #666; /* 내용 색상 */
+    margin: 0; /* 기본 마진 제거 */
+}
+
+.card-text small {
+    color: #999; /* 글번호 색상 */
+}
+
+.btn {
+    margin: 5px;
+    padding: 5px 11px;
+    color: #fff !important;
+    display: inline-block;
+    background-color: #7D7F82; /* 버튼 색상 */
+    vertical-align: middle;
+    border-radius: 0 !important;
+    cursor: pointer;
+    border: none;
+}
+
+.btn:hover {
+    background: #6b9ab8; /* 버튼 마우스 오버 시 색상 */
+}

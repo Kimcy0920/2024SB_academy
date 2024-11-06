@@ -1,0 +1,34 @@
+body.login-body { /* 'login-body' 클래스에 대한 스타일을 지정합니다 */
+    font-family: 'Roboto', sans-serif; /* 폰트 설정 */
+    background-color: #f8f9fa; /* 배경색 설정 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    height: 100vh; /* 뷰포트 전체 높이 사용 */
+    display: flex; /* flexbox 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.login-container { /* 'login-container' 클래스에 대한 스타일을 지정합니다 */
+    max-width: 400px; /* 최대 너비 설정 */
+    padding: 30px; /* 내부 여백 설정 */
+    background-color: #ffffff; /* 배경색 설정 */
+    border-radius: 10px; /* 둥근 모서리 설정 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
+}
+
+.form-group {
+    margin-bottom: 15px; /* 입력 폼 간격 설정 */
+    text-align: center;
+}
+
+.form-label {
+    font-size: 2rem; /* 폰트 크기 2배로 설정 */
+    font-weight: bold;
+}
+
+/* Custom styles */
+.btn {
+    max-width: 600px; /* 최대 너비 설정 (원하는 길이로 조정 가능) */
+}
+

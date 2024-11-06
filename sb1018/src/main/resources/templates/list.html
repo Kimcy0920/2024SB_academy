@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <style>
+    h1 { font-size:18pt; font-weight:bold; color:gray; }
+    body { font-size:13pt; color:gray; margin:5px 25px; }
+    tr { margin:5px; }
+    th { padding: 5px; color:white; background: darkgray; }
+    td { padding: 5px; color:black; background: #e0e0ff; }
+  </style>
+</head>
+<body>
+<h1>SELECT EMP TABLE</h1>
+<hr/>
+<table>
+  <tr>
+    <th>EMPNO</th>
+    <th>ENAME</th>
+    <th>JOB</th>
+    <th>MGR</th>
+    <th>HIREDATE</th>
+    <th>SAL</th>
+    <th>COMM</th>
+    <th>DEPTNO</th>
+    <th>DELETE</th>
+  </tr>
+
+  <tr th:each="obj : ${datalist}">
+    <td><a th:href="@{/update/{empno}(empno=${obj.empno})}" th:text="${obj.empno}"></a></td>
+    <td th:text="${obj.ename}"></td>
+    <td th:text="${obj.job}"></td>
+    <td th:text="${obj.mgr}"></td>
+    <td th:text="${#dates.format(obj.hiredate, 'yyyy-MM-dd')}"></td>
+    <td th:text="${obj.sal}"></td>
+    <td th:text="${obj.comm}"></td>
+    <td th:text="${obj.deptno}"></td>
+    <td>
+      <form th:action="@{/delete/{empno}(empno=${obj.empno})}" method="post">
+        <button type="submit">delete</button>
+      </form>
+    </td>
+  </tr>
+</table>
+<hr/>
+<form method="get" action="/insert">
+  <button type="submit">insert</button>
+</form>
+</body>
+</html>
