@@ -5,6 +5,7 @@ import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
 import edu.du.sb1101.registerMember.entity.Member;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,6 +67,7 @@ public class SampleController {
         model.addAttribute("address", member.getAddress()); // 주소 추가
         model.addAttribute("role", member.getRole());
         model.addAttribute("regdate", member.getRegdate());
+        model.addAttribute("password", member.getPassword());
         return "sample/member";
     }
     @PostMapping("/infoUpdate")
@@ -116,4 +118,46 @@ public class SampleController {
         return "redirect:/sample/login?logout"; // 로그아웃 후 로그인 페이지로 리다이렉트
     }
 
+    @PostMapping("/changePwd")
+    public String changePassword(@RequestParam String currentPassword,
+                                 @RequestParam String newPassword,
+                                 @RequestParam String confirmPassword,
+                                 HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+
+        // 서버 측에서 메시지 추가
+        if (member != null) {
+            // 현재 비밀번호가 일치하는지 확인
+            if (member.getPassword().equals(currentPassword)) {
+                // 새 비밀번호와 확인 비밀번호가 일치하는지 확인
+                if (newPassword.equals(confirmPassword)) {
+                    // 비밀번호 변경
+                    member.setPassword(newPassword);
+                    memberRepository.save(member);
+                    model.addAttribute("successMessage", "비밀번호가 변경되었습니다.");
+                    return "redirect:/sample/member"; // 성공 시 회원 정보 페이지로 리다이렉트
+                } else {
+                    model.addAttribute("errorMessage", "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+                }
+            } else {
+                model.addAttribute("errorMessage", "현재 비밀번호가 일치하지 않습니다.");
+            }
+        }
+        return "sample/changePwd"; // 실패 시 비밀번호 변경 페이지로 돌아가기
+    }
+
+    @PostMapping("/findEmail")
+    public String findEmail(@RequestParam String username, Model model) {
+        Member member = memberRepository.findByUsername(username);
+
+        if (member != null) {
+            model.addAttribute("emailFound", true);
+            model.addAttribute("email", member.getEmail());
+        } else {
+            model.addAttribute("emailFound", false);
+            model.addAttribute("errorMessage", "해당 이름으로 등록된 사용자가 없습니다.");
+        }
+
+        return "sample/findEmail";
+    }
 }

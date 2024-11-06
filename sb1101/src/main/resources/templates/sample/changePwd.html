@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+  <meta charset="UTF-8">
+  <title>비밀번호 변경</title>
+  <link rel="stylesheet" href="/css/myInfo.css">
+</head>
+<body>
+<h1>비밀번호 변경</h1>
+<hr/>
+<form method="post" th:action="@{/sample/changePwd}" id="changePwdForm">
+  <div class="mb-3">
+    <label for="currentPassword" class="form-label">현재 비밀번호</label>
+    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+  </div>
+  <div class="mb-3">
+    <label for="newPassword" class="form-label">새 비밀번호</label>
+    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+  </div>
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">새 비밀번호 확인</label>
+    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+  </div>
+  <button type="submit" class="btn btn-primary w-100">비밀번호 변경</button>
+</form>
+</body>
+</html>

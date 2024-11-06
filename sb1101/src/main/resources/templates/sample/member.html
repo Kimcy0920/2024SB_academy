@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="/css/myInfo.css">
   </head>
   <body>
+  <hr/>
   <h1>내 정보 조회</h1>
   <hr/>
+  <br><br>
   <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
     <form method="post" th:action="@{/sample/infoUpdate}">
       <main>
@@ -19,7 +21,6 @@
             <col class="col1">
             <col class="col2">
           </colgroup>
-
           <tr>
             <th>아이디</th>
             <td th:text="${id}"></td>
@@ -44,9 +45,57 @@
           </tr>
         </table>
         <button type="submit" class="btn btn-primary w-100">수정하기</button>
+        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#changePasswordModal">비밀번호 변경</button>
       </main>
     </form>
   </div>
+
+  <!-- 비밀번호 변경 모달 -->
+  <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changePasswordModalLabel">비밀번호 변경</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" th:action="@{/sample/changePwd}" id="changePwdForm">
+            <input type="hidden" th:value="${password}">
+            <div class="mb-3">
+              <label for="currentPassword" class="form-label">현재 비밀번호</label>
+              <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+            </div>
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">새 비밀번호</label>
+              <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">새 비밀번호 확인</label>
+              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">비밀번호 변경</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 새 비밀번호와 확인 비밀번호 일치 여부 확인
+    document.getElementById('changePwdForm').addEventListener('submit', function(event) {
+      var newPassword = document.getElementById('newPassword').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+
+      // 새 비밀번호와 확인 비밀번호가 일치하지 않으면 alert
+      if (newPassword !== confirmPassword) {
+        event.preventDefault();
+        alert('새 비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+        return;
+      }
+    });
+
+  </script>
+
   </body>
 </div>
 </html>
