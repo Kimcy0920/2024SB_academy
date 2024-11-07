@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
@@ -90,22 +91,22 @@ public class SampleController {
         return "redirect:/sample/member"; // 업데이트 후 회원 정보 페이지로 리다이렉트
     }
 
-
     @GetMapping("/login")
     public String loginForm() {
         return "sample/login";
     }
-
     @PostMapping("/login")
-    public String login(@RequestParam String email, HttpSession session, Model model) {
-        Member member = memberRepository.findByEmail(email);
+    public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
+
+        Member member = memberRepository.findByEmailAndPassword(email, password);
 
         if (member != null) {
             // Member 객체를 세션에 저장
             session.setAttribute("member", member);
-            log.info("Login successful for user: {}", member.getUsername());
+            log.info("Login successful for user & password : {}", member.getUsername());
             return "redirect:/sample/all";
         } else {
+            System.out.println("잘못된 이메일 또는 비밀번호입니다.");
             model.addAttribute("errorMessage", "잘못된 이메일 또는 비밀번호입니다.");
             log.warn("Login failed for email: {}", email);
             return "sample/login";
@@ -118,7 +119,48 @@ public class SampleController {
         return "redirect:/sample/login?logout"; // 로그아웃 후 로그인 페이지로 리다이렉트
     }
 
+    @GetMapping("/findPwd")
+    public String findPwdForm() {
+        return "sample/findPwd";
+    }
+    @PostMapping("/findPwd")
+    public String findPwd(@RequestParam String email, @RequestParam String username,
+                          HttpSession session) {
+        Member member = memberRepository.findByEmailAndUsername(email, username);
+        if (member != null) {
+            session.setAttribute("email", email);
+            return "redirect:/sample/changePwd";
+        } else {
+            System.out.println("잘못된 입력값");
+            return "sample/findPwd";
+        }
+    }
+    @GetMapping("/changePwd")
+    public String changePwdForm(HttpSession session, Model model) {
+        String email = (String) session.getAttribute("email");
+        if (email == null) {
+            return "redirect:/sample/findPwd";
+        }
+        model.addAttribute("email", email);
+        return "/sample/changePwd";
+    }
     @PostMapping("/changePwd")
+    public String changePwd(@RequestParam String email,
+                            @RequestParam String newPassword,
+                            @RequestParam String confirmPassword) {
+        if (newPassword.equals(confirmPassword)) {
+            Member member = memberRepository.findByEmail(email);
+            member.setPassword(newPassword);
+            memberRepository.save(member);
+            System.out.println("비밀번호 변경");
+            return "redirect:/sample/login";
+        } else {
+            System.out.println("입력한 비밀번호가 일치하지 않습니다.");
+            return "sample/changePwd";
+        }
+    }
+
+    @PostMapping("/changePassword")
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
                                  @RequestParam String confirmPassword,
@@ -135,7 +177,7 @@ public class SampleController {
                     member.setPassword(newPassword);
                     memberRepository.save(member);
                     model.addAttribute("successMessage", "비밀번호가 변경되었습니다.");
-                    return "redirect:/sample/member"; // 성공 시 회원 정보 페이지로 리다이렉트
+                    return "redirect:/sample/login"; // 성공 시 로그인 페이지
                 } else {
                     model.addAttribute("errorMessage", "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
                 }
@@ -143,21 +185,26 @@ public class SampleController {
                 model.addAttribute("errorMessage", "현재 비밀번호가 일치하지 않습니다.");
             }
         }
-        return "sample/changePwd"; // 실패 시 비밀번호 변경 페이지로 돌아가기
+        return "sample/changePassword"; // 실패 시 비밀번호 변경 페이지로 돌아가기
     }
 
-    @PostMapping("/findEmail")
+    @GetMapping("/findEmail") // 아이디 찾기 폼
+    public String findEmail() {
+        return "sample/findEmail";
+    }
+    @PostMapping("/findEmail") // 아이디 찾기 컨트롤러
     public String findEmail(@RequestParam String username, Model model) {
         Member member = memberRepository.findByUsername(username);
 
         if (member != null) {
             model.addAttribute("emailFound", true);
             model.addAttribute("email", member.getEmail());
+            System.out.println("이메일: " + member.getEmail());
         } else {
             model.addAttribute("emailFound", false);
             model.addAttribute("errorMessage", "해당 이름으로 등록된 사용자가 없습니다.");
+            System.out.println("해당 이름으로 가입된 정보가 없습니다.");
         }
-
         return "sample/findEmail";
     }
 }

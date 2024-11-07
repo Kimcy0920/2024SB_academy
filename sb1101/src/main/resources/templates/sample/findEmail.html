@@ -4,22 +4,19 @@
       layout:decorate="~{layout/basic.html}">
 <head>
     <meta charset="UTF-8">
-    <title>아이디 찾기</title>
+    <title>아이디(이메일) 찾기</title>
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <h1>아이디 찾기</h1>
+    <h1>아이디(이메일) 찾기</h1>
     <hr/>
     <form method="post" th:action="@{/sample/findEmail}">
         <div class="mb-3">
-            <label for="username" class="form-label">이름</label>
+            <label for="username" class="form-label">이름 입력:</label>
             <input type="text" class="form-control" id="username" name="username" required>
         </div>
         <button type="submit" class="btn btn-primary">아이디 찾기</button>
     </form>
 </div>
-<script th:if="${emailFound}" th:inline="javascript">
-    alert("찾으신 이메일: [[${email}]]");
-</script>
 </body>
 </html>

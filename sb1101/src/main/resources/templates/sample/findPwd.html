@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 찾기</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <h1>비밀번호 찾기</h1>
+    <hr/>
+    <form method="post" th:action="@{/sample/findPwd}">
+        <div class="mb-3">
+            <label for="email" class="form-label">아이디(이메일) 입력:</label>
+            <input type="text" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">성명 입력:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+    </form>
+</div>
+</body>
+</html>

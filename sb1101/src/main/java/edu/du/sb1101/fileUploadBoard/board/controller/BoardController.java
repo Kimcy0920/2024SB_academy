@@ -2,9 +2,7 @@ package edu.du.sb1101.fileUploadBoard.board.controller;
 
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardDto;
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardFileDto;
-import edu.du.sb1101.fileUploadBoard.board.mapper.BoardMapper;
 import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
-import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import edu.du.sb1101.registerMember.entity.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -36,7 +34,7 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping("/board/openBoardList.do")
-	public String openBoardList(Model model, @PageableDefault(page = 0, size = 5) Pageable pageable, HttpSession session) throws Exception {
+	public String openBoardList(Model model, @PageableDefault(page = 0, size = 10) Pageable pageable, HttpSession session) throws Exception {
 		log.info("====> openBoardList {}", "테스트");
 		Member member = (Member) session.getAttribute("member");
 		if (member == null) {
@@ -58,7 +56,7 @@ public class BoardController {
 		log.info("====> recentList size: {}", recentList.size());
 		log.info("====> recentList contents: {}", recentList);
 		for (BoardDto boardDto : recentList) {
-			log.info("BoardIdx: {}, Title: {}, Contents: {}", boardDto.getBoardIdx(), boardDto.getTitle(), boardDto.getContents());
+			log.info("BoardIdx: {}, Title: {}, Contents: {}, CreatorId: {}", boardDto.getBoardIdx(), boardDto.getTitle(), boardDto.getContents(), boardDto.getCreatorId());
 		}
 
 		model.addAttribute("recentList", recentList);

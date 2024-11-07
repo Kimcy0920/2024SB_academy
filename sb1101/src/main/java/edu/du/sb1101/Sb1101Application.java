@@ -2,6 +2,8 @@ package edu.du.sb1101;
 
 import edu.du.sb1101.fileUploadBoard.entity.Board;
 import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
+import edu.du.sb1101.notice.entity.Notice;
+import edu.du.sb1101.notice.repository.NoticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +17,8 @@ public class Sb1101Application {
 
     @Autowired
     BoardRepository boardRepository;
+    @Autowired
+    NoticeRepository noticeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Sb1101Application.class, args);
@@ -25,16 +29,25 @@ public class Sb1101Application {
 
         IntStream.rangeClosed(1, 50).forEach(i->{
             Board board = Board.builder()
-                    .title("제목"+i)
+                    .title("게시글 제목"+i)
                     .createdDatetime(LocalDateTime.now().toString().substring(0, 18))
                     .creatorId("사용자")
-                    .contents("내용"+i)
+                    .contents("게시글 내용"+i)
                     .deletedYn("N")
                     .hitCnt(0)
                     .build();
             boardRepository.save(board);
         });
-//        noticeRepository.saveAndFlush(notice);
+
+        IntStream.rangeClosed(1, 50).forEach(i->{
+            Notice notice = Notice.builder()
+                    .title("공지사항 제목"+i)
+                    .content("공지사항 내용"+i)
+                    .username("관리자")
+                    .regdate(LocalDateTime.now())
+                    .build();
+            noticeRepository.save(notice);
+        });
 
     }
 

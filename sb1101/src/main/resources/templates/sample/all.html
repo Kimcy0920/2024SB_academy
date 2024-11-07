@@ -23,7 +23,7 @@
         <div class="row_all">
             <!-- 공지사항 섹션 (하단) -->
             <section class="col-md-6 mb-4 p-4 rounded section-box2_all">
-                <h2><a href="/notice" class="text-decoration-none">공지사항</a></h2>
+                <h2><a th:href="@{/notice/noticeList}" class="text-decoration-none">공지사항</a></h2>
                 <div class="main--page--split_all"></div>
                 <table class="table_all">
                     <thead>
@@ -54,7 +54,7 @@
                                 </h5>
                                 <p class="card-text_all" th:text="${post.contents}" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">내용이 여기에 표시됩니다.</p>
                                 <p class="card-text_all"><small class="text-muted_all">글번호: <span th:text="${post.boardIdx}"></span></small></p>
-                                <p th:if="${username == null}">로그인 후 이용이 가능합니다.</p>
+                                <span><p th:if="${username == null}">로그인 후 이용이 가능합니다.</p></span>
                             </a>
                         </div>
                     </li>
