@@ -30,4 +30,5 @@ public class Notice {
     private String username;
 
     private LocalDateTime regdate;
+
 }

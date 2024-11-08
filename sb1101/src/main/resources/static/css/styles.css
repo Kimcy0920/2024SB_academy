@@ -3030,32 +3030,32 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  /*background-color: #0d6efd;*/
+  /*border-color: #0d6efd;*/
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
+  /*background-color: #0b5ed7;*/
+  /*border-color: #0a58ca;*/
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
-  box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+  /*background-color: #0b5ed7;*/
+  /*border-color: #0a58ca;*/
+  /*box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);*/
 }
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #0a58ca;
-  border-color: #0a53be;
+  /*background-color: #0a58ca;*/
+  /*border-color: #0a53be;*/
 }
 .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+  /*box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);*/
 }
 .btn-primary:disabled, .btn-primary.disabled {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  /*background-color: #0d6efd;*/
+  /*border-color: #0d6efd;*/
 }
 
 .btn-secondary {
@@ -3269,27 +3269,27 @@ textarea.form-control-lg {
 }
 
 .btn-outline-primary {
-  color: #0d6efd;
-  border-color: #0d6efd;
+  /*color: #0d6efd;*/
+  /*border-color: #0d6efd;*/
 }
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  /*background-color: #0d6efd;*/
+  /*border-color: #0d6efd;*/
 }
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
 }
 .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  /*background-color: #0d6efd;*/
+  /*border-color: #0d6efd;*/
 }
 .btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
 }
 .btn-outline-primary:disabled, .btn-outline-primary.disabled {
-  color: #0d6efd;
+  /*color: #0d6efd;*/
   background-color: transparent;
 }
 
@@ -11374,14 +11374,20 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 
 /* Footer 스타일 추가 */
 .footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: #dcdcdc; /* 더 연한 색상으로 변경 */
   text-align: center;
   padding: 10px;
   font-size: 14px;
   color: #6c757d;
-  z-index: 1; /* footer가 다른 요소보다 뒤에 오도록 설정 */
+  z-index: 0; /* footer가 다른 요소보다 뒤에 오도록 설정 */
+  margin-top: auto; /* 푸터를 페이지 하단에 위치시키기 위해 사용 */
 }
 
+#sidebarToggle {
+  color: #7D7F82;
+  background-color: #7D7F82;
+  border-color: #7D7F82;
+}

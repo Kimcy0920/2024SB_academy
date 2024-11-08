@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
+<div class="container" layout:fragment="content">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +46,6 @@
     </style>
 </head>
 <body>
-<div class="container" layout:fragment="content">
     <div class="login-box"> <!-- 로그인 박스 추가 -->
         <form method="post" th:action="@{/sample/login}" >
             <div class="form-group">
@@ -71,6 +71,6 @@
             <a th:href="@{/register/step1}" class="mx-2">회원가입</a>
         </div>
     </div>
-</div>
 </body>
+</div>
 </html>

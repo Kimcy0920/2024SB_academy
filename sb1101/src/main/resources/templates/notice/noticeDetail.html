@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
 
-</body>
+<div layout:fragment="content">
+    <head>
+        <meta charset="UTF-8">
+        <title>공지사항</title>
+        <link rel="stylesheet" th:href="@{/css/notice/noticeDetail.css}"/>
+    </head>
+    <body>
+    <div class="container_nd">
+        <h2>공지사항</h2>
+        <form id="frm_nd" method="post">
+            <table class="notice_detail_nd">
+                <colgroup>
+                    <col width="15%"/>
+                    <col width="85%"/>
+                </colgroup>
+                <caption>공지사항 내용</caption>
+                <tbody>
+                <tr>
+                    <th scope="row">제목</th>
+                    <td><input type="text" id="title_nd" name="title" th:value="${notice.title}" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">작성자</th>
+                    <td th:text="${notice.username}" id="username_nd"></td>
+                </tr>
+                <tr>
+                    <th scope="row">작성일</th>
+                    <td th:text="${notice.regdate}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="view_text_nd">
+                        <textarea title="내용" id="content_nd" name="content" th:text="${notice.content}"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" id="id_nd" name="id" th:value="${notice.id}">
+        </form>
+
+        <!-- 버튼 영역 -->
+        <div class="btn_area_nd">
+            <a href="#this" id="list" class="btn">목록으로</a>
+            <span th:if="${notice.username} == ${username}">
+                <a href="#this" id="edit" class="btn">수정하기</a>
+                <a href="#this" id="delete" class="btn">삭제하기</a>
+            </span>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // CSRF 토큰 설정
+            var csrfParameter = $("#csrf").attr("name");
+            var csrfToken = $("#csrf").val();
+
+            // 목록으로 이동
+            $("#list").on("click", function(){
+                location.href = "/notice/noticeList";
+            });
+
+            // 수정하기
+            $("#edit").on("click", function(){
+                var frm = $("#frm_nd")[0];
+                frm.action = "/notice/noticeUpdate";
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: csrfParameter,
+                    value: csrfToken
+                }).appendTo(frm);
+                frm.submit();
+            });
+
+            // 삭제하기
+            $("#delete").on("click", function(){
+                var frm = $("#frm_nd")[0];
+                frm.action = "/notice/noticeDelete";
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: csrfParameter,
+                    value: csrfToken
+                }).appendTo(frm);
+                frm.submit();
+            });
+        });
+    </script>
+    </body>
+</div>
 </html>

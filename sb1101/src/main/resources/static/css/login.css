@@ -1,34 +1,39 @@
-body.login-body { /* 'login-body' 클래스에 대한 스타일을 지정합니다 */
-    font-family: 'Roboto', sans-serif; /* 폰트 설정 */
-    background-color: #f8f9fa; /* 배경색 설정 */
-    margin: 0; /* 기본 마진 제거 */
-    padding: 0; /* 기본 패딩 제거 */
-    height: 100vh; /* 뷰포트 전체 높이 사용 */
-    display: flex; /* flexbox 사용 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
+/* 로그인 페이지 전용 스타일 */
+
+/* 로그인 화면 배경색 및 중앙 정렬 (조금 위쪽으로 배치) */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 중앙 정렬이 아닌 위쪽 정렬 */
+    height: 100vh;
+    background-color: #e0e0e0;
+    padding: 0;
+    margin-top: 50px; /* 로그인 박스를 위쪽으로 조금 내려줍니다. */
 }
 
-.login-container { /* 'login-container' 클래스에 대한 스타일을 지정합니다 */
-    max-width: 400px; /* 최대 너비 설정 */
-    padding: 30px; /* 내부 여백 설정 */
-    background-color: #ffffff; /* 배경색 설정 */
-    border-radius: 10px; /* 둥근 모서리 설정 */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 그림자 효과 설정 */
+/* 로그인 박스 스타일 */
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
 }
 
+/* 폼 그룹 스타일 */
 .form-group {
-    margin-bottom: 15px; /* 입력 폼 간격 설정 */
-    text-align: center;
+    margin-bottom: 15px;
 }
 
+/* 레이블 스타일 */
 .form-label {
-    font-size: 2rem; /* 폰트 크기 2배로 설정 */
+    font-size: 2rem;
     font-weight: bold;
 }
 
-/* Custom styles */
+/* 버튼 스타일 */
 .btn {
-    max-width: 600px; /* 최대 너비 설정 (원하는 길이로 조정 가능) */
+    width: 100%;
 }
-

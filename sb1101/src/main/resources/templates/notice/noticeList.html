@@ -7,10 +7,10 @@
   <head>
     <meta charset="UTF-8">
     <title>공지사항</title>
-    <link rel="stylesheet" th:href="@{/css/notice.css}"/>
+    <link rel="stylesheet" th:href="@{/css/notice/notice.css}"/>
   </head>
   <body>
-  <div class="container_notice">
+  <div class="container_nw"> <!-- 기존 container_notice에서 container_nw로 변경 -->
     <h2>공지사항 목록</h2>
     <table class="notice_list">
       <colgroup>
@@ -30,7 +30,7 @@
       <tbody>
       <tr th:if="${#lists.size(noticeList)} > 0" th:each="notice : ${noticeList}">
         <td th:text="${notice.id}"></td>
-        <td class="title_notice"><a href="/notice/view?id=" th:attrappend="href=${notice.id}" th:text="${notice.title}"></a></td>
+        <td class="title_notice"><a href="/notice/noticeDetail?id=" th:attrappend="href=${notice.id}" th:text="${notice.title}"></a></td>
         <td th:text="${notice.username}"></td>
         <td th:text="${notice.regdate}"></td>
       </tr>
@@ -39,47 +39,52 @@
       </tr>
       </tbody>
     </table>
-    <a th:href="@{/notice/noticeWrite}" class="btn_write_notice">공지 작성</a>
+    <div class="btn_container">
+      <a th:href="@{/notice/noticeWrite}" class="btn_nt">공지 작성</a>
+    </div>
   </div>
 
   <!-- 페이징 -->
-  <div th:if="${!noticeList.isEmpty()}" class="pagination_notice">
-    <nav th:with="pageNumber = ${noticeList.pageable.pageNumber}, pageSize = ${noticeList.pageable.pageSize}, totalPages = ${noticeList.totalPages}, startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1}, tempEndPage = ${startPage + pageSize - 1}, endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
-         aria-label="Page navigation">
-      <ul class="pagination">
-        <li th:classappend="${pageNumber < pageSize} ? 'disabled'" class="page-item">
-          <a class="page-link" th:href="@{/notice/noticeList(page=0)}">
-            <span>&laquo;</span>
-            <span class="sr-only">First</span>
-          </a>
-        </li>
+  <div th:if="${!noticeList.isEmpty()}" class="pagination">
+    <!-- 페이징 -->
+    <div th:if="${!noticeList.isEmpty()}" class="pagination">
+      <nav th:with="pageNumber = ${noticeList.pageable.pageNumber}, pageSize = ${noticeList.pageable.pageSize}, totalPages = ${noticeList.totalPages}, startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1}, tempEndPage = ${startPage + pageSize - 1}, endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
+           aria-label="Page navigation">
+        <ul class="pagination">
+          <li th:classappend="${pageNumber < pageSize} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=0)}">
+              <span>&laquo;</span>
+              <span class="sr-only">First</span>
+            </a>
+          </li>
 
-        <li th:classappend="${noticeList.first} ? 'disabled'" class="page-item">
-          <a class="page-link" th:href="${noticeList.first} ? '#' : @{/notice/noticeList(page=${pageNumber - 1})}" aria-label="Previous">
-            <span aria-hidden="true">&lt;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
+          <li th:classappend="${noticeList.first} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="${noticeList.first} ? '#' : @{/notice/noticeList(page=${pageNumber - 1})}" aria-label="Previous">
+              <span aria-hidden="true">&lt;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
 
-        <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
-          <a th:text="${page}" class="page-link" th:href="@{/notice/noticeList(page=${page - 1})}"></a>
-        </li>
+          <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
+            <a th:text="${page}" class="page-link" th:href="@{/notice/noticeList(page=${page - 1})}"></a>
+          </li>
 
-        <li th:classappend="${noticeList.last} ? 'disabled'" class="page-item">
-          <a class="page-link" th:href="${noticeList.last} ? '#' : @{/notice/noticeList(page=${pageNumber + 1})}" aria-label="Next">
-            <span aria-hidden="true">&gt;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
+          <li th:classappend="${noticeList.last} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="${noticeList.last} ? '#' : @{/notice/noticeList(page=${pageNumber + 1})}" aria-label="Next">
+              <span aria-hidden="true">&gt;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
 
-        <li th:classappend="${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
-          <a class="page-link" th:href="@{/notice/noticeList(page=${totalPages - 1})}">
-            <span>&raquo;</span>
-            <span class="sr-only">Last</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+          <li th:classappend="${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=${totalPages - 1})}">
+              <span>&raquo;</span>
+              <span class="sr-only">Last</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
   </body>
 </div>
