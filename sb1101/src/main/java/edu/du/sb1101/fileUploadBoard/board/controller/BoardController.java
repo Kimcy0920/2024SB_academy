@@ -1,8 +1,12 @@
 package edu.du.sb1101.fileUploadBoard.board.controller;
 
+import edu.du.sb1101.comment.entity.Comment;
+import edu.du.sb1101.comment.repository.CommentRepository;
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardDto;
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardFileDto;
 import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
+import edu.du.sb1101.fileUploadBoard.entity.Board;
+import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import edu.du.sb1101.registerMember.entity.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -31,10 +35,16 @@ import java.util.List;
 public class BoardController {
 
 	@Autowired
+	CommentRepository commentRepository;
+	@Autowired
+	BoardRepository boardRepository;
+
+	@Autowired
 	private BoardService boardService;
 
 	@RequestMapping("/board/openBoardList.do")
-	public String openBoardList(Model model, @PageableDefault(page = 0, size = 10) Pageable pageable, HttpSession session) throws Exception {
+	public String openBoardList(Model model, @PageableDefault(page = 0, size = 10) Pageable pageable,
+								HttpSession session) throws Exception {
 		log.info("====> openBoardList {}", "테스트");
 		Member member = (Member) session.getAttribute("member");
 		if (member == null) {
@@ -87,7 +97,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("board/openBoardDetail.do")
-	public ModelAndView openBoardDetail(@RequestParam int boardIdx, HttpSession session) throws Exception {
+	public ModelAndView openBoardDetail(@RequestParam int boardIdx,
+										HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardDetail");
 
 		Member member = (Member) session.getAttribute("member");
@@ -95,8 +106,19 @@ public class BoardController {
 			mv.addObject("username", member.getUsername());
 		}
 
+		// 게시글 조회
 		BoardDto board = boardService.selectBoardDetail(boardIdx);
+		if (board == null) {
+			mv.setViewName("redirect:/board/openBoardList.do");
+			mv.addObject("error", "게시글을 찾을 수 없습니다.");
+			return mv;
+		}
 		mv.addObject("board", board);
+
+		// 댓글 목록 조회
+		Board boardEntity = boardRepository.findById(boardIdx).orElse(null);
+		List<Comment> commentList = commentRepository.findByBoard(boardEntity);
+		mv.addObject("commentList", commentList);
 
 		return mv;
 	}

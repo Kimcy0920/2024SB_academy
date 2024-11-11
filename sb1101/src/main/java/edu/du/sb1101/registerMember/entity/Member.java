@@ -1,5 +1,6 @@
 package edu.du.sb1101.registerMember.entity;
 
+import edu.du.sb1101.comment.entity.Comment;
 import edu.du.sb1101.registerMember.spring.WrongIdPasswordException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data            // Getter Setter
@@ -37,6 +40,9 @@ public class Member {
     private String role;
 
     private LocalDateTime regdate;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     public void changePassword(String oldPassword, String newPassword) {
         if (!password.equals(oldPassword))
