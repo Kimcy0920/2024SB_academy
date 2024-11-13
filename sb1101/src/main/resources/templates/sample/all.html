@@ -36,6 +36,7 @@
                     <tr th:each="notice : ${noticeList}">
                         <td><a th:href="@{/notice/read(id=${notice.id})}" th:text="${notice.title}">공지사항 제목</a></td>
                         <td th:text="${notice.date}">2024-01-01</td>
+                        <p th:if="${username == null}" class="login-prompt"><span>로그인 후 이용이 가능합니다.</span></p>
                     </tr>
                     </tbody>
                 </table>
@@ -45,20 +46,20 @@
                 <h2>
                     <a th:href="@{/board/openBoardList.do}">게시판</a>
                 </h2>
-                <ul class="list-group_all">
-                    <li class="list-group-item_all" th:each="post : ${recentList}">
-                        <div class="card_all mb-3">
-                            <a th:href="@{/board/openBoardDetail.do(boardIdx=${post.boardIdx})}" class="card-body_all" style="text-decoration: none;">
-                                <h5 class="card-title_all">
-                                    <span th:text="${post.title}"></span>
-                                </h5>
-                                <p class="card-text_all" th:text="${post.contents}" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">내용이 여기에 표시됩니다.</p>
-                                <p class="card-text_all"><small class="text-muted_all">글번호: <span th:text="${post.boardIdx}"></span></small></p>
-                                <span><p th:if="${username == null}">로그인 후 이용이 가능합니다.</p></span>
+                <div class="row">
+                    <div class="col-md-6 mb-3" th:each="post : ${recentList}">
+                        <div class="card post-card h-100">
+                            <a th:href="@{/board/openBoardDetail.do(boardIdx=${post.boardIdx})}" class="post-link">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${post.title}">게시글 제목</h5>
+                                    <p class="card-text post-excerpt" th:text="${post.contents}"
+                                       style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></p>
+                                </div>
                             </a>
+                            <p th:if="${username == null}" class="login-prompt"><span>로그인 후 이용이 가능합니다.</span></p>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </section>
         </div>
     </div>

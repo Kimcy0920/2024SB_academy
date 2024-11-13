@@ -62,7 +62,7 @@ public class BoardController {
 		model.addAttribute("list", page);
 
 		// 최근 5개 게시글
-		List<BoardDto> recentList = boardService.selectRecentBoardList(5);
+		List<BoardDto> recentList = boardService.selectRecentBoardList(6);
 		log.info("====> recentList size: {}", recentList.size());
 		log.info("====> recentList contents: {}", recentList);
 		for (BoardDto boardDto : recentList) {

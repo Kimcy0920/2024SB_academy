@@ -11300,15 +11300,11 @@ textarea.form-control-lg {
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
 #sidebar-wrapper .list-group {
   width: 15rem;
-}
-
-#page-content-wrapper {
-  min-width: 100vw;
-  padding-bottom: 50px; /* footer 높이와 맞춰줌 */
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
@@ -11320,10 +11316,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: 0;
   }
 
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
 
   body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
@@ -11371,24 +11363,38 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 
 .file_list a {display:inherit !important;}
 
+#page-content-wrapper {
+  width: 100%;    /* 화면 가득 차지 */
+  padding-bottom: 50px; /* footer 높이만큼 여백 */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;   /* 가능한 공간을 차지하도록 */
+}
 
-/* Footer 스타일 추가 */
 .footer {
-  position: sticky;
+  position: relative;
   bottom: 0;
   width: 100%;
-  background-color: #dcdcdc; /* 더 연한 색상으로 변경 */
+  background-color: #dcdcdc;
   text-align: center;
   padding: 10px;
   font-size: 14px;
   color: #6c757d;
-  z-index: 0; /* footer가 다른 요소보다 뒤에 오도록 설정 */
-  margin-top: auto; /* 푸터를 페이지 하단에 위치시키기 위해 사용 */
+  margin-top: auto;
 }
 
 #sidebarToggle {
   color: #7D7F82;
   background-color: #7D7F82;
   border-color: #7D7F82;
-  width: auto;
+  /*width: auto;*/
+}
+
+.title_text {
+  font-weight: bold; /* 글씨를 진하게 */
+  font-size: 2em; /* 크기 2배 키우기 */
+  display: flex; /* Flexbox를 사용 */
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center; /* 세로 방향 가운데 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
 }

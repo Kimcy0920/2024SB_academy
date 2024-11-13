@@ -157,7 +157,7 @@
 		WHERE
 			deleted_yn = 'N'
 		ORDER BY created_datetime DESC
-			LIMIT 5
+			LIMIT 6
 		]]>
     </select>
 

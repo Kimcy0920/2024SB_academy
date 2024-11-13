@@ -120,32 +120,6 @@ a:link, a:visited { text-decoration: none; color: #656565; }
     cursor: not-allowed;
 }
 
-.card_all {
-    border: 1px solid #ccc; /* 카드 경계 색상 */
-    border-radius: 0.25rem; /* 둥근 모서리 */
-    height: 120px; /* 카드 높이 조정 */
-    overflow: hidden; /* 내용 넘침 방지 */
-}
-
-.card_all:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 마우스 오버 시 그림자 효과 */
-    transition: 0.3s; /* 애니메이션 효과 */
-}
-
-.card-title_all {
-    font-size: 1.25em; /* 제목 크기 조정 */
-    color: #3b3a3a; /* 제목 색상 */
-}
-
-.card-text_all {
-    color: #666; /* 내용 색상 */
-    margin: 0; /* 기본 마진 제거 */
-}
-
-.card-text_all small {
-    color: #999; /* 글번호 색상 */
-}
-
 .btn {
     margin: 5px;
     padding: 5px 11px;
@@ -153,4 +127,39 @@ a:link, a:visited { text-decoration: none; color: #656565; }
     display: inline-block;
     background-color: #7D7F82; /* 버튼 색상 */
     vertical-align: middle;
+}
+
+/* Card layout for each post */
+.post-card {
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+.post-card:hover {
+    transform: scale(1.02); /* Hover effect for card */
+}
+
+.post-card .card-body {
+    padding: 15px;
+}
+
+.post-card .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.post-card .card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.login-prompt {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    padding: 10px;
 }
