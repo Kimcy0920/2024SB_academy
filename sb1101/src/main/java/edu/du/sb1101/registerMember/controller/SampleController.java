@@ -2,6 +2,7 @@ package edu.du.sb1101.registerMember.controller;
 
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardDto;
 import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
+import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.registerMember.entity.Member;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
 import lombok.extern.log4j.Log4j2;
@@ -25,6 +26,9 @@ public class SampleController {
     private BoardService boardService;
 
     private final MemberRepository memberRepository;
+
+    @Autowired
+    private NoticeRepository noticeRepository;
 
     public SampleController(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;

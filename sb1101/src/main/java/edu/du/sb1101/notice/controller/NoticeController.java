@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequestMapping("/notice")
 @RequiredArgsConstructor
@@ -35,6 +36,8 @@ public class NoticeController {
 
         Page<Notice> list = noticeRepository.findAll(pageable);
         model.addAttribute("noticeList", list);
+
+        noticeRepository.findTop5ByOrderByRegdateDesc();
 
         return "/notice/noticeList";
     }

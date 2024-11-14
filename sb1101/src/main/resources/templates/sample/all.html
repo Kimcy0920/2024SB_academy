@@ -36,7 +36,7 @@
                     <tr th:each="notice : ${noticeList}">
                         <td><a th:href="@{/notice/read(id=${notice.id})}" th:text="${notice.title}">공지사항 제목</a></td>
                         <td th:text="${notice.date}">2024-01-01</td>
-                        <p th:if="${username == null}" class="login-prompt"><span>로그인 후 이용이 가능합니다.</span></p>
+                        <p th:if="${username == null}"><span>로그인 후 이용이 가능합니다.</span></p>
                     </tr>
                     </tbody>
                 </table>
