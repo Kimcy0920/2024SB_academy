@@ -19,13 +19,13 @@ html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, subm
 }
 
 body {
+	font-family: 'NanumGothic', '나눔고딕', dotum, Arial, sans-serif;
 	font-size: 0.875em;
-	line-height: 1.5;
 	color: #666;
-	-webkit-text-size-adjust: none;
 	min-width: 320px;
-	font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-Serief;
+	background-color: #f9f9f9;
 }
+
 
 h1, h2, h3 {
 	font-size: 1.5em;
@@ -103,6 +103,7 @@ h2 {
 	color: #3b3a3a;
 	text-align: center;
 	vertical-align: middle;
+	background-color: #f7f7f7; /* 제목 부분 배경색 */
 }
 
 .board_list tbody td {

@@ -1,0 +1,23 @@
+<!-- templates/books/create.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Book</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- CSS 파일 연결 -->
+</head>
+<body>
+<h1>Create a New Book</h1>
+<form th:action="@{/api/books}" th:object="${book}" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}" required />
+
+    <label for="author">Author:</label>
+    <input type="text" id="author" th:field="*{author}" required />
+
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" th:field="*{isbn}" required />
+
+    <button type="submit">Add Book</button>
+</form>
+</body>
+</html>

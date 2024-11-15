@@ -1,0 +1,30 @@
+<!-- templates/books/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Book List</title>
+  <link rel="stylesheet" href="/css/style.css"> <!-- CSS 파일 연결 -->
+</head>
+<body>
+<h1>Book List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>ISBN</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td th:text="${book.id}">1</td>
+    <td th:text="${book.title}">Sample Title</td>
+    <td th:text="${book.author}">Sample Author</td>
+    <td th:text="${book.isbn}">123456789</td>
+  </tr>
+  </tbody>
+</table>
+<a href="/books/create">Add New Book</a>
+</body>
+</html>

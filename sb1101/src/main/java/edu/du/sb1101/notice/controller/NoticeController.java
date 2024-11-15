@@ -6,6 +6,7 @@ import edu.du.sb1101.registerMember.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class NoticeController {
     private final NoticeRepository noticeRepository;
 
     @GetMapping("/noticeList")
-    public String notice(Model model, @PageableDefault(page = 0, size = 10) Pageable pageable,
+    public String notice(Model model, @PageableDefault(page = 0, size = 10, sort = "regdate", direction = Sort.Direction.DESC) Pageable pageable,
                          HttpSession session) throws Exception {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
@@ -36,8 +37,6 @@ public class NoticeController {
 
         Page<Notice> list = noticeRepository.findAll(pageable);
         model.addAttribute("noticeList", list);
-
-        noticeRepository.findTop5ByOrderByRegdateDesc();
 
         return "/notice/noticeList";
     }

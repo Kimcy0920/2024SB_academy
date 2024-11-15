@@ -2,6 +2,7 @@ package edu.du.sb1101.registerMember.controller;
 
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardDto;
 import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
+import edu.du.sb1101.notice.entity.Notice;
 import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.registerMember.entity.Member;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
@@ -45,8 +46,12 @@ public class SampleController {
         }
         model.addAttribute("username", member.getUsername());
 
-        List<BoardDto> recentList = boardService.selectRecentBoardList(5);
+        List<BoardDto> recentList = boardService.selectRecentBoardList(8);
         model.addAttribute("recentList", recentList);
+
+        List<Notice> noticeList = noticeRepository.findTop5ByOrderByRegdateDesc();
+        model.addAttribute("noticeList", noticeList);
+
         return "sample/all";
     }
 

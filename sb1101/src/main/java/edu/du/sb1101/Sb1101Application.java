@@ -30,11 +30,11 @@ public class Sb1101Application {
         IntStream.rangeClosed(1, 50).forEach(i->{
             Board board = Board.builder()
                     .title("게시글 제목"+i)
-                    .createdDatetime(LocalDateTime.now().toString().substring(0, 18))
-                    .creatorId("사용자")
                     .contents("게시글 내용"+i)
-                    .deletedYn("N")
+                    .creatorId("사용자")
+                    .createdDatetime(LocalDateTime.now().toString().substring(0, 18))
                     .hitCnt(0)
+                    .deletedYn("N")
                     .build();
             boardRepository.save(board);
         });

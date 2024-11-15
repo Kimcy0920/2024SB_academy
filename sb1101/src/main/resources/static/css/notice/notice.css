@@ -4,41 +4,18 @@
 @import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 
 /* 기본 스타일 */
-html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td {
+html {
+    overflow: scroll;
+}
+
+html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {
     margin: 0;
+    outline: 0;
+    border: 0;
     padding: 0;
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
-}
-
-body {
-    font-family: 'NanumGothic', '나눔고딕', dotum, Arial, sans-serif;
-    font-size: 0.875em;
-    color: #666;
-    min-width: 320px;
-    background-color: #f9f9f9;
-}
-
-/* 컨테이너 스타일 */
-.container_nw {
-    width: calc(100% - 30px); /* 양옆 여백 */
-    max-width: 1024px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* 제목 스타일 */
-h2 {
-    font-size: 1.5em;
-    color: #252525;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-align: center;
 }
 
 /* 공지사항 목록 스타일 */
@@ -52,7 +29,7 @@ h2 {
 .notice_list thead th {
     padding: 12px;
     background-color: #f7f7f7;
-    color: #333;
+    color: #3b3a3a;
     border-bottom: 1px solid #ddd;
     text-align: center;
 }
@@ -63,8 +40,14 @@ h2 {
     text-align: center;
 }
 
+/* 공지사항 목록 스타일 */
 .notice_list tbody tr:hover {
-    background-color: #f5f5f5;
+    background: #ffff99 !important; /* 마우스 오버 시 배경색을 노란색으로 */
+}
+
+/* 게시글 제목 간격 추가 */
+.notice_list tbody tr {
+    margin-bottom: 15px; /* 각 게시글 간격 추가 */
 }
 
 .title_notice {

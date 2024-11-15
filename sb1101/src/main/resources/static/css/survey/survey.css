@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+/* 기본 스타일 */
+html {
+    overflow: scroll;
+}
+
+html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {
+    margin: 0;
+    outline: 0;
+    border: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+/* 설문조사 컨테이너 스타일 */
+.survey-container_su {
+    width: 80%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+/* 설문 제목 스타일 */
+.survey-container_su h2 {
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* 질문과 응답 옵션 스타일 */
+.survey-question_su {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 설문 질문 옵션 스타일 */
+.survey-options_su {
+    margin-top: 10px;
+}
+
+.survey-option_su {
+    margin: 10px 0;
+}
+
+/* 텍스트 응답 입력 스타일 */
+.survey-text_su input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 구분선 스타일 */
+hr_su {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+/* 제출 버튼 스타일 */
+.submit-btn_su {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.submit-btn_su:hover {
+    background-color: #333;
+}
+
+/* 응답자 나이 및 하고 싶은 말 입력란 스타일 */
+label_su {
+    font-size: 1em;
+    color: #333;
+}
+
+input[type="number"].su, input[type="text"].su {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 배경 스타일 */
+body {
+    background-color: #f4f4f4;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* 기본 색상 및 호버 효과 */
+input[type="radio"].su {
+    margin-right: 10px;
+}
+
+input[type="radio"].su:hover {
+    background-color: #e0e0e0;
+}
+
+/* 폼 구분선 */
+.survey-container_su hr_su {
+    border-top: 2px solid #ddd;
+}

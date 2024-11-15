@@ -61,15 +61,15 @@ public class BoardController {
 		final Page<BoardDto> page = new PageImpl<>(list.subList(start, end), pageable, list.size());
 		model.addAttribute("list", page);
 
-		// 최근 5개 게시글
-		List<BoardDto> recentList = boardService.selectRecentBoardList(6);
-		log.info("====> recentList size: {}", recentList.size());
-		log.info("====> recentList contents: {}", recentList);
-		for (BoardDto boardDto : recentList) {
-			log.info("BoardIdx: {}, Title: {}, Contents: {}, CreatorId: {}", boardDto.getBoardIdx(), boardDto.getTitle(), boardDto.getContents(), boardDto.getCreatorId());
-		}
-
-		model.addAttribute("recentList", recentList);
+//		// 최근 5개 게시글
+//		List<BoardDto> recentList = boardService.selectRecentBoardList(6);
+//		log.info("====> recentList size: {}", recentList.size());
+//		log.info("====> recentList contents: {}", recentList);
+//		for (BoardDto boardDto : recentList) {
+//			log.info("BoardIdx: {}, Title: {}, Contents: {}, CreatorId: {}", boardDto.getBoardIdx(), boardDto.getTitle(), boardDto.getContents(), boardDto.getCreatorId());
+//		}
+//
+//		model.addAttribute("recentList", recentList);
 
 		return "board/boardList";
 	}
