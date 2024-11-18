@@ -78,6 +78,7 @@ public class SampleController {
         model.addAttribute("role", member.getRole());
         model.addAttribute("regdate", member.getRegdate());
         model.addAttribute("password", member.getPassword());
+        model.addAttribute("point", member.getPoint());
         return "sample/member";
     }
     @PostMapping("/infoUpdate")

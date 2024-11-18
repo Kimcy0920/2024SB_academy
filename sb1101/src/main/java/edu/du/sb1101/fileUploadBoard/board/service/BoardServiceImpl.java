@@ -4,6 +4,7 @@ import edu.du.sb1101.fileUploadBoard.board.dto.BoardDto;
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardFileDto;
 import edu.du.sb1101.fileUploadBoard.board.mapper.BoardMapper;
 import edu.du.sb1101.fileUploadBoard.common.FileUtils;
+import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,10 @@ import java.util.List;
 @Service
 @Slf4j
 public class BoardServiceImpl implements BoardService{
-	
+
+	@Autowired
+	BoardRepository boardRepository;
+
 	@Autowired
 	private BoardMapper boardMapper;
 	

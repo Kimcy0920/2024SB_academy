@@ -11,9 +11,7 @@ import edu.du.sb1101.registerMember.entity.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,33 +41,28 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping("/board/openBoardList.do")
-	public String openBoardList(Model model, @PageableDefault(page = 0, size = 10) Pageable pageable,
+	public String openBoardList(@RequestParam(value = "keyword", required = false) String keyword,
+								Model model,
+								@PageableDefault(page = 0, size = 10) Pageable pageable,
 								HttpSession session) throws Exception {
-		log.info("====> openBoardList {}", "테스트");
 		Member member = (Member) session.getAttribute("member");
 		if (member == null) {
 			return "redirect:/sample/login";
 		}
 		model.addAttribute("username", member.getUsername());
 
-		// 전체 게시글 목록
-		List<BoardDto> list = boardService.selectBoardList();
+		// 키워드 여부에 따라 데이터 조회
+		Page<Board> pageResult;
+		Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Order.desc("createdDatetime")));
+		if (keyword != null && !keyword.trim().isEmpty()) {
+			pageResult = boardRepository.findByTitleContainingOrCreatorIdContaining(keyword, keyword, pageable);
+		} else {
+			pageResult = boardRepository.findAll(pageable);
+		}
 
-		// 페이지 정보에 따라 현재 페이지의 시작 인덱스를 계산
-		final int start = (int) pageable.getOffset();
-		final int end = Math.min((start + pageable.getPageSize()), list.size());
-		final Page<BoardDto> page = new PageImpl<>(list.subList(start, end), pageable, list.size());
-		model.addAttribute("list", page);
-
-//		// 최근 5개 게시글
-//		List<BoardDto> recentList = boardService.selectRecentBoardList(6);
-//		log.info("====> recentList size: {}", recentList.size());
-//		log.info("====> recentList contents: {}", recentList);
-//		for (BoardDto boardDto : recentList) {
-//			log.info("BoardIdx: {}, Title: {}, Contents: {}, CreatorId: {}", boardDto.getBoardIdx(), boardDto.getTitle(), boardDto.getContents(), boardDto.getCreatorId());
-//		}
-//
-//		model.addAttribute("recentList", recentList);
+		// 검색어, 페이징 결과를 모델에 추가
+		model.addAttribute("list", pageResult);
+		model.addAttribute("keyword", keyword);
 
 		return "board/boardList";
 	}

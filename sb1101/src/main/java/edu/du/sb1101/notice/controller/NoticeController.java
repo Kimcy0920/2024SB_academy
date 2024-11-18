@@ -27,7 +27,9 @@ public class NoticeController {
     private final NoticeRepository noticeRepository;
 
     @GetMapping("/noticeList")
-    public String notice(Model model, @PageableDefault(page = 0, size = 10, sort = "regdate", direction = Sort.Direction.DESC) Pageable pageable,
+    public String notice(@RequestParam(value = "keyword", required = false) String keyword, // 검색 키워드
+                         Model model,
+                         @PageableDefault(page = 0, size = 10, sort = "regdate", direction = Sort.Direction.DESC) Pageable pageable,
                          HttpSession session) throws Exception {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
@@ -35,8 +37,16 @@ public class NoticeController {
         }
         model.addAttribute("username", member.getUsername());
 
-        Page<Notice> list = noticeRepository.findAll(pageable);
+        // 키워드 여부에 따라 데이터 조회
+        Page<Notice> list;
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            list = noticeRepository.findByTitleContainingOrUsernameContaining(keyword, keyword, pageable);
+        } else {
+            list = noticeRepository.findAll(pageable);
+        }
+
         model.addAttribute("noticeList", list);
+        model.addAttribute("keyword", keyword);
 
         return "/notice/noticeList";
     }

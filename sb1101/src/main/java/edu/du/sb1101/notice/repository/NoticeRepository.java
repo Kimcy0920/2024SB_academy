@@ -14,4 +14,6 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
     Page<Notice> findAll(Pageable pageable); // 공지사항 최근등록순
     
     List<Notice> findTop5ByOrderByRegdateDesc(); // 공지사항 최근등록순 5개 메인페이지용
+
+    Page<Notice> findByTitleContainingOrUsernameContaining(String title, String username, Pageable pageable);
 }

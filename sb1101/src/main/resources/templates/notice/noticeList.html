@@ -10,8 +10,17 @@
     <link rel="stylesheet" th:href="@{/css/notice/notice.css}"/>
   </head>
   <body>
-  <div class="container_nw">
+  <div class="container">
     <h2>공지사항 목록</h2>
+
+    <!--    검색 기능   -->
+    <div class="search-container" style="margin-bottom: 20px; display: flex; justify-content: flex-end;">
+      <form th:action="@{/notice/noticeList}" method="get" style="display: flex; gap: 10px;">
+        <input type="text" name="keyword" placeholder="제목 또는 작성자 검색" th:value="${keyword}" style="width: 300px; padding: 5px;">
+        <button type="submit" class="btn">검색</button>
+      </form>
+    </div>
+
     <table class="notice_list">
       <colgroup>
         <col width="10%"/>
@@ -42,36 +51,42 @@
 
     <!-- 페이징 -->
     <div th:if="${!noticeList.isEmpty()}" class="pagination-container">
-      <nav th:with="pageNumber = ${noticeList.pageable.pageNumber}, pageSize = ${noticeList.pageable.pageSize}, totalPages = ${noticeList.totalPages}, startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1}, tempEndPage = ${startPage + pageSize - 1}, endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
+      <nav th:with="pageNumber=${noticeList.pageable.pageNumber},
+                 totalPages=${noticeList.totalPages}"
            aria-label="Page navigation">
         <ul class="pagination">
-          <li th:classappend="${pageNumber < pageSize} ? 'disabled'" class="page-item">
-            <a class="page-link" th:href="@{/notice/noticeList(page=0)}">
+          <!-- First page -->
+          <li th:classappend="${pageNumber == 0} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=0, keyword=${keyword})}">
               <span>&laquo;</span>
               <span class="sr-only">First</span>
             </a>
           </li>
 
-          <li th:classappend="${noticeList.first} ? 'disabled'" class="page-item">
-            <a class="page-link" th:href="${noticeList.first} ? '#' : @{/notice/noticeList(page=${pageNumber - 1})}" aria-label="Previous">
-              <span aria-hidden="true">&lt;</span>
+          <!-- Previous page -->
+          <li th:classappend="${pageNumber == 0} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=${pageNumber - 1}, keyword=${keyword})}">
+              <span>&lt;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
 
-          <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
-            <a th:text="${page}" class="page-link" th:href="@{/notice/noticeList(page=${page - 1})}"></a>
+          <!-- Page numbers -->
+          <li th:each="page : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${page == pageNumber} ? 'active'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=${page}, keyword=${keyword})}" th:text="${page + 1}"></a>
           </li>
 
-          <li th:classappend="${noticeList.last} ? 'disabled'" class="page-item">
-            <a class="page-link" th:href="${noticeList.last} ? '#' : @{/notice/noticeList(page=${pageNumber + 1})}" aria-label="Next">
-              <span aria-hidden="true">&gt;</span>
+          <!-- Next page -->
+          <li th:classappend="${pageNumber == totalPages - 1} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=${pageNumber + 1}, keyword=${keyword})}">
+              <span>&gt;</span>
               <span class="sr-only">Next</span>
             </a>
           </li>
 
-          <li th:classappend="${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
-            <a class="page-link" th:href="@{/notice/noticeList(page=${totalPages - 1})}">
+          <!-- Last page -->
+          <li th:classappend="${pageNumber == totalPages - 1} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="@{/notice/noticeList(page=${totalPages - 1}, keyword=${keyword})}">
               <span>&raquo;</span>
               <span class="sr-only">Last</span>
             </a>
@@ -79,6 +94,7 @@
         </ul>
       </nav>
     </div>
+
 
     <!-- 글쓰기 버튼 -->
     <div style="display: flex; justify-content: flex-end; margin-top: 10px;">

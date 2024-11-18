@@ -34,6 +34,7 @@ public class BeginController {
                 .address("성남시 수정구 복정동")
                 .regdate(now)
                 .role("ADMIN")
+                .point(500)
                 .build();
         memberRepository.save(member);
 
@@ -42,9 +43,10 @@ public class BeginController {
                 .username("사용자")
                 .password("1234")
                 .email("user@mail.com")
-                .address("서울시 광진구 중곡동")
+                .address("서울특별시 광진구 자양로44나길 11 스위트빌라")
                 .regdate(now)
                 .role("USER")
+                .point(500)
                 .build();
         memberRepository.save(member);
     }

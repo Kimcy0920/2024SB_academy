@@ -22,7 +22,7 @@
             <col class="col2">
           </colgroup>
           <tr>
-            <th>아이디</th>
+            <th>고유번호</th>
             <td th:text="${id}"></td>
             <th>이메일</th>
             <td><input type="text" th:value="${email}" name="email" required></td>
@@ -40,10 +40,18 @@
               <div th:if="${role == 'MANAGER'}">MANAGER</div>
               <div th:if="${role == 'ADMIN'}">ADMIN</div>
             </td>
-            <th>주소</th>
-            <td><input type="text" th:value="${address}" name="address" required></td>
+            <th>보유 포인트</th>
+            <td><input type="text" th:value="${point}" name="point" readonly></td>
+          </tr>
+          <!-- 주소 부분을 두 열에 걸쳐 표시 -->
+          <tr>
+            <th colspan="1">주소</th>
+            <td colspan="3">
+              <input type="text" th:value="${address}" name="address" required style="width: 100%;">
+            </td>
           </tr>
         </table>
+
         <button type="submit" class="btn btn-primary w-100">수정하기</button>
         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#changePasswordModal">비밀번호 변경</button>
       </main>

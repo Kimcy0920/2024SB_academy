@@ -44,6 +44,8 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    private int point = 0;
+
     public void changePassword(String oldPassword, String newPassword) {
         if (!password.equals(oldPassword))
             throw new WrongIdPasswordException();

@@ -30,6 +30,7 @@ h1 {
 .input--table td {
     background-color: #ffffff; /* 흰색 배경으로 설정 */
     color: #333; /* 기본 텍스트 색상 */
+    width: 100%; /* td 너비 100%로 지정 */
 }
 
 .input--table th, .input--table td {

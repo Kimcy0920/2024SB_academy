@@ -146,7 +146,7 @@
 
 	<!-- 최근 게시글 -->
 	<select id="selectRecentBoardList" parameterType="int" resultType="edu.du.sb1101.fileUploadBoard.board.dto.BoardDto">
-        <![CDATA[
+    <![CDATA[
 		SELECT
 			board_idx,
 			title,
@@ -158,8 +158,8 @@
 		WHERE
 			deleted_yn = 'N'
 		ORDER BY created_datetime DESC
-			LIMIT 8
+			LIMIT #{limit}
 		]]>
-    </select>
+	</select>
 
 </mapper>

@@ -17,13 +17,24 @@ body {
     background-color: #f9f9f9;
 }
 
-.container_nd {
-    width: calc(100% - 30px);
+/*.container {*/
+/*    width: calc(100% - 30px);*/
+/*    padding: 20px;*/
+/*    background-color: #fff;*/
+/*    border: 1px solid #ddd;*/
+/*    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);*/
+/*    margin: 20px auto;*/
+/*}*/
+
+/* 컨테이너 스타일 */
+.container {
+    max-width: 1024px;
+    margin: 30px auto;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    text-align: center;
 }
 
 h2 {

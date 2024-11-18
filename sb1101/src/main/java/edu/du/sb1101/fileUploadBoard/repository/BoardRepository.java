@@ -1,6 +1,8 @@
 package edu.du.sb1101.fileUploadBoard.repository;
 
 import edu.du.sb1101.fileUploadBoard.entity.Board;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -8,4 +10,6 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     public List<Board> findAllByOrderByBoardIdxDesc();
+
+    Page<Board> findByTitleContainingOrCreatorIdContaining(String title, String creatorId, Pageable pageable);
 }
