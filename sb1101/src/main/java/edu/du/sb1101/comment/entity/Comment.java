@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,6 +23,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer CommentId;
 
+    @Size(max = 200, message = "댓글은 200자 이내로 작성해주세요.")
+    @Column(nullable = false)
     private String content;
 
     private LocalDateTime commentDate;

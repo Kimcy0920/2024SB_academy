@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http//www.thymeleaf.org"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 
 <div layout:fragment="content">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>관리자 전용 페이지</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h1>For Admin</h1>
+<div class="container">
+<h1>관리자 전용 페이지</h1>
+  <form method="post" th:action="@{/sample/admin/memberList}">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>고유번호</th>
+        <th>이메일</th>
+        <th>성명</th>
+        <th>역할</th>
+        <th>가입일</th>
+        <th>관리</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="member : ${memberList}">
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.email}"></td>
+        <td th:text="${member.username}"></td>
+        <td th:text="${member.role}"></td>
+        <td th:text="${member.regdate}"></td>
+        <td th:text="Del" href="#"></td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
 </body>
 </div>
 </html>

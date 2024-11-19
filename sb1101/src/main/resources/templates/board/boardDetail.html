@@ -8,6 +8,14 @@
 		<meta charset="UTF-8">
 		<title>게시글</title>
 		<link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+		<style>
+			.board_list td {
+				word-wrap: break-word;  /* 긴 텍스트가 화면을 넘지 않도록 자동 줄바꿈 */
+				white-space: normal;    /* 텍스트가 넘칠 경우 줄바꿈 허용 */
+			}
+		</style>
+
 	</head>
 	<body>
 	<div class="container">
@@ -89,7 +97,7 @@
 				<th:block th:each="comment : ${commentList}">
 					<tr>
 						<td th:text="${comment.username}"></td>
-						<td th:text="${comment.content}"></td>
+						<td th:text="${comment.content}" style="word-wrap: break-word; white-space: normal;"></td>
 						<td th:text="${comment.commentDate}"></td>
 					</tr>
 				</th:block>
@@ -105,7 +113,10 @@
 				<tbody>
 				<tr>
 					<th>댓글 작성</th>
-					<td><textarea name="content" placeholder="댓글을 입력하세요" required></textarea></td>
+					<td>
+						<textarea name="content" id="commentContent" placeholder="댓글을 입력하세요" required maxlength="200"></textarea>
+						<div id="charCount">0/200</div>
+					</td>
 				</tr>
 				</tbody>
 			</table>
@@ -145,6 +156,12 @@
 					value: csrfToken
 				}).appendTo(frm);
 				frm.submit();
+			});
+
+			// 댓글 작성란에서 글자 수를 실시간으로 표시하는 기능 추가
+			$('#commentContent').on('input', function() {
+				var currentLength = $(this).val().length;
+				$('#charCount').text(currentLength + '/200');
 			});
 		});
 	</script>

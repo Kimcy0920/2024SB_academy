@@ -55,16 +55,6 @@ public class SampleController {
         return "sample/all";
     }
 
-    @GetMapping("/admin")
-    public String exAdmin(Model model, HttpSession session) {
-        Member member = (Member) session.getAttribute("member"); // 세션에서 Member 객체 가져오기
-        if (member == null) {
-            return "redirect:/sample/login";
-        }
-        model.addAttribute("username", member.getUsername());
-        return "sample/admin";
-    }
-
     @GetMapping("/member")
     public String exMember(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("member"); // 세션에서 Member 객체 가져오기
@@ -202,19 +192,51 @@ public class SampleController {
     public String findEmail() {
         return "sample/findEmail";
     }
+
     @PostMapping("/findEmail") // 아이디 찾기 컨트롤러
     public String findEmail(@RequestParam String username, Model model) {
         Member member = memberRepository.findByUsername(username);
+
+        // 기본값을 설정하여 null을 방지
+        model.addAttribute("emailFound", false);  // 기본값 false 설정
 
         if (member != null) {
             model.addAttribute("emailFound", true);
             model.addAttribute("email", member.getEmail());
             System.out.println("이메일: " + member.getEmail());
         } else {
-            model.addAttribute("emailFound", false);
             model.addAttribute("errorMessage", "해당 이름으로 등록된 사용자가 없습니다.");
             System.out.println("해당 이름으로 가입된 정보가 없습니다.");
         }
-        return "sample/findEmail";
+
+        return "sample/findEmail"; // 같은 페이지로 돌아가서 결과를 표시
+    }
+
+    @GetMapping("/admin")
+    public String admin(Model model, HttpSession session) {
+        Member member = (Member) session.getAttribute("member"); // 세션에서 Member 객체 가져오기
+        if (member.getRole().equals("USER")) {
+            return "redirect:/sample/login";
+        }
+        if ("ADMIN".equals(member.getRole())) {
+            List<Member> members = memberRepository.findAllByOrderByIdAsc();
+            model.addAttribute("memberList", members);
+        }
+        model.addAttribute("username", member.getUsername());
+        return "sample/admin";
+    }
+    @PostMapping("/memberList")
+    public String memberList(Model model, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+
+        if (member != null && "ADMIN".equals(member.getRole())) {
+            List<Member> members = memberRepository.findAllByOrderByIdAsc();
+            log.info("Fetched members: {}", members);
+            model.addAttribute("memberList", members);
+            return "sample/admin"; // 관리자 페이지로 이동
+        } else {
+            System.out.println("관리자 전용 페이지입니다.");
+            return "redirect:/sample/all";
+        }
     }
 }

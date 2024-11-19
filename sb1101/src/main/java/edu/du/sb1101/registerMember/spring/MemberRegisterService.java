@@ -26,7 +26,9 @@ public class MemberRegisterService {
 				.regdate(LocalDateTime.now())
 				.password(req.getPassword())
 				.username(req.getName())
+				.address(req.getAddress())
 				.role("USER")
+				.point(100)
 				.build();
 		memberDao.insert(newMember);
 		System.out.println("====>" + newMember);

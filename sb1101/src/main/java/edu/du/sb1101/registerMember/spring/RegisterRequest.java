@@ -14,6 +14,8 @@ public class RegisterRequest {
 	private String confirmPassword;
 	@NotEmpty
 	private String name;
+	@NotEmpty
+	private String address;
 
 	public String getEmail() {
 		return email;
@@ -46,6 +48,10 @@ public class RegisterRequest {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getAddress() { return address; }
+
+	public void setAddress(String address) { this.address = address; }
 
 	public boolean isPasswordEqualToConfirmPassword() {
 		return password.equals(confirmPassword);

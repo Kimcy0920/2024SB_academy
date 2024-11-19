@@ -1,22 +1,78 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http//www.thymeleaf.org"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 
 <div layout:fragment="content">
-<head>
-  <title th:text="#{member.register}">Member Register</title>
-</head>
-<body>
-<h2 th:text="#{term}">Terms</h2>
-<p>약관 내용</p>
-<form th:action="@{/register/step2}" method="post">
-  <label>
-    <input type="checkbox" name="agree" value="true">
-    <span th:text="#{term.agree}">I agree to the terms</span>
-  </label>
-  <input type="submit" th:value="#{next.btn}" />
-</form>
-</body>
+  <head>
+    <title th:text="#{member.register}">회원가입(약관동의)</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}"/>
+  </head>
+  <body>
+  <div class="container">
+    <h2 th:text="#{term}">약관 동의</h2>
+    <hr/>
+
+    <!-- 약관 내용 -->
+    <div class="terms-content">
+  <textarea readonly>
+    [서비스 이용약관]
+
+    제1조 (목적)
+    이 약관은 [서비스명]이 제공하는 서비스의 이용과 관련하여 [서비스명]과 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
+
+    제2조 (정의)
+    1. "서비스"란 [서비스명]이 제공하는 모든 온라인 서비스 및 콘텐츠를 의미합니다.
+    2. "이용자"란 본 약관에 동의하고 서비스를 이용하는 자를 의미합니다.
+    3. "회원"이란 본 약관에 동의하고 회원 가입을 통해 서비스를 이용하는 이용자를 의미합니다.
+
+    제3조 (약관의 효력 및 변경)
+    1. 이 약관은 서비스 제공자가 서비스 화면에 게시하거나 기타 방법으로 고지함으로써 효력을 발생합니다.
+    2. 회사는 필요한 경우 약관을 변경할 수 있으며, 변경된 약관은 서비스 화면에 게시하거나 기타 방법으로 고지합니다.
+
+    제4조 (서비스의 제공)
+    1. 회사는 이용자에게 서비스를 제공하기 위해 필요한 모든 기술적, 물리적 장치를 갖추어야 합니다.
+    2. 회사는 서비스 제공을 일시적으로 중지할 수 있으며, 이로 인한 서비스의 중단 및 손해에 대해 책임지지 않습니다.
+
+    제5조 (이용자의 의무)
+    1. 이용자는 서비스 이용 시 회사의 약관과 법령을 준수하여야 합니다.
+    2. 이용자는 서비스 이용 중 타인의 권리를 침해하거나 불법적인 행위를 해서는 안 됩니다.
+    3. 이용자는 본인의 계정 정보를 안전하게 관리할 책임이 있습니다.
+
+    제6조 (개인정보 보호)
+    1. 회사는 이용자의 개인정보를 보호하기 위해 관련 법령을 준수하며, 개인정보 보호정책에 따라 이를 처리합니다.
+    2. 회사는 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않으며, 법적 요구가 있을 경우에만 제공할 수 있습니다.
+
+    제7조 (서비스 이용의 제한)
+    1. 회사는 이용자가 본 약관을 위반한 경우, 서비스 이용을 제한하거나 중지할 수 있습니다.
+    2. 이용자가 서비스를 부정한 방법으로 이용할 경우, 회사는 서비스 제공을 거부할 수 있습니다.
+
+    제8조 (서비스의 종료)
+    1. 회사는 서비스를 종료할 수 있으며, 종료 시에는 이용자에게 사전 고지 후 종료합니다.
+    2. 서비스 종료 시, 이용자는 남은 포인트나 이용권을 사용할 수 없으며, 회사는 이에 대한 책임을 지지 않습니다.
+
+    제9조 (면책 조항)
+    1. 회사는 이용자가 서비스를 이용함에 있어 발생한 손해에 대해 책임지지 않습니다.
+    2. 서비스 이용 중 발생한 문제에 대해 회사가 통제할 수 없는 사유로 인한 손해는 면책됩니다.
+
+    제10조 (기타)
+    1. 본 약관에 명시되지 않은 사항에 대해서는 관련 법령 및 회사 정책에 따릅니다.
+    2. 이용자는 언제든지 회사의 고객센터를 통해 문의할 수 있습니다.
+
+    [본 약관에 동의하시면 서비스 이용을 계속할 수 있습니다.]
+  </textarea>
+    </div>
+
+    <!-- 동의 체크박스 -->
+    <form th:action="@{/register/step2}" method="post">
+      <label class="checkbox-label">
+        <input type="checkbox" name="agree" value="true">
+        <span th:text="#{term.agree}">약관에 동의합니다.</span>
+      </label>
+      <input type="submit" th:value="#{next.btn}" class="btn"/>
+    </form>
+  </div>
+  </body>
 </div>
+
 </html>

@@ -21,7 +21,7 @@
       </form>
     </div>
 
-    <table class="notice_list">
+    <table class="board_list">
       <colgroup>
         <col width="10%"/>
         <col width="*"/>
@@ -39,7 +39,7 @@
       <tbody>
       <tr th:if="${#lists.size(noticeList)} > 0" th:each="notice : ${noticeList}">
         <td th:text="${notice.id}"></td>
-        <td class="title_notice"><a href="/notice/noticeDetail?id=" th:attrappend="href=${notice.id}" th:text="${notice.title}"></a></td>
+        <td class="title"><a href="/notice/noticeDetail?id=" th:attrappend="href=${notice.id}" th:text="${notice.title}"></a></td>
         <td th:text="${notice.username}"></td>
         <td th:text="${notice.regdate}"></td>
       </tr>
@@ -94,7 +94,6 @@
         </ul>
       </nav>
     </div>
-
 
     <!-- 글쓰기 버튼 -->
     <div style="display: flex; justify-content: flex-end; margin-top: 10px;">

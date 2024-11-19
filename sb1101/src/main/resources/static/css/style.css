@@ -150,6 +150,14 @@ h2 {
 	text-align: center;
 }
 
+.board_detail td {
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+	color: #333;
+	border-bottom: 1px solid #ddd;
+}
+
 .board_detail tbody th, .board_detail tbody td {
 	padding: 10px 15px;
 	border-bottom: 1px solid #ccc;
