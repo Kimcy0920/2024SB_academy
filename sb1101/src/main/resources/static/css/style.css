@@ -91,6 +91,7 @@ h2 {
 	border-bottom: 1px solid #ccc;
 	margin: 15px 0;
 	border-collapse: collapse;
+	text-align: center;
 }
 
 .board_list thead th:first-child {
@@ -300,7 +301,7 @@ h2 {
 /* 댓글 작성 텍스트 영역 스타일 */
 .comment-form textarea {
 	width: 100%;
-	min-height: 80px;
+	min-height: 65px;
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
@@ -309,4 +310,17 @@ h2 {
 
 .comment-form .btn-submit:hover {
 	background-color: #6b9ab8;
+}
+
+#charCount {
+	text-align: right !important; /* 우측 정렬 강제 적용 */
+	color: #666 !important; /* 색상을 빨간색으로 강제 적용 */
+}
+
+.comment-content {
+	max-width: 80ch; /* 최대 글자수 80자로 제한 */
+	white-space: pre-wrap; /* 줄바꿈 유지 및 공백 반영 */
+	word-break: break-word; /* 단어 줄바꿈 허용 */
+	overflow-wrap: break-word; /* 긴 단어도 줄바꿈 */
+	overflow: hidden; /* 넘치는 내용 숨김 */
 }

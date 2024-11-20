@@ -36,22 +36,21 @@ public class CommentController {
 
         Board board = boardRepository.findById(boardIdx).get();
         if (board == null) {
-            System.out.println("게시글이 존재하지 않습니다.");
             model.addAttribute("error", "게시글을 찾을 수 없습니다.");
             return "redirect:/board/openBoardDetail.do";
         }
 
+        // 줄바꿈을 <br>로 변경
+        String formattedContent = content.replace("\n", "<br>");
+
         Comment newComment = Comment.builder()
-                .content(content)
+                .content(formattedContent)
                 .commentDate(LocalDateTime.now())
                 .username(member.getUsername())
                 .member(member)
                 .board(board)
                 .build();
         commentRepository.save(newComment);
-
-        List<Comment> commentList = commentRepository.findByBoard(board);
-        model.addAttribute("commentList", commentList);
 
         return "redirect:/board/openBoardDetail.do?boardIdx=" + boardIdx;
     }

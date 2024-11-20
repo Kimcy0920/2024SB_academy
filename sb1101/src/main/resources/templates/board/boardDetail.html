@@ -8,14 +8,31 @@
 		<meta charset="UTF-8">
 		<title>게시글</title>
 		<link rel="stylesheet" th:href="@{/css/style.css}"/>
-
 		<style>
-			.board_list td {
-				word-wrap: break-word;  /* 긴 텍스트가 화면을 넘지 않도록 자동 줄바꿈 */
-				white-space: normal;    /* 텍스트가 넘칠 경우 줄바꿈 허용 */
+			/* 입력창을 relative로 설정하여 자식 요소들의 기준을 잡습니다 */
+			.input-wrapper {
+				position: relative;
+				width: 100%;
+			}
+
+			/* 글자 수를 우측 하단에 위치시킵니다 */
+			.char-count {
+				position: absolute;
+				bottom: 5px;
+				right: 10px;
+				font-size: 12px;
+				color: #888;
+			}
+
+			/* 댓글 입력창 글자 수 표시 위치 */
+			.comment-section .char-count {
+				position: absolute;
+				bottom: 5px;
+				right: 10px;
+				font-size: 12px;
+				color: #888;
 			}
 		</style>
-
 	</head>
 	<body>
 	<div class="container">
@@ -45,11 +62,22 @@
 				</tr>
 				<tr>
 					<th scope="row">제목</th>
-					<td colspan="3"><input type="text" id="title" name="title" th:value="${board.title }"/></td>
+					<td colspan="3">
+						<div class="input-wrapper">
+							<input type="text" id="title" name="title" th:value="${board.title }" maxlength="50" required
+								   th:disabled="${board.creatorId != username}" />
+							<div id="charCountTitle" class="char-count" th:if="${board.creatorId == username}">0/50</div>
+						</div>
+					</td>
 				</tr>
+
 				<tr>
 					<td colspan="4" class="view_text">
-						<textarea title="내용" id="contents" name="contents" th:text="${board.contents }"></textarea>
+						<div class="input-wrapper">
+                            <textarea title="내용" id="contents" name="contents" maxlength="1000" required th:text="${board.contents }"
+									  th:disabled="${board.creatorId != username}"></textarea>
+							<div id="charCountContents" class="char-count" th:if="${board.creatorId == username}">0/1000</div>
+						</div>
 					</td>
 				</tr>
 				</tbody>
@@ -68,62 +96,69 @@
 
 		<a href="#this" id="list" class="btn">목록으로</a>
 		<span th:if="${board.creatorId} == ${username}">
-			<a href="#this" id="edit" class="btn">수정하기</a>
-			<a href="#this" id="delete" class="btn">삭제하기</a>
-		</span>
-	</div>
+            <a href="#this" id="edit" class="btn">수정하기</a>
+            <a href="#this" id="delete" class="btn">삭제하기</a>
+        </span>
 
-	<!-- 댓글 기능 -->
-	<div class="container">
-		<!-- th:text="${comment.count}" -->
-		<h3 th:value="댓글"></h3>
-		<form th:action="@{/comment/addComment}" method="post" class="comment-form">
-			<input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
-			<!-- 댓글 목록 -->
-			<table class="board_list" style="margin-top:20px;">
-				<colgroup>
-					<col width="15%">
-					<col width="65%">
-					<col width="20%">
-				</colgroup>
-				<thead>
-				<tr>
-					<th>작성자</th>
-					<th>댓글 내용</th>
-					<th>작성일</th>
-				</tr>
-				</thead>
-				<tbody>
-				<th:block th:each="comment : ${commentList}">
+		<!-- 댓글 영역 -->
+		<div class="comment-section" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ddd;">
+			<h3>댓글 <span th:text="'(' + ${commentList.size()} + ')'"></span></h3>
+			<form th:action="@{/comment/addComment}" method="post" class="comment-form">
+				<input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
+
+				<!-- 댓글 목록 -->
+				<table class="board_list" style="margin-top: 20px;">
+					<colgroup>
+						<col width="15%">
+						<col width="65%">
+						<col width="20%">
+					</colgroup>
+					<thead th:if="${commentList.size() > 0}">
 					<tr>
-						<td th:text="${comment.username}"></td>
-						<td th:text="${comment.content}" style="word-wrap: break-word; white-space: normal;"></td>
-						<td th:text="${comment.commentDate}"></td>
+						<th>작성자</th>
+						<th>댓글 내용</th>
+						<th>작성일</th>
 					</tr>
-				</th:block>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+					<th:block th:each="comment : ${commentList}">
+						<tr>
+							<td th:text="${comment.username}"></td>
+							<td class="comment-content" th:utext="${comment.content}"></td>
+							<td th:text="${comment.commentDate}"></td>
+						</tr>
+					</th:block>
+					</tbody>
+				</table>
 
-			<table class="board_detail">
-				<colgroup>
-					<col width="15%">
-					<col width="85%">
-				</colgroup>
+				<!-- 댓글이 없을 경우 -->
+				<div th:if="${commentList.size() == 0}" class="no-comments">
+					<p>아직 작성된 댓글이 없습니다.</p><br>
+				</div>
 
-				<tbody>
-				<tr>
-					<th>댓글 작성</th>
-					<td>
-						<textarea name="content" id="commentContent" placeholder="댓글을 입력하세요" required maxlength="200"></textarea>
-						<div id="charCount">0/200</div>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-			<div style="text-align:right; margin-top:10px;">
-				<input type="submit" value="댓글 작성" class="btn">
-			</div>
-		</form>
+				<!-- 댓글 작성 입력창 -->
+				<table class="board_detail">
+					<colgroup>
+						<col width="15%">
+						<col width="85%">
+					</colgroup>
+					<tbody>
+					<tr>
+						<th>댓글 작성</th>
+						<td>
+							<div class="input-wrapper">
+								<textarea name="content" id="commentContent" placeholder="댓글을 입력하세요" required maxlength="200"></textarea>
+								<div id="charCount" class="char-count">0/200</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div style="text-align:right; margin-top:10px;">
+					<input type="submit" value="댓글 작성" class="btn">
+				</div>
+			</form>
+		</div>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -148,14 +183,36 @@
 			});
 
 			$("#delete").on("click", function(){
-				var frm = $("#frm")[0];
-				frm.action = "/board/deleteBoard.do";
-				$('<input>').attr({
-					type: 'hidden',
-					name: csrfParameter,
-					value: csrfToken
-				}).appendTo(frm);
-				frm.submit();
+				if(confirm("정말 삭제하시겠습니까?")) {
+					var frm = $("#frm")[0];
+					frm.action = "/board/deleteBoard.do";
+					$('<input>').attr({
+						type: 'hidden',
+						name: csrfParameter,
+						value: csrfToken
+					}).appendTo(frm);
+					frm.submit();
+				}
+			});
+
+			// 제목 글자 수 초기화
+			var titleLength = $('#title').val().length;
+			$('#charCountTitle').text(titleLength + '/50');
+
+			// 내용 글자 수 초기화
+			var contentsLength = $('#contents').val().length;
+			$('#charCountContents').text(contentsLength + '/1000');
+
+			// 제목 글자 수 표시
+			$('#title').on('input', function() {
+				var currentLength = $(this).val().length;
+				$('#charCountTitle').text(currentLength + '/50');
+			});
+
+			// 내용 글자 수 표시
+			$('#contents').on('input', function() {
+				var currentLength = $(this).val().length;
+				$('#charCountContents').text(currentLength + '/1000');
 			});
 
 			// 댓글 작성란에서 글자 수를 실시간으로 표시하는 기능 추가

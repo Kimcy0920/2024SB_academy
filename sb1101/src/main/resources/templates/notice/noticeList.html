@@ -8,12 +8,18 @@
     <meta charset="UTF-8">
     <title>공지사항</title>
     <link rel="stylesheet" th:href="@{/css/notice/notice.css}"/>
+    <style>
+      /* 테이블 셀 텍스트 가운데 정렬 */
+      th, td {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
   <div class="container">
     <h2>공지사항 목록</h2>
 
-    <!--    검색 기능   -->
+    <!-- 검색 기능 -->
     <div class="search-container" style="margin-bottom: 20px; display: flex; justify-content: flex-end;">
       <form th:action="@{/notice/noticeList}" method="get" style="display: flex; gap: 10px;">
         <input type="text" name="keyword" placeholder="제목 또는 작성자 검색" th:value="${keyword}" style="width: 300px; padding: 5px;">
@@ -51,8 +57,7 @@
 
     <!-- 페이징 -->
     <div th:if="${!noticeList.isEmpty()}" class="pagination-container">
-      <nav th:with="pageNumber=${noticeList.pageable.pageNumber},
-                 totalPages=${noticeList.totalPages}"
+      <nav th:with="pageNumber=${noticeList.pageable.pageNumber}, totalPages=${noticeList.totalPages}"
            aria-label="Page navigation">
         <ul class="pagination">
           <!-- First page -->

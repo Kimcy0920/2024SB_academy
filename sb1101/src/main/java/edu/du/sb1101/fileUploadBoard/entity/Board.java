@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,13 @@ public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer boardIdx;
-	
+
+	@Size(max = 50, message = "제목은 50자 이내로 작성해주세요.")
+	@Column(nullable = false, length = 50)
 	private String title;
-	
+
+	@Size(max = 1000, message = "내용은 1000자 이내로 작성해주세요.")
+	@Column(nullable = false, length = 1000)
 	private String contents;
 
 	@ColumnDefault("0") //default 0
