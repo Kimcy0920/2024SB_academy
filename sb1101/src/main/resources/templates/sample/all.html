@@ -21,40 +21,60 @@
         </div>
 
         <div class="row_all">
-            <!-- 공지사항 섹션 (하단) -->
+            <!-- 공지사항 섹션 -->
             <section class="col-md-6 mb-4 p-4 rounded section-box2_all">
-                <h2><a th:href="@{/notice/noticeList}" class="text-decoration-none">공지사항</a></h2>
-                <hr/>
-                <div class="main--page--split_all"></div>
-                <div class="notice-list">
-                    <div th:each="notice : ${noticeList}" class="notice-card mb-3 p-3 rounded">
-                        <a th:href="@{/notice/noticeDetail(id=${notice.id})}" class="notice-link d-flex justify-content-between align-items-center">
-                            <span class="notice-title" th:text="${notice.title}">공지사항 제목</span>
-                            <span class="notice-date text-muted" th:text="${notice.regdate}">2024-01-01</span>
+                <div class="section-inner-box">
+                    <h2><a th:href="@{/notice/noticeList}" class="text-decoration-none" style="font-weight: 900;">공지사항</a></h2>
+                    <hr/>
+                    <!-- 로그인 안 된 경우 문구 표시 -->
+                    <span th:if="${username == null}">
+            로그인 후 이용이 가능합니다.
+        </span>
+                    <!-- 로그인 된 경우 공지사항 리스트 표시 -->
+                    <span th:if="${username != null}">
+            <div class="main--page--split_all"></div>
+            <div class="notice-list">
+                <ul class="list-unstyled">
+                    <li th:each="notice : ${noticeList}" class="post-item">
+                        <a th:href="@{/notice/noticeDetail(id=${notice.id})}" class="post-link">
+                            <div class="post-content">
+                                <span class="post-title" th:text="${notice.title}">공지사항 제목</span>
+                                <span class="post-date" th:text="${notice.regdate}">2024-01-01</span>
+                            </div>
                         </a>
-                    </div>
+                    </li>
+                </ul>
+            </div>
+        </span>
                 </div>
             </section>
 
-
+            <!-- 게시판 섹션 -->
             <section class="col-md-6 mb-4 p-4 rounded section-box3_all">
-                <h2>
-                    <a th:href="@{/board/openBoardList.do}">게시판</a>
-                </h2>
-                <hr/>
-                <div class="row">
-                    <div class="col-md-6 mb-3" th:each="post : ${recentList}">
-                        <div class="card post-card h-100">
-                            <a th:href="@{/board/openBoardDetail.do(boardIdx=${post.boardIdx})}" class="post-link">
-                                <div class="card-body">
-                                    <h5 class="card-title" th:text="${post.title}">게시글 제목</h5>
-                                    <p class="card-text post-excerpt" th:text="${post.contents}"
-                                       style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></p>
-                                </div>
-                            </a>
-                            <p th:if="${username == null}" class="login-prompt"><span>로그인 후 이용이 가능합니다.</span></p>
-                        </div>
-                    </div>
+                <div class="section-inner-box">
+                    <h2>
+                        <a th:href="@{/board/openBoardList.do}" style="font-weight: 900;">게시판</a>
+                    </h2>
+                    <hr/>
+                    <!-- 로그인 안 된 경우 문구 표시 -->
+                    <span th:if="${username == null}">
+            로그인 후 이용이 가능합니다.
+        </span>
+                    <!-- 로그인 된 경우 게시판 리스트 표시 -->
+                    <span th:if="${username != null}">
+            <div class="row">
+                <ul class="list-unstyled">
+                    <li th:each="post : ${recentList}" class="post-item">
+                        <a th:href="@{/board/openBoardDetail.do(boardIdx=${post.boardIdx})}" class="post-link">
+                            <div class="post-content">
+                                <span class="post-title" th:text="${post.title}">게시글 제목</span>
+                                <span class="post-date" th:text="${post.createdDatetime}">2024-01-01</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </span>
                 </div>
             </section>
         </div>

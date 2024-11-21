@@ -10,12 +10,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class NoticeController {
             return "redirect:/sample/login";
         }
         model.addAttribute("username", member.getUsername());
+        model.addAttribute("role", member.getRole());
 
         // 키워드 여부에 따라 데이터 조회
         Page<Notice> list;
@@ -67,7 +70,10 @@ public class NoticeController {
         }
     }
     @PostMapping("/noticeWrite")
-    public String noticeWrite(@RequestParam String title, @RequestParam String content, Model model, HttpSession session) throws Exception {
+    public String noticeWrite(@Valid @RequestParam String title,
+                              @Valid @RequestParam String content,
+                              Model model,
+                              HttpSession session) throws Exception {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return "redirect:/sample/login";
@@ -75,11 +81,12 @@ public class NoticeController {
         model.addAttribute("username", member.getUsername());
 
         Notice notice = Notice.builder()
-                        .title(title).content(content).username(member.getUsername()).regdate(LocalDateTime.now()).build();
+                .title(title).content(content).username(member.getUsername()).regdate(LocalDateTime.now()).build();
         noticeRepository.save(notice);
 
         return "redirect:/notice/noticeList";
     }
+
 
     @PostMapping("/noticeUpdate")
     public String noticeUpdate(@RequestParam("id") Integer id, @RequestParam String title, @RequestParam String content, HttpSession session) throws Exception {

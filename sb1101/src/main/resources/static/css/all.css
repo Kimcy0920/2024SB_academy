@@ -12,19 +12,18 @@ h1, h2, h3 { font-size: 1.5em; }
 a:link, a:visited { text-decoration: none; color: #656565; }
 
 .container_all {
-    /* max-width를 삭제하여 화면에 꽉 차게 만듬 */
     margin-right: 0;
     margin-left: 0;
-    padding-right: 0;  /* 오른쪽 패딩 제거 */
-    padding-left: 0;   /* 왼쪽 패딩 제거 */
-    width: 100%;  /* 화면 너비에 맞춰 확장 */
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
 }
 
 .row_all {
     display: flex;
-    gap: 15px;  /* 섹션 간 간격 유지 */
-    width: 100%; /* 전체 너비를 사용하도록 설정 */
-    flex-wrap: wrap;  /* 화면 크기에 맞게 섹션이 줄 바꿈 가능하도록 설정 */
+    gap: 15px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .section-box1_all {
@@ -32,53 +31,121 @@ a:link, a:visited { text-decoration: none; color: #656565; }
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     width: 100%;
-    height: 400px;  /* 더 큰 높이를 설정하여 이미지가 더 크게 보이도록 */
-    background-size: cover; /* 이미지가 섹션에 맞게 꽉 차도록 설정 */
-    background-position: center; /* 이미지 중앙 정렬 */
-    margin: 0;  /* 모든 마진 제거 */
-    padding: 0;  /* 모든 패딩 제거 */
-    border-radius: 0;  /* 모서리 둥글기 제거 */
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
 }
 
 .section-box2_all, .section-box3_all {
     border: 1px solid #ddd;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    width: 100%; /* 기본적으로 100% 너비 설정 */
-    min-height: 200px;
-    margin-top: 15px;  /* 섹션 2, 3에 마진 추가 */
+    width: 100%;
+    min-height: 250px;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+.section-box2_all:hover, .section-box3_all:hover {
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 @media (min-width: 768px) {
     .section-box1_all {
-        width: 100%; /* section-box1은 화면 크기에 맞게 가득 채우되 높이를 유지 */
-        height: 500px; /* 화면이 커지면 더 높은 높이로 설정 */
+        width: 100%;
+        height: 500px;
     }
 
     .section-box2_all, .section-box3_all {
-        width: 48%; /* 화면 크기가 커지면 각 섹션이 2개씩 나란히 배치되도록 설정 */
+        width: 48%;
     }
 }
 
-.section-box1_all h2 a, .section-box2_all h2 a, .section-box3_all h2 a {
+.section-box2_all h2 a, .section-box3_all h2 a {
     color: #333;
 }
 
-.table_all {
-    width: 100%;
-    border-collapse: collapse;
+.notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.table_all thead th, .table_all tbody td {
-    text-align: center;
+.notice-list .post-item { /* 공지사항도 게시판 스타일로 적용 */
     padding: 12px;
+    border-bottom: 1px solid #ddd;
 }
 
-.table_all tbody tr:hover {
-    background-color: #ffff99;
+.notice-list .post-item:last-child {
+    border-bottom: none;
 }
 
-/* Pagination 스타일 */
+.notice-link {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.notice-link:hover {
+    background-color: #f0f0f0;
+}
+
+.notice-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.notice-date {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.post-item {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.post-link {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.post-link:hover {
+    background-color: #f0f0f0;
+}
+
+.post-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-title {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.post-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
 .pagination-container {
     text-align: center;
     margin-top: 20px;
@@ -118,82 +185,4 @@ a:link, a:visited { text-decoration: none; color: #656565; }
     background-color: #f9f9f9;
     color: #bbb;
     cursor: not-allowed;
-}
-
-.btn {
-    margin: 5px;
-    padding: 5px 11px;
-    color: #fff;
-    display: inline-block;
-    background-color: #7D7F82; /* 버튼 색상 */
-    vertical-align: middle;
-}
-
-/* Card layout for each post */
-.post-card {
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    transition: transform 0.2s ease-in-out;
-    overflow: hidden;
-}
-
-.post-card:hover {
-    transform: scale(1.02); /* Hover effect for card */
-}
-
-.post-card .card-body {
-    padding: 15px;
-}
-
-.post-card .card-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.post-card .card-text {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.login-prompt {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #888;
-    padding: 10px;
-}
-
-.notice-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* 공지사항 카드 간 간격 */
-}
-
-.notice-card {
-    background-color: #f8f9fa; /* 카드 배경색 */
-    border: 1px solid #ddd;
-    border-radius: 8px; /* 둥근 모서리 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    transition: transform 0.2s ease-in-out;
-}
-
-.notice-card:hover {
-    transform: scale(1.02); /* 카드 호버 효과 */
-}
-
-.notice-link {
-    text-decoration: none;
-    color: #333;
-}
-
-.notice-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.notice-date {
-    font-size: 0.9rem;
-    color: #666;
 }

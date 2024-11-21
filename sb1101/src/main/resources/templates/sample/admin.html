@@ -31,7 +31,12 @@
         <td th:text="${member.username}"></td>
         <td th:text="${member.role}"></td>
         <td th:text="${member.regdate}"></td>
-        <td th:text="Del" href="#"></td>
+        <td>
+          <form method="post" th:action="@{/sample/memberDel}" th:if="${member.username != username}">
+            <input type="hidden" name="id" th:value="${member.id}"/>
+            <button type="submit" class="btn btn-danger">Del</button>
+          </form>
+        </td>
       </tr>
       </tbody>
     </table>

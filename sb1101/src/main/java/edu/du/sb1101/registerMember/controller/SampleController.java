@@ -40,18 +40,23 @@ public class SampleController {
 
     @GetMapping("/all")
     public String exAll(Model model, HttpSession session) throws Exception {
-        Member member = (Member) session.getAttribute("member"); // 세션에서 Member 객체 가져오기
-        if (member == null) {
-            return "redirect:/sample/login";
-        }
-        model.addAttribute("username", member.getUsername());
+        // 세션에서 Member 객체 가져오기
+        Member member = (Member) session.getAttribute("member");
 
-        List<BoardDto> recentList = boardService.selectRecentBoardList(8);
+        // 로그인한 경우에만 username을 모델에 추가
+        if (member != null) {
+            model.addAttribute("username", member.getUsername());
+        }
+
+        // 최근 게시글 목록 가져오기
+        List<BoardDto> recentList = boardService.selectRecentBoardList(5);
         model.addAttribute("recentList", recentList);
 
+        // 공지사항 목록 가져오기
         List<Notice> noticeList = noticeRepository.findTop5ByOrderByRegdateDesc();
         model.addAttribute("noticeList", noticeList);
 
+        // 메인 페이지 반환
         return "sample/all";
     }
 
@@ -214,15 +219,31 @@ public class SampleController {
 
     @GetMapping("/admin")
     public String admin(Model model, HttpSession session) {
-        Member member = (Member) session.getAttribute("member"); // 세션에서 Member 객체 가져오기
-        if (member.getRole().equals("USER")) {
-            return "redirect:/sample/login";
+        // 세션에서 Member 객체 가져오기
+        Member member = (Member) session.getAttribute("member");
+
+        // member가 null인지 확인
+        if (member == null) {
+            System.out.println("관리자 전용 페이지입니다. 로그인하세요.");
+            return "redirect:/sample/login"; // 로그인 페이지로 리디렉션
         }
+
+        // member의 role이 USER인 경우
+        if ("USER".equals(member.getRole())) {
+            System.out.println("관리자 전용 페이지입니다. 권한이 없습니다.");
+            return "redirect:/sample/all"; // 권한 없는 페이지로 리디렉션
+        }
+
+        // ADMIN 권한이 있는 경우
         if ("ADMIN".equals(member.getRole())) {
+            // 세션에서 가져온 member의 username을 모델에 추가
+            model.addAttribute("username", member.getUsername());
+
+            // 회원 목록 가져오기
             List<Member> members = memberRepository.findAllByOrderByIdAsc();
             model.addAttribute("memberList", members);
         }
-        model.addAttribute("username", member.getUsername());
+
         return "sample/admin";
     }
     @PostMapping("/memberList")
@@ -238,5 +259,11 @@ public class SampleController {
             System.out.println("관리자 전용 페이지입니다.");
             return "redirect:/sample/all";
         }
+    }
+    @PostMapping("/memberDel")
+    public String memberDel(@RequestParam Long id, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        memberRepository.deleteById(id);
+        return "redirect:/sample/memberList";
     }
 }

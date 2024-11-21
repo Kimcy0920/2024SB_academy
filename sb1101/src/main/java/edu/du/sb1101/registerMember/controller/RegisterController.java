@@ -1,5 +1,6 @@
 package edu.du.sb1101.registerMember.controller;
 
+import edu.du.sb1101.registerMember.entity.Member;
 import edu.du.sb1101.registerMember.spring.DuplicateMemberException;
 import edu.du.sb1101.registerMember.spring.MemberRegisterService;
 import edu.du.sb1101.registerMember.spring.RegisterRequest;
@@ -10,6 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -24,14 +27,28 @@ public class RegisterController {
 	}
 
 	@RequestMapping("/register/step1")
-	public String handleStep1() {
+	public String handleStep1(Model model, HttpSession session) {
+		// 세션에서 Member 객체 가져오기
+		Member member = (Member) session.getAttribute("member");
+
+		// 로그인한 경우에만 username을 모델에 추가
+		if (member != null) {
+			model.addAttribute("username", member.getUsername());
+		}
 		return "register/step1";
 	}
 
 	@PostMapping("/register/step2")
 	public String handleStep2(
 			@RequestParam(value = "agree", defaultValue = "false") Boolean agree,
-			Model model) {
+			Model model, HttpSession session) {
+		// 세션에서 Member 객체 가져오기
+		Member member = (Member) session.getAttribute("member");
+
+		// 로그인한 경우에만 username을 모델에 추가
+		if (member != null) {
+			model.addAttribute("username", member.getUsername());
+		}
 		if (!agree) {
 			return "register/step1";
 		}
@@ -54,8 +71,16 @@ public class RegisterController {
 //		}
 //	}
 @PostMapping("/register/step3")
-public String handleStep3(@Validated RegisterRequest regReq, Errors errors) {
+public String handleStep3(@Validated RegisterRequest regReq, Errors errors,
+						  Model model, HttpSession session) {
 //	new RegisterRequestValidator().validate(regReq, errors);
+	// 세션에서 Member 객체 가져오기
+	Member member = (Member) session.getAttribute("member");
+
+	// 로그인한 경우에만 username을 모델에 추가
+	if (member != null) {
+		model.addAttribute("username", member.getUsername());
+	}
 	if (errors.hasErrors())
 		return "register/step2";
 

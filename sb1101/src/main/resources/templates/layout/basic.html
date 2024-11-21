@@ -31,7 +31,7 @@
         <!-- Top navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container-fluid">
-                <button class="btn btn-primary" id="sidebarToggle" style="width: auto;">메뉴</button>
+                <button class="btn btn-primary btn-sidebar sidebar-small" id="sidebarToggle">메뉴</button>
                 <div class="mx-auto text-center">
                     <a class="title_text" href="/sample/all">
                         Web Kim community.
@@ -42,18 +42,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                        <span th:if="${username == null}">
+                            <a href="/sample/login">로그인</a> |
+                            <a href="/register/step1">회원가입</a>
+                        </span>
+                        <span th:if="${username != null}">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span th:if="${username != null}"><span th:text="${username}"></span>님 환영합니다.</span>
-                                <span th:if="${username == null}">로그인</span>
+                                <span th:text="${username}"></span>님 환영합니다.
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/sample/member">내 정보</a>
                                 <hr/>
-                                <span th:if="${username == null}"><a class="dropdown-item" href="/sample/login">로그인</a></span>
-                                <span th:if="${username != null}"><a class="dropdown-item" href="/sample/logout">로그아웃</a></span>
+                                <a class="dropdown-item" href="/sample/logout">로그아웃</a>
                             </div>
                         </li>
+                        </span>
                     </ul>
                 </div>
             </div>
@@ -77,7 +81,7 @@
 <footer th:fragment="fragment-footer" class="footer">
     <div class="row justify-content-center">
         <a href="https://github.com/Kimcy0920/2024SB_academy/tree/main/sb1101" target="_blank">
-            <p>&copy; 2024/11/06 edu.du.sb1101 University My Project. All rights reserved.</p>
+            <p>&copy; 2024/11/21 edu.du.sb1101 University My Project. All rights reserved.</p>
         </a>
     </div>
 </footer>

@@ -24,12 +24,13 @@ public class Board {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer boardIdx;
 
-	@Size(max = 50, message = "제목은 50자 이내로 작성해주세요.")
-	@Column(nullable = false, length = 50)
+	@Size(max = 60, message = "제목은 50자 이내로 작성해주세요.")
+	@Column(nullable = false, length = 60)
 	private String title;
 
-	@Size(max = 1000, message = "내용은 1000자 이내로 작성해주세요.")
-	@Column(nullable = false, length = 1000)
+	@Size(max = 1200, message = "내용은 1000자 이내로 작성해주세요.")
+	@Column(nullable = false)
+	@Lob
 	private String contents;
 
 	@ColumnDefault("0") //default 0

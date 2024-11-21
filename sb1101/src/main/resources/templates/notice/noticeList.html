@@ -102,7 +102,9 @@
 
     <!-- 글쓰기 버튼 -->
     <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
-      <a th:href="@{/notice/noticeWrite}" class="btn">공지 작성</a>
+      <span th:if="${role == 'ADMIN'}">
+        <a th:href="@{/notice/noticeWrite}" class="btn">공지 작성</a>
+      </span>
     </div>
 
   </div>

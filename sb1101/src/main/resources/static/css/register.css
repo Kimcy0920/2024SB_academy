@@ -68,7 +68,8 @@ input[type="submit"]:hover, .btn:hover {
 
 .btn-back {
     background-color: #7D7F82;
-    color: white;
+    color: #fff;
+    font-weight: bold;
     text-decoration: none;
     padding: 10px 15px;
     display: inline-block;
@@ -110,18 +111,8 @@ textarea {
     margin-right: 10px;
 }
 
-/* 버튼 스타일 */
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.btn:hover {
-    background-color: #0056b3;
+a.btn-back:link,
+a.btn-back:visited {
+    color: #f0f0f0; /* 폰트 색상 */
+    text-decoration: none; /* 밑줄 제거 */
 }

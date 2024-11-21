@@ -82,7 +82,7 @@
 				</tr>
 				</tbody>
 			</table>
-			<input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx }">
+			<input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx}">
 		</form>
 
 		<div class="file_list">
@@ -213,12 +213,20 @@
 			$('#contents').on('input', function() {
 				var currentLength = $(this).val().length;
 				$('#charCountContents').text(currentLength + '/1000');
+
+				// 내용이 길어질 경우 textarea 크기 조정
+				this.style.height = 'auto';  // 먼저 높이를 초기화
+				this.style.height = (this.scrollHeight) + 'px';  // 내용에 맞춰서 높이 자동 조정
 			});
 
 			// 댓글 작성란에서 글자 수를 실시간으로 표시하는 기능 추가
 			$('#commentContent').on('input', function() {
 				var currentLength = $(this).val().length;
 				$('#charCount').text(currentLength + '/200');
+
+				// 댓글 입력창 글자 수에 맞춰 높이 조정
+				this.style.height = 'auto';  // 먼저 높이를 초기화
+				this.style.height = (this.scrollHeight) + 'px';  // 내용에 맞춰서 높이 자동 조정
 			});
 		});
 	</script>

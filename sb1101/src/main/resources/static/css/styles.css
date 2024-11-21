@@ -11384,10 +11384,10 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 }
 
 #sidebarToggle {
-  color: #7D7F82;
+  color: #fff;
   background-color: #7D7F82;
   border-color: #7D7F82;
-  /*width: auto;*/
+  width: auto;
 }
 
 .title_text {

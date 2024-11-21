@@ -53,11 +53,12 @@ public class BoardController {
 
 		// 키워드 여부에 따라 데이터 조회
 		Page<Board> pageResult;
-		Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Order.desc("createdDatetime")));
+		Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Order.desc("boardIdx"))); // boardIdx 기준 내림차순 정렬
+
 		if (keyword != null && !keyword.trim().isEmpty()) {
-			pageResult = boardRepository.findByTitleContainingOrCreatorIdContaining(keyword, keyword, pageable);
+			pageResult = boardRepository.findByTitleContainingOrCreatorIdContaining(keyword, keyword, sortedPageable); // 수정된 부분
 		} else {
-			pageResult = boardRepository.findAll(pageable);
+			pageResult = boardRepository.findAll(sortedPageable); // 수정된 부분
 		}
 
 		// 검색어, 페이징 결과를 모델에 추가

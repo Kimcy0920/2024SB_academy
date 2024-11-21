@@ -8,6 +8,20 @@
         <meta charset="UTF-8">
         <title>공지사항</title>
         <link rel="stylesheet" th:href="@{/css/notice/noticeDetail.css}"/>
+        <style>
+            /* 글자 수를 우측 하단에 위치시킵니다 */
+            .char-count {
+                position: absolute;
+                bottom: 5px;
+                right: 10px;
+                font-size: 12px;
+                color: #888;
+            }
+            .input-wrapper {
+                position: relative;
+                width: 100%;
+            }
+        </style>
     </head>
     <body>
     <div class="container">
@@ -22,7 +36,12 @@
                 <tbody>
                 <tr>
                     <th scope="row">제목</th>
-                    <td><input type="text" id="title_nd" name="title" th:value="${notice.title}" /></td>
+                    <td>
+                        <div class="input-wrapper">
+                            <input type="text" id="title_nd" name="title" th:value="${notice.title}" maxlength="50" required />
+                            <div id="charCountTitle" class="char-count">0/50</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">작성자</th>
@@ -34,7 +53,10 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="view_text_nd">
-                        <textarea title="내용" id="content_nd" name="content" th:text="${notice.content}"></textarea>
+                        <div class="input-wrapper">
+                            <textarea title="내용" id="content_nd" name="content" maxlength="1000" required th:text="${notice.content}"></textarea>
+                            <div id="charCountContent" class="char-count">0/1000</div>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -76,16 +98,28 @@
                 frm.submit();
             });
 
-            // 삭제하기
-            $("#delete").on("click", function(){
-                var frm = $("#frm_nd")[0];
-                frm.action = "/notice/noticeDelete";
-                $('<input>').attr({
-                    type: 'hidden',
-                    name: csrfParameter,
-                    value: csrfToken
-                }).appendTo(frm);
-                frm.submit();
+            // 제목 글자 수 초기화
+            var titleLength = $('#title_nd').val().length;
+            $('#charCountTitle').text(titleLength + '/50');
+
+            // 내용 글자 수 초기화
+            var contentLength = $('#content_nd').val().length;
+            $('#charCountContent').text(contentLength + '/1000');
+
+            // 제목 글자 수 표시
+            $('#title_nd').on('input', function() {
+                var currentLength = $(this).val().length;
+                $('#charCountTitle').text(currentLength + '/50');
+            });
+
+            // 내용 글자 수 표시
+            $('#content_nd').on('input', function() {
+                var currentLength = $(this).val().length;
+                $('#charCountContent').text(currentLength + '/1000');
+
+                // 내용이 길어질 경우 textarea 크기 조정
+                this.style.height = 'auto';  // 먼저 높이를 초기화
+                this.style.height = (this.scrollHeight) + 'px';  // 내용에 맞춰서 높이 자동 조정
             });
         });
     </script>

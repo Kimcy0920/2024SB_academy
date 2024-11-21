@@ -21,14 +21,13 @@ class Sb1120ApplicationTests {
     TeamRepository teamRepository;
 
     @Test
-    void contextLoads() {
+    public void test1() {
         Team team = Team.builder().id(1).teamName("서울").build();
         Member member = Member.builder().id(1).name("박지성").team(team).build();
         team.addMember(member);
-        teamRepository.save(team);
         memberRepository.save(member);
-
-        System.out.println("-------------------------입력완료");
+        teamRepository.save(team);
+        System.out.println("------------------------입력완료");
     }
 
     @Test

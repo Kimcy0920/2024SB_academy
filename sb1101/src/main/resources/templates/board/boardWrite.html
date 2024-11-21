@@ -6,8 +6,22 @@
 <div layout:fragment="content">
 	<head>
 		<meta charset="UTF-8">
-		<title>board</title>
+		<title>게시글 등록</title>
 		<link rel="stylesheet" th:href="@{/css/style.css}"/>
+		<style>
+			/* 글자 수를 우측 하단에 위치시킵니다 */
+			.char-count {
+				position: absolute;
+				bottom: 5px;
+				right: 10px;
+				font-size: 12px;
+				color: #888;
+			}
+			.input-wrapper {
+				position: relative;
+				width: 100%;
+			}
+		</style>
 	</head>
 	<body>
 	<div class="container">
@@ -15,16 +29,24 @@
 		<form id="frm" name="frm" method="post" th:action="@{/board/insertBoard.do}" enctype="multipart/form-data">
 			<table class="board_detail">
 				<tr>
-					<td>제목</td>
-					<td><input type="text" id="title" name="title"/></td>
+					<td class="backcolor">제목</td>
+					<td>
+						<div class="input-wrapper">
+							<input type="text" id="title" name="title" maxlength="50"/>
+							<div id="charCountTitle" class="char-count">0/50</div>
+						</div>
+					</td>
 				</tr>
 				<tr>
-					<td>작성자</td>
-					<td><input type="text" id="username" name="username" th:value="${username}" readonly /></td>
+					<td class="backcolor">작성자</td>
+					<td id="username" name="username" th:text="${username}">작성자</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<textarea id="contents" name="contents"></textarea>
+						<div class="input-wrapper">
+							<textarea id="contents" name="contents" maxlength="1000"></textarea>
+							<div id="charCountContents" class="char-count">0/1000</div>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -32,6 +54,23 @@
 			<input type="submit" id="submit" value="저장" class="btn">
 		</form>
 	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// 제목 글자 수 표시
+			$('#title').on('input', function() {
+				var currentLength = $(this).val().length;
+				$('#charCountTitle').text(currentLength + '/50');
+			});
+
+			// 내용 글자 수 표시
+			$('#contents').on('input', function() {
+				var currentLength = $(this).val().length;
+				$('#charCountContents').text(currentLength + '/1000');
+			});
+		});
+	</script>
 	</body>
 </div>
 </html>

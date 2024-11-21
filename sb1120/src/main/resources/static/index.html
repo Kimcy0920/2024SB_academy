@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        svg {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <p>Welcome <a href="/welcome">here</a></p>
+    <p>Dashboard <a href="/dashboard">here</a></p>
+    <svg width="720" height="400"></svg>
+    <script>
+        console.log("나온다")
+        // Fetch data from the REST API
+        d3.json("/api/data").then(function(data) {
+            var svg = d3.select("svg");
+
+            var circles = svg.selectAll("circle")
+                .data(data)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d) { return d.x; })
+                .attr("cy", function(d) { return d.y; })
+                .attr("r", function(d) { return d.r; })
+                .style("fill", "steelblue");
+
+            circles.on("click", function() {
+                d3.select(this).style("fill", "orange");
+            });
+        });
+    </script>
+</body>
+</html>

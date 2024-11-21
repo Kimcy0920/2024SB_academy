@@ -157,7 +157,7 @@
 			t_board
 		WHERE
 			deleted_yn = 'N'
-		ORDER BY created_datetime DESC
+		ORDER BY board_idx DESC
 			LIMIT #{limit}
 		]]>
 	</select>

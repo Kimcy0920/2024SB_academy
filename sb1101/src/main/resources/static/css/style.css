@@ -139,8 +139,28 @@ h2 {
 	border-collapse: collapse;
 }
 
-.board_detail tbody input {
+.board_detail tbody input[type="text"],
+.board_detail tbody textarea {
 	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	color: #333;
+	font-size: 0.875em;
+}
+
+/* 게시글 내용 입력창 크기 설정 */
+.board_detail tbody textarea#contents {
+	resize: vertical;
+	min-height: 300px; /* 내용 입력창은 최소 높이를 300px로 설정 */
+	max-height: 1000px;
+}
+
+/* 댓글 입력창 크기 설정 */
+.board_detail tbody textarea#commentContent {
+	resize: vertical;
+	min-height: 150px; /* 댓글 입력창은 최소 높이를 150px로 설정 */
+	max-height: 300px;
 }
 
 .board_detail tbody th {
@@ -153,7 +173,6 @@ h2 {
 
 .board_detail td {
 	text-align: center;
-	font-weight: bold;
 	padding: 10px;
 	color: #333;
 	border-bottom: 1px solid #ddd;
@@ -162,11 +181,6 @@ h2 {
 .board_detail tbody th, .board_detail tbody td {
 	padding: 10px 15px;
 	border-bottom: 1px solid #ccc;
-}
-
-.board_detail tbody textarea {
-	width: 100%;
-	min-height: 170px;
 }
 
 /* 버튼 스타일 */
@@ -323,4 +337,10 @@ h2 {
 	word-break: break-word; /* 단어 줄바꿈 허용 */
 	overflow-wrap: break-word; /* 긴 단어도 줄바꿈 */
 	overflow: hidden; /* 넘치는 내용 숨김 */
+}
+
+/* .backcolor 클래스를 가진 tr 및 td의 배경색 변경 */
+.backcolor, .backcolor td {
+	background-color: #f0f0f0;
+	font-weight: bold;
 }

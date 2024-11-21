@@ -53,11 +53,14 @@ h2 {
 
 .notice_detail_nw td {
     padding: 10px;
-    color: #333;
+    color: #666;
     border-bottom: 1px solid #ddd;
-    background-color: #f0f0f0;
     text-align: center;
     font-weight: bold;
+}
+
+.backcolor  {
+    background-color: #f0f0f0;
 }
 
 .notice_detail_nw input[type="text"],
@@ -70,25 +73,30 @@ h2 {
     font-size: 0.875em;
 }
 
-#username_nw {
-    background-color: #f0f0f0; /* 어두운 하얀색 배경 */
-    color: #666;
-}
-
+/* input과 textarea에 포커스 시 스타일 */
 .notice_detail_nw input[type="text"]:focus,
 .notice_detail_nw textarea:focus {
     border-color: #bbb;
 }
 
+/* textarea 스타일 */
 .notice_detail_nw textarea {
-    resize: vertical;
-    min-height: 150px;
+    resize: vertical; /* 세로로만 크기 조정 가능 */
+    min-height: 300px; /* 최소 높이 설정 */
+    max-height: 1000px; /* 최대 높이 설정 */
+    overflow: hidden; /* 내용에 맞춰 크기 조정 */
 }
 
+/* 작성자 스타일 */
+#username_nw {
+    font-weight: normal;
+}
+
+/* 버튼 스타일 */
 .btn_nw {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #555;
+    background-color: #7D7F82;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -101,5 +109,5 @@ h2 {
 }
 
 .btn_nw:hover {
-    background-color: #333;
+    background-color: #6b9ab8;
 }

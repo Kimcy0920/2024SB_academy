@@ -8,29 +8,85 @@
         <meta charset="UTF-8">
         <title>공지사항 작성</title>
         <link rel="stylesheet" th:href="@{/css/notice/noticeWrite.css}"/>
+        <style>
+            /* 글자 수를 우측 하단에 위치시킵니다 */
+            .char-count {
+                position: absolute;
+                bottom: 5px;
+                right: 10px;
+                font-size: 12px;
+                color: #888;
+            }
+            .input-wrapper {
+                position: relative;
+                width: 100%;
+            }
+            textarea {
+                width: 100%;
+                height: 100px;
+                resize: none;
+            }
+        </style>
     </head>
     <body>
     <div class="container">
         <h2>공지사항 등록</h2>
-        <form id="frm_nw" name="frm" method="post" th:action="@{/notice/noticeWrite}" >
+        <form id="frm_nw" name="frm" method="post" th:action="@{/notice/noticeWrite}">
             <table class="notice_detail_nw">
                 <tr>
-                    <td>제목</td>
-                    <td><input type="text" id="title_nw" name="title"/></td>
+                    <td class="backcolor">제목</td>
+                    <td>
+                        <div class="input-wrapper">
+                            <input type="text" id="title_nw" name="title" maxlength="50" required />
+                            <div id="charCountTitle" class="char-count">0/50</div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td>작성자</td>
-                    <td><input type="text" id="username_nw" name="username" th:value="${username}" readonly /></td>
+                    <td class="backcolor">작성자</td>
+                    <td id="username_nw" name="username" th:text="${username}"></td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea id="content_nw" name="content" placeholder="내용"></textarea>
+                        <div class="input-wrapper">
+                            <textarea id="content_nw" name="content" placeholder="내용" maxlength="1000" required></textarea>
+                            <div id="charCountContent" class="char-count">0/1000</div>
+                        </div>
                     </td>
                 </tr>
             </table>
-            <input type="submit" id="submit_nw" value="저장" class="btn_nw">
+            <input type="submit" id="submit_nw" value="등록" class="btn_nw">
         </form>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // 제목 글자 수 초기화
+            var titleLength = $('#title_nw').val().length;
+            $('#charCountTitle').text(titleLength + '/50');
+
+            // 내용 글자 수 초기화
+            var contentLength = $('#content_nw').val().length;
+            $('#charCountContent').text(contentLength + '/1000');
+
+            // 제목 글자 수 표시
+            $('#title_nw').on('input', function() {
+                var currentLength = $(this).val().length;
+                $('#charCountTitle').text(currentLength + '/50');
+            });
+
+            // 내용 글자 수 표시
+            $('#content_nw').on('input', function() {
+                var currentLength = $(this).val().length;
+                $('#charCountContent').text(currentLength + '/1000');
+
+                // 내용이 길어질 경우 textarea 크기 조정
+                this.style.height = 'auto';  // 먼저 높이를 초기화
+                this.style.height = (this.scrollHeight) + 'px';  // 내용에 맞춰서 높이 자동 조정
+            });
+        });
+    </script>
     </body>
 </div>
 </html>

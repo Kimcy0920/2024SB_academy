@@ -65,4 +65,6 @@ public class MyController {
     public List<MyDataMongo> view() {
         return myDataMongoRepository.findAll();
     }
+
+
 }
