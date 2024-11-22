@@ -1,7 +1,10 @@
 package edu.du.sb1101.registerMember.controller;
 
+import edu.du.sb1101.comment.repository.CommentRepository;
 import edu.du.sb1101.fileUploadBoard.board.dto.BoardDto;
 import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
+import edu.du.sb1101.fileUploadBoard.entity.Board;
+import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import edu.du.sb1101.notice.entity.Notice;
 import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.registerMember.entity.Member;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/sample/")
@@ -24,9 +28,15 @@ import java.util.List;
 public class SampleController {
 
     @Autowired
+    private BoardRepository boardRepository;
+
+    @Autowired
     private BoardService boardService;
 
     private final MemberRepository memberRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Autowired
     private NoticeRepository noticeRepository;
@@ -253,7 +263,9 @@ public class SampleController {
         if (member != null && "ADMIN".equals(member.getRole())) {
             List<Member> members = memberRepository.findAllByOrderByIdAsc();
             log.info("Fetched members: {}", members);
+
             model.addAttribute("memberList", members);
+
             return "sample/admin"; // 관리자 페이지로 이동
         } else {
             System.out.println("관리자 전용 페이지입니다.");
@@ -263,7 +275,21 @@ public class SampleController {
     @PostMapping("/memberDel")
     public String memberDel(@RequestParam Long id, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
+
+    // 회원 정보 가져오기
+        Optional<Member> optionalMember = memberRepository.findById(id);
+        if (optionalMember.isEmpty()) {
+            return "redirect:/sample/admin"; // 회원이 존재하지 않음
+        }
+        Member targetMember = optionalMember.get();
+
+        // 해당 회원이 작성한 게시글 모두 삭제
+        List<Board> boards = boardRepository.findByCreatorId(targetMember.getUsername());
+        if (!boards.isEmpty()) {
+            boardRepository.deleteAll(boards);
+        }
+        // 회원 삭제
         memberRepository.deleteById(id);
-        return "redirect:/sample/memberList";
+        return "redirect:/sample/admin"; // 변경된 URL로 리다이렉트
     }
 }

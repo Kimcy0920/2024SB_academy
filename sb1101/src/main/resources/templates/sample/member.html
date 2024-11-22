@@ -2,59 +2,61 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
+
 <div layout:fragment="content">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 정보</title>
-    <link rel="stylesheet" href="/css/myInfo.css">
+    <link rel="stylesheet" th:href="@{/css/myInfo.css}">
   </head>
   <body>
-  <hr/>
-  <h1>내 정보 조회</h1>
-  <hr/>
-  <br><br>
-  <div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
+  <div class="container">
+    <h2>회원 정보</h2>
     <form method="post" th:action="@{/sample/infoUpdate}">
-      <main>
-        <table border="1" class="input--table">
-          <colgroup>
-            <col class="col1">
-            <col class="col2">
-          </colgroup>
-          <tr>
-            <th>고유번호</th>
-            <td th:text="${id}"></td>
-            <th>이메일</th>
-            <td><input type="text" th:value="${email}" name="email" required></td>
-          </tr>
-          <tr>
-            <th>성명</th>
-            <td><input type="text" th:value="${username}" name="username" required></td>
-            <th>가입일</th>
-            <td><input type="date" th:value="${#temporals.format(regdate, 'yyyy-MM-dd')}" name="regdate" required></td>
-          </tr>
-          <tr>
-            <th>직책</th>
-            <td>
-              <div th:if="${role == 'USER'}">USER</div>
-              <div th:if="${role == 'MANAGER'}">MANAGER</div>
-              <div th:if="${role == 'ADMIN'}">ADMIN</div>
-            </td>
-            <th>보유 포인트</th>
-            <td><input type="text" th:value="${point}" name="point" readonly></td>
-          </tr>
-          <!-- 주소 부분을 두 열에 걸쳐 표시 -->
-          <tr>
-            <th colspan="1">주소</th>
-            <td colspan="3">
-              <input type="text" th:value="${address}" name="address" required style="width: 100%;">
-            </td>
-          </tr>
-        </table>
+      <table class="notice_detail_nd">
+        <colgroup>
+          <col class="col1">
+          <col class="col2">
+        </colgroup>
+        <tr>
+          <th>고유번호</th>
+          <td th:text="${id}"></td>
+          <th>이메일</th>
+          <td><input type="text" th:value="${email}" name="email" required></td>
+        </tr>
+        <tr>
+          <th>성명</th>
+          <td><input type="text" th:value="${username}" name="username" required></td>
+          <th>가입일</th>
+          <td><input type="date" th:value="${#temporals.format(regdate, 'yyyy-MM-dd')}" name="regdate" required></td>
+        </tr>
+        <tr>
+          <th>직책</th>
+          <td>
+            <div th:if="${role == 'USER'}">USER</div>
+            <div th:if="${role == 'MANAGER'}">MANAGER</div>
+            <div th:if="${role == 'ADMIN'}">ADMIN</div>
+          </td>
+          <th>보유 포인트</th>
+          <td th:text="${point}"></td>
+        </tr>
+<!--        <tr>-->
+<!--          <th>작성한 게시글 수</th>-->
+<!--          <td><span th:text="${count != null ? count : '0'}"></span></td>-->
+<!--          <th>작성한 댓글 수</th>-->
+<!--          <td><span th:text="${commentCount != null ? commentCount : '0'}"></span></td>-->
+<!--        </tr>-->
+        <tr>
+          <th colspan="1">주소</th>
+          <td colspan="3">
+            <input type="text" th:value="${address}" name="address" required style="width: 100%;">
+          </td>
+        </tr>
+      </table>
 
-        <button type="submit" class="btn btn-primary w-100">수정하기</button>
-        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#changePasswordModal">비밀번호 변경</button>
-      </main>
+      <button type="submit" class="btn btn-primary w-100">수정하기</button>
+      <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#changePasswordModal">비밀번호 변경</button>
     </form>
   </div>
 
@@ -94,16 +96,13 @@
       var newPassword = document.getElementById('newPassword').value;
       var confirmPassword = document.getElementById('confirmPassword').value;
 
-      // 새 비밀번호와 확인 비밀번호가 일치하지 않으면 alert
       if (newPassword !== confirmPassword) {
         event.preventDefault();
         alert('새 비밀번호와 확인 비밀번호가 일치하지 않습니다.');
         return;
       }
     });
-
   </script>
-
   </body>
 </div>
 </html>

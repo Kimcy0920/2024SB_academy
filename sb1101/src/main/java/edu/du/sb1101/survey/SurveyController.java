@@ -43,28 +43,28 @@ public class SurveyController {
 
 	private List<Question> createQuestions() {
 		Question q1 = new Question("당신이 주로 즐겨하는 서브컬쳐 게임은 무엇입니까?",
-				Arrays.asList("니케", "명조", "블루아카이브", "트릭컬 리바이브"));
+				Arrays.asList("니케", "명조", "블루아카이브", "트릭컬 리바이브", "기타"));
 		Question q2 = new Question("여러 종류의 서브컬쳐 게임을 플레이 하고 계신가요?",
 				Arrays.asList("1개", "2개", "3개", "4개", "5개 이상"));
-		Question q3 = new Question("하고 싶은 말을 적어주세요.");
+		Question q3 = new Question("(기타 선택 시) 게임명을 작성해주세요.");
 		return Arrays.asList(q1, q2, q3);
 	}
 
 	@PostMapping("/submitted")
 	public String submit(@ModelAttribute("ansData") AnsweredData data,
-						 Member member, HttpSession	session, Model model) {
+						 HttpSession session, Model model) {
 		Member mem = (Member) session.getAttribute("member");
 		if (mem == null) {
 			return "redirect:/sample/login";
 		}
+
 		model.addAttribute("username", mem.getUsername());
-		data.setMember(member); // 로그인한 멤버 설정
+		data.setMember(mem); // Member 설정
 
-		Respondent respondent = data.getRes();
-		respondent.setMember(member); // Respondent에도 Member 설정
+		// 서비스 계층에 저장 위임
+		surveyService.save(data);
 
-		surveyService.save(data); // 저장
 		return "/survey/submitted";
 	}
-
 }
+

@@ -1,122 +1,173 @@
 @charset "UTF-8";
-
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 
-/* 기본 스타일 */
-html {
-    overflow: scroll;
-}
-
-html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {
+html, body {
+    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
-    outline: 0;
-    border: 0;
     padding: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-}
-
-/* 설문조사 컨테이너 스타일 */
-.container {
-    max-width: 1024px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* 설문 제목 스타일 */
-.survey-container_su h2 {
-    text-align: center;
-    font-size: 1.5em;
+    background-color: #f9f9f9;
     color: #333;
 }
 
-/* 질문과 응답 옵션 스타일 */
-.survey-question_su {
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
+body {
+    font-size: 0.875em;
+    line-height: 1.5;
+    background-color: #f9f9f9;
 }
 
-/* 설문 질문 옵션 스타일 */
+.survey-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+h2 {
+    text-align: center;
+    color: #252525;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.survey-content {
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.survey-question_su {
+    margin-bottom: 20px;
+}
+
 .survey-options_su {
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 .survey-option_su {
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
-/* 텍스트 응답 입력 스타일 */
+.survey-option_su input {
+    margin-right: 10px;
+}
+
 .survey-text_su input {
     width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 0.875em;
 }
 
-/* 구분선 스타일 */
-hr_su {
+.survey-extra p {
     margin: 20px 0;
-    border: 0;
-    border-top: 1px solid #ddd;
 }
 
-/* 제출 버튼 스타일 */
-.submit-btn_su {
-    display: block;
+.survey-extra label {
+    font-weight: bold;
+}
+
+.survey-extra input[type="text"],
+.survey-extra input[type="number"] {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.875em;
+}
+
+.survey-submit {
+    text-align: center;
+}
+
+.submit-btn_su {
+    padding: 10px 20px;
     background-color: #555;
     color: #fff;
     border: none;
     border-radius: 4px;
-    font-size: 1em;
+    font-size: 0.875em;
     cursor: pointer;
-    margin-top: 20px;
-    text-align: center;
     transition: background-color 0.3s;
 }
 
 .submit-btn_su:hover {
-    background-color: #333;
+    background-color: #6b9ab8;
 }
 
-/* 응답자 나이 및 하고 싶은 말 입력란 스타일 */
-label_su {
-    font-size: 1em;
-    color: #333;
+/* A4 용지 느낌 추가 */
+.survey-container {
+    page-break-before: always;
+    page-break-after: always;
+    margin-top: 40px;
 }
 
-input[type="number"].su, input[type="text"].su {
+.survey-container h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.survey-question_su {
+    margin-bottom: 15px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+@media print {
+    body {
+        background-color: #fff;
+        font-size: 12pt;
+    }
+
+    .survey-container {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .survey-submit {
+        display: none;
+    }
+}
+
+/* 추가된 부분 - 설문결과 화면 스타일 */
+.survey-results {
     width: 100%;
-    padding: 8px;
-    margin-top: 10px;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.survey-results th, .survey-results td {
+    padding: 10px;
+    text-align: left;
     border: 1px solid #ddd;
-    border-radius: 4px;
 }
 
-/* 배경 스타일 */
-body {
-    background-color: #f4f4f4;
-    font-family: 'Nanum Gothic', sans-serif;
+.survey-results th {
+    background-color: #f2f2f2;
+    font-weight: bold;
 }
 
-/* 기본 색상 및 호버 효과 */
-input[type="radio"].su {
-    margin-right: 10px;
+.survey-results td {
+    background-color: #fafafa;
 }
 
-input[type="radio"].su:hover {
-    background-color: #e0e0e0;
+.survey-extra p {
+    font-size: 1em;
+    margin: 15px 0;
 }
 
-/* 폼 구분선 */
-.survey-container_su hr_su {
-    border-top: 2px solid #ddd;
+.survey-extra strong {
+    font-weight: bold;
+    color: #555;
 }

@@ -1,96 +1,199 @@
-@CHARSET "UTF-8";
+/*@CHARSET "UTF-8";*/
 
+/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
+/*@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);*/
+
+/*!* 기본 HTML 스타일 초기화 *!*/
+/*html, body, div, h1, h2, h3, a, form, table, caption, thead, tbody, tr, th, td, input {*/
+/*    margin: 0; outline: 0; border: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;*/
+/*}*/
+/*body {*/
+/*    font-size: 0.875em; line-height: 1.5; color: #333; -webkit-text-size-adjust: none; min-width: 320px;*/
+/*    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-serif;*/
+/*}*/
+
+/*!* 제목 스타일 *!*/
+/*h1 {*/
+/*    font-size: 2em;*/
+/*    margin-bottom: 20px;*/
+/*    color: #252525;*/
+/*    text-align: center;*/
+/*}*/
+
+/*!* 테이블 스타일 *!*/
+/*.input--table {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*    margin: 20px 0;*/
+/*}*/
+
+/*.input--table td {*/
+/*    background-color: #ffffff; !* 흰색 배경으로 설정 *!*/
+/*    color: #333; !* 기본 텍스트 색상 *!*/
+/*    width: 100%; !* td 너비 100%로 지정 *!*/
+/*}*/
+
+/*.input--table th, .input--table td {*/
+/*    padding: 12px;*/
+/*    border: 1px solid #ddd; !* 테두리 추가 *!*/
+/*    text-align: left;*/
+/*}*/
+
+/*.input--table th {*/
+/*    background-color: #f2f2f2; !* 상단 헤더 배경색 *!*/
+/*    color: #3b3a3a;*/
+/*    font-weight: bold; !* 헤더 글씨 두껍게 *!*/
+/*}*/
+
+/*.input--table tr:nth-child(even) {*/
+/*    background-color: #f9f9f9; !* 짝수 행 배경색 *!*/
+/*}*/
+
+/*.input--table tr:hover {*/
+/*    background-color: #f1f1f1; !* 마우스 오버 시 배경색 *!*/
+/*}*/
+
+/*!* 링크 스타일 *!*/
+/*a {*/
+/*    color: #007bff; !* 링크 색상 *!*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*a:hover {*/
+/*    text-decoration: underline; !* 링크 마우스 오버 시 밑줄 *!*/
+/*}*/
+
+/*!* 중앙 정렬을 위한 Flexbox 설정 *!*/
+/*.d-flex {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: flex-start;*/
+/*}*/
+
+/*!* 기타 스타일 *!*/
+/*.split--div {*/
+/*    margin: 20px 0;*/
+/*    border-top: 2px solid #ccc;*/
+/*}*/
+
+/*!* 버튼 스타일 *!*/
+/*.btn {*/
+/*    margin: 5px;*/
+/*    padding: 5px 11px;*/
+/*    color: #fff !important;*/
+/*    background-color: #7D7F82;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.btn:hover {*/
+/*    background: #6b9ab8; !* 버튼 마우스 오버 색상 *!*/
+/*}*/
+
+/*td#td_01 {*/
+/*    text-decoration: underline; !* 텍스트에 밑줄 추가 *!*/
+/*}*/
+
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 
-/* 기본 HTML 스타일 초기화 */
-html, body, div, h1, h2, h3, a, form, table, caption, thead, tbody, tr, th, td, input {
-    margin: 0; outline: 0; border: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;
-}
-body {
-    font-size: 0.875em; line-height: 1.5; color: #333; -webkit-text-size-adjust: none; min-width: 320px;
-    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-serif;
+html, body, div, h1, h2, a, form, table, tr, th, td, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* 제목 스타일 */
-h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #252525;
+body {
+    font-size: 0.875em;
+    color: #333;
+    line-height: 1.5;
+    background-color: #f9f9f9;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    max-width: 1024px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* 테이블 스타일 */
-.input--table {
+h2 {
+    font-size: 1.5em;
+    color: #252525;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notice_detail_nd {
     width: 100%;
+    border-top: 2px solid #252525;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
-.input--table td {
-    background-color: #ffffff; /* 흰색 배경으로 설정 */
-    color: #333; /* 기본 텍스트 색상 */
-    width: 100%; /* td 너비 100%로 지정 */
+.notice_detail_nd th, .notice_detail_nd td {
+    padding: 12px 10px;
+    border: 1px solid #ddd; /* 경계선 더 명확하게 */
+    color: #333;
 }
 
-.input--table th, .input--table td {
-    padding: 12px;
-    border: 1px solid #ddd; /* 테두리 추가 */
-    text-align: left;
+.notice_detail_nd th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
 }
 
-.input--table th {
-    background-color: #f2f2f2; /* 상단 헤더 배경색 */
-    color: #3b3a3a;
-    font-weight: bold; /* 헤더 글씨 두껍게 */
+.notice_detail_nd input[type="text"],
+.notice_detail_nd textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    font-size: 0.875em;
 }
 
-.input--table tr:nth-child(even) {
-    background-color: #f9f9f9; /* 짝수 행 배경색 */
+#username_nd {
+    color: #666;
 }
 
-.input--table tr:hover {
-    background-color: #f1f1f1; /* 마우스 오버 시 배경색 */
+.notice_detail_nd input[type="text"]:focus,
+.notice_detail_nd textarea:focus {
+    border-color: #bbb;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 링크 스타일 */
-a {
-    color: #007bff; /* 링크 색상 */
-    text-decoration: none;
+.notice_detail_nd textarea {
+    resize: none;
+    min-height: 300px; /* 내용 입력창은 최소 높이를 300px로 설정 */
+    max-height: 1000px;
+    overflow: hidden;
 }
 
-a:hover {
-    text-decoration: underline; /* 링크 마우스 오버 시 밑줄 */
-}
-
-/* 중앙 정렬을 위한 Flexbox 설정 */
-.d-flex {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-/* 기타 스타일 */
-.split--div {
-    margin: 20px 0;
-    border-top: 2px solid #ccc;
-}
-
-/* 버튼 스타일 */
-.btn {
-    margin: 5px;
-    padding: 5px 11px;
-    color: #fff !important;
-    background-color: #7D7F82;
+.btn_nd {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
     border: none;
     border-radius: 4px;
+    font-size: 0.875em;
     cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
 }
 
-.btn:hover {
-    background: #6b9ab8; /* 버튼 마우스 오버 색상 */
-}
-
-td#td_01 {
-    text-decoration: underline; /* 텍스트에 밑줄 추가 */
+.btn_nd:hover {
+    background-color: #6b9ab8;
 }

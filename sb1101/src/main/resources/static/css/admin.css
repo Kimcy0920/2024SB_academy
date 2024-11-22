@@ -1,0 +1,102 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
+html, body, div, h1, h2, a, form, table, tr, th, td, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-size: 0.875em;
+    color: #333;
+    line-height: 1.5;
+    background-color: #f9f9f9;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    max-width: 1024px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #252525;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notice_detail_nd {
+    width: 100%;
+    border-top: 2px solid #252525;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.notice_detail_nd th, .notice_detail_nd td {
+    padding: 12px 10px;
+    border: 1px solid #ddd; /* 경계선 더 명확하게 */
+    color: #333;
+}
+
+.notice_detail_nd th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.notice_detail_nd input[type="text"],
+.notice_detail_nd textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    font-size: 0.875em;
+}
+
+#username_nd {
+    color: #666;
+}
+
+.notice_detail_nd input[type="text"]:focus,
+.notice_detail_nd textarea:focus {
+    border-color: #bbb;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.notice_detail_nd textarea {
+    resize: none;
+    min-height: 300px; /* 내용 입력창은 최소 높이를 300px로 설정 */
+    max-height: 1000px;
+    overflow: hidden;
+}
+
+.btn_nd {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.875em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn_nd:hover {
+    background-color: #6b9ab8;
+}

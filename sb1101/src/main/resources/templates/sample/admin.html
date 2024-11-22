@@ -4,16 +4,16 @@
       layout:decorate="~{layout/basic.html}">
 
 <div layout:fragment="content">
-<head>
-  <meta charset="UTF-8">
-  <title>관리자 전용 페이지</title>
-  <link rel="stylesheet" th:href="@{/css/style.css}"/>
-</head>
-<body>
-<div class="container">
-<h1>관리자 전용 페이지</h1>
-  <form method="post" th:action="@{/sample/admin/memberList}">
-    <table class="table table-bordered">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 전용 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}" />
+  </head>
+  <body>
+  <div class="container">
+    <h2>관리자 전용 페이지</h2>
+    <table class="notice_detail_nd">
       <thead>
       <tr>
         <th>고유번호</th>
@@ -33,15 +33,14 @@
         <td th:text="${member.regdate}"></td>
         <td>
           <form method="post" th:action="@{/sample/memberDel}" th:if="${member.username != username}">
-            <input type="hidden" name="id" th:value="${member.id}"/>
-            <button type="submit" class="btn btn-danger">Del</button>
+            <input type="hidden" name="id" th:value="${member.id}" />
+            <button type="submit" class="btn_nd">삭제</button>
           </form>
         </td>
       </tr>
       </tbody>
     </table>
-  </form>
-</div>
-</body>
+  </div>
+  </body>
 </div>
 </html>
