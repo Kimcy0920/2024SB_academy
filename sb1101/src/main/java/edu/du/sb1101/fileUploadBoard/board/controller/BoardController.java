@@ -8,6 +8,8 @@ import edu.du.sb1101.fileUploadBoard.board.service.BoardService;
 import edu.du.sb1101.fileUploadBoard.entity.Board;
 import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import edu.du.sb1101.registerMember.entity.Member;
+import edu.du.sb1101.registerMember.repository.MemberRepository;
+import edu.du.sb1101.registerMember.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,12 @@ import java.util.List;
 public class BoardController {
 
 	@Autowired
+	MemberRepository memberRepository;
+
+	@Autowired
+	MemberService memberService;
+
+	@Autowired
 	CommentRepository commentRepository;
 	@Autowired
 	BoardRepository boardRepository;
@@ -50,6 +58,7 @@ public class BoardController {
 			return "redirect:/sample/login";
 		}
 		model.addAttribute("username", member.getUsername());
+		model.addAttribute("role", member.getRole());
 
 		// 키워드 여부에 따라 데이터 조회
 		Page<Board> pageResult;
@@ -71,6 +80,7 @@ public class BoardController {
 	@RequestMapping("board/openBoardWrite.do")
 	public String openBoardWrite(HttpSession session, Model model) throws Exception{
 		Member member = (Member) session.getAttribute("member");
+		model.addAttribute("role", member.getRole());
 		if (member == null) {
 			return "redirect:/sample/login";
 		}
@@ -87,6 +97,14 @@ public class BoardController {
 		// 게시글을 데이터베이스에 저장합니다.
 		boardService.insertBoard(board, multipartHttpServletRequest);
 
+		// 포인트 적립
+		memberService.addPoints(member.getUsername(), 15, "게시글 작성 +15포인트 적립");
+		log.info("15포인트가 적립되었습니다.");
+		// 업데이트된 Member 객체 가져오기
+		Member updatedMember = memberRepository.findByUsername(member.getUsername());
+		// 세션에 갱신된 Member 저장
+		session.setAttribute("member", updatedMember);
+
 		return "redirect:/board/openBoardList.do";
 	}
 
@@ -98,6 +116,7 @@ public class BoardController {
 		Member member = (Member) session.getAttribute("member");
 		if (member != null) {
 			mv.addObject("username", member.getUsername());
+			mv.addObject("role", member.getRole());
 		}
 
 		// 게시글 조회

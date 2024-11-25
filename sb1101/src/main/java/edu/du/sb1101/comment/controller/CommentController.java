@@ -5,7 +5,10 @@ import edu.du.sb1101.comment.repository.CommentRepository;
 import edu.du.sb1101.fileUploadBoard.entity.Board;
 import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import edu.du.sb1101.registerMember.entity.Member;
+import edu.du.sb1101.registerMember.repository.MemberRepository;
+import edu.du.sb1101.registerMember.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Log4j2
 @RequestMapping("/comment")
 @RequiredArgsConstructor
 @Controller
@@ -24,6 +28,8 @@ public class CommentController {
 
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
+    private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     @PostMapping("/addComment")
     public String addComment(@RequestParam("content") String content,
@@ -51,6 +57,14 @@ public class CommentController {
                 .board(board)
                 .build();
         commentRepository.save(newComment);
+
+        // 포인트 적립
+        memberService.addPoints(member.getUsername(), 5, "댓글 작성 +5포인트 적립");
+
+        // 업데이트된 Member 객체 가져오기
+        Member updatedMember = memberRepository.findByUsername(member.getUsername());
+        // 세션에 갱신된 Member 저장
+        session.setAttribute("member", updatedMember);
 
         return "redirect:/board/openBoardDetail.do?boardIdx=" + boardIdx;
     }

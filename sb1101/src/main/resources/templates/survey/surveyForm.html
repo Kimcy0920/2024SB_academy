@@ -3,54 +3,54 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 <div layout:fragment="content">
-<head>
-  <meta charset="UTF-8">
-  <title>설문조사</title>
-  <link rel="stylesheet" th:href="@{/css/survey/survey.css}" />
-</head>
-<body>
-<div class="survey-container">
-  <h2>설문조사</h2>
-  <hr/>
-  <form th:action="@{/survey/submitted}" method="post">
-    <div class="survey-content">
-      <div th:each="q, stat : ${questions}" class="survey-question_su">
-        <p>
-          <span th:text="${stat.index + 1} + '. ' + ${q.title}"></span>
-        </p>
+  <head>
+    <meta charset="UTF-8">
+    <title>설문조사</title>
+    <link rel="stylesheet" th:href="@{/css/survey/survey.css}" />
+  </head>
+  <body>
+  <div class="survey-container">
+    <h2>설문조사</h2>
+    <hr/>
+    <form th:action="@{/survey/submitted}" method="post">
+      <div class="survey-content">
+        <div th:each="q, stat : ${questions}" class="survey-question_su">
+          <p>
+            <label><span th:text="${stat.index + 1} + '. ' + ${q.title}"></span></label>
+          </p>
 
-        <div th:if="${q.choice}" class="survey-options_su">
-          <div th:each="option : ${q.options}" class="survey-option_su">
-            <label>
-              <input type="radio" th:name="'responses[' + ${stat.index} + ']'" th:value="${option}" class="su"/>
-              <span th:text="${option}"></span>
-            </label>
+          <div th:if="${q.choice}" class="survey-options_su">
+            <div th:each="option : ${q.options}" class="survey-option_su">
+              <label>
+                <input type="radio" th:name="'responses[' + ${stat.index} + ']'" th:value="${option}" class="su"/>
+                <span th:text="${option}"></span>
+              </label>
+            </div>
+          </div>
+          <div th:if="${!q.choice}" class="survey-text_su"><br>
+            <input type="text" th:name="'responses[' + ${stat.index} + ']'" class="su"/>
           </div>
         </div>
-        <div th:if="${!q.choice}" class="survey-text_su"><br>
-          <input type="text" th:name="'responses[' + ${stat.index} + ']'" class="su"/>
-        </div>
       </div>
-    </div>
 
-    <div class="survey-extra">
-      <p>
-        <label class="label_su">응답자 나이:<br>
-          <input type="number" name="res.age" class="su"/>
-        </label>
-      </p>
-      <p>
-        <label class="label_su">하고 싶은 말:<br>
-          <input type="text" name="res.location" class="su"/>
-        </label>
-      </p>
-    </div>
+      <div class="survey-extra">
+        <p>
+          <label class="label_su">응답자 나이:<br>
+            <input type="number" name="res.age" class="su"/>
+          </label>
+        </p>
+        <p>
+          <label class="label_su">하고 싶은 말:<br>
+            <input type="text" name="res.location" class="su"/>
+          </label>
+        </p>
+      </div>
 
-    <div class="survey-submit">
-      <input type="submit" value="제출" class="submit-btn_su"/>
-    </div>
-  </form>
-</div>
-</body>
+      <div class="survey-submit">
+        <input type="submit" value="제출" class="submit-btn_su"/>
+      </div>
+    </form>
+  </div>
+  </body>
 </div>
 </html>

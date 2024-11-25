@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Respondent {
 
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "RESPONDENT_ID") // answeredData 테이블과 "RESPONDENT_ID" 조인함.
 	private int id;
 

@@ -1,6 +1,8 @@
 package edu.du.sb1101.registerMember.controller;
 
 import edu.du.sb1101.registerMember.entity.Member;
+import edu.du.sb1101.registerMember.repository.MemberRepository;
+import edu.du.sb1101.registerMember.service.MemberService;
 import edu.du.sb1101.registerMember.spring.DuplicateMemberException;
 import edu.du.sb1101.registerMember.spring.MemberRegisterService;
 import edu.du.sb1101.registerMember.spring.RegisterRequest;
@@ -17,6 +19,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class RegisterController {
+
+	@Autowired
+	private MemberService memberService;
+
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@Autowired
 	private MemberRegisterService memberRegisterService;
@@ -61,15 +69,6 @@ public class RegisterController {
 		return "redirect:/register/step1";
 	}
 
-//	@PostMapping("/register/step3")
-//	public String handleStep3(RegisterRequest regReq) {
-//		try {
-//			memberRegisterService.regist(regReq);
-//			return "register/step3";
-//		} catch (DuplicateMemberException ex) {
-//			return "register/step2";
-//		}
-//	}
 @PostMapping("/register/step3")
 public String handleStep3(@Validated RegisterRequest regReq, Errors errors,
 						  Model model, HttpSession session) {
@@ -86,7 +85,18 @@ public String handleStep3(@Validated RegisterRequest regReq, Errors errors,
 
 	try {
 		memberRegisterService.regist(regReq);
+
+		// 등록된 회원 정보로 Member 객체를 가져오기 (등록 후 DB에서 조회)
+		Member registeredMember = memberRepository.findByUsername(regReq.getName());
+
+		// 포인트 적립 (회원가입 후 포인트 적립)
+		memberService.addPoints(registeredMember.getUsername(), 100, "회원가입 +100포인트 적립");
+
+		// 포인트 적립 후 세션에 갱신된 Member 객체 저장
+		session.setAttribute("member", registeredMember);
+
 		return "register/step3";
+
 	} catch (DuplicateMemberException ex) {
 		errors.rejectValue("email", "duplicate");
 //		errors.reject("notMatchingPassword");

@@ -7,8 +7,11 @@ import edu.du.sb1101.fileUploadBoard.entity.Board;
 import edu.du.sb1101.fileUploadBoard.repository.BoardRepository;
 import edu.du.sb1101.notice.entity.Notice;
 import edu.du.sb1101.notice.repository.NoticeRepository;
+import edu.du.sb1101.point.PointLog;
+import edu.du.sb1101.point.PointLogRepository;
 import edu.du.sb1101.registerMember.entity.Member;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
+import edu.du.sb1101.registerMember.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ import java.util.Optional;
 public class SampleController {
 
     @Autowired
+    private PointLogRepository pointLogRepository;
+
+    @Autowired
     private BoardRepository boardRepository;
 
     @Autowired
@@ -36,7 +42,7 @@ public class SampleController {
     private final MemberRepository memberRepository;
 
     @Autowired
-    private CommentRepository commentRepository;
+    private MemberService memberService;
 
     @Autowired
     private NoticeRepository noticeRepository;
@@ -56,18 +62,32 @@ public class SampleController {
         // 로그인한 경우에만 username을 모델에 추가
         if (member != null) {
             model.addAttribute("username", member.getUsername());
+            model.addAttribute("role", member.getRole());
+
+            // 최근 게시글 목록 가져오기
+            List<BoardDto> recentList = boardService.selectRecentBoardList(5);
+            model.addAttribute("recentList", recentList);
+
+            // 공지사항 목록 가져오기
+            List<Notice> noticeList = noticeRepository.findTop5ByOrderByRegdateDesc();
+            model.addAttribute("noticeList", noticeList);
+
+            return "sample/all";
         }
-
-        // 최근 게시글 목록 가져오기
-        List<BoardDto> recentList = boardService.selectRecentBoardList(5);
-        model.addAttribute("recentList", recentList);
-
-        // 공지사항 목록 가져오기
-        List<Notice> noticeList = noticeRepository.findTop5ByOrderByRegdateDesc();
-        model.addAttribute("noticeList", noticeList);
-
-        // 메인 페이지 반환
         return "sample/all";
+    }
+
+    @GetMapping("/points")
+    public String viewPointLogs(HttpSession session, Model model) throws Exception {
+        Member member = (Member) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/sample/login";
+        }
+        List<PointLog> pointLogs = pointLogRepository.findByMemberIdOrderByCreatedAtDesc(member.getId());
+        model.addAttribute("pointLogs", pointLogs);
+
+        return "/sample/pointLogs";
     }
 
     @GetMapping("/member")
@@ -76,6 +96,7 @@ public class SampleController {
         if (member == null) {
             return "redirect:/sample/login";
         }
+
         model.addAttribute("id", member.getId());
         model.addAttribute("email", member.getEmail());
         model.addAttribute("username", member.getUsername());
@@ -110,15 +131,32 @@ public class SampleController {
     public String loginForm() {
         return "sample/login";
     }
+
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
-
         Member member = memberRepository.findByEmailAndPassword(email, password);
 
         if (member != null) {
             // Member 객체를 세션에 저장
             session.setAttribute("member", member);
             log.info("Login successful for user & password : {}", member.getUsername());
+
+            LocalDate today = LocalDate.now();
+
+            // 동일한 날짜에 포인트가 적립되지 않도록 체크
+            if (member.getLastPointDate() == null || !member.getLastPointDate().isEqual(today)) {
+                member.setLastPointDate(today); // 오늘 날짜로 갱신
+
+                memberRepository.save(member); // DB에 업데이트
+                // 포인트 적립 로그를 서비스에서 처리
+                memberService.addPoints(member.getUsername(), 10, "로그인 +10포인트 적립");
+
+                // 세션에 갱신된 Member 객체 저장
+                session.setAttribute("member", member);
+            } else {
+                // 이미 포인트가 적립되었음을 출력
+                System.out.println("이미 로그인 포인트가 적립되었습니다.");
+            }
             return "redirect:/sample/all";
         } else {
             System.out.println("잘못된 이메일 또는 비밀번호입니다.");
@@ -127,6 +165,7 @@ public class SampleController {
             return "sample/login";
         }
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -248,6 +287,7 @@ public class SampleController {
         if ("ADMIN".equals(member.getRole())) {
             // 세션에서 가져온 member의 username을 모델에 추가
             model.addAttribute("username", member.getUsername());
+            model.addAttribute("role", member.getRole());
 
             // 회원 목록 가져오기
             List<Member> members = memberRepository.findAllByOrderByIdAsc();

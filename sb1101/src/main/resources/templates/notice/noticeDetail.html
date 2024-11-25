@@ -38,7 +38,8 @@
                     <th scope="row">제목</th>
                     <td>
                         <div class="input-wrapper">
-                            <input type="text" id="title_nd" name="title" th:value="${notice.title}" maxlength="50" required />
+                            <input type="text" id="title_nd" name="title" th:value="${notice.title}" maxlength="50" required
+                                   th:disabled="${notice.username != username}" />
                             <div id="charCountTitle" class="char-count">0/50</div>
                         </div>
                     </td>
@@ -54,7 +55,9 @@
                 <tr>
                     <td colspan="2" class="view_text_nd">
                         <div class="input-wrapper">
-                            <textarea title="내용" id="content_nd" name="content" maxlength="1000" required th:text="${notice.content}"></textarea>
+                            <textarea title="내용" id="content_nd" name="content" maxlength="1000" required
+                                      th:disabled="${notice.username != username}"
+                                      th:text="${notice.content}"></textarea>
                             <div id="charCountContent" class="char-count">0/1000</div>
                         </div>
                     </td>

@@ -79,6 +79,7 @@ public class NoticeController {
             return "redirect:/sample/login";
         }
         model.addAttribute("username", member.getUsername());
+        model.addAttribute("role", member.getRole());
 
         Notice notice = Notice.builder()
                 .title(title).content(content).username(member.getUsername()).regdate(LocalDateTime.now()).build();

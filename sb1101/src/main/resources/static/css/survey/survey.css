@@ -12,35 +12,43 @@ html, body {
 body {
     font-size: 0.875em;
     line-height: 1.5;
-    background-color: #f9f9f9;
 }
 
+/* 기본 스타일 */
 .survey-container {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 1em;
+    margin-top: 50px;
+}
+
+/* 각 항목 간격을 띄워줍니다 */
+.survey-option-stat {
+    margin-bottom: 30px; /* 항목 간격을 30px로 설정 */
 }
 
 h2 {
     text-align: center;
-    color: #252525;
+    color: #333;
     margin-bottom: 30px;
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 .survey-content {
     margin-bottom: 30px;
-    font-weight: bold;
 }
 
-.survey-question_su {
-    margin-bottom: 20px;
+/* 기존 질문 텍스트 스타일에 label 스타일 추가 */
+.survey-question_su label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
 .survey-options_su {
@@ -54,14 +62,16 @@ h2 {
 
 .survey-option_su input {
     margin-right: 10px;
+    accent-color: #7D7F82; /* 라디오 버튼 색상 */
 }
 
 .survey-text_su input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.875em;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
 }
 
 .survey-extra p {
@@ -70,77 +80,42 @@ h2 {
 
 .survey-extra label {
     font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
 .survey-extra input[type="text"],
 .survey-extra input[type="number"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.875em;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
 }
 
 .survey-submit {
     text-align: center;
+    margin-top: 20px;
 }
 
 .submit-btn_su {
-    padding: 10px 20px;
-    background-color: #555;
+    padding: 12px 25px;
+    background-color: #7D7F82;
     color: #fff;
     border: none;
-    border-radius: 4px;
-    font-size: 0.875em;
+    border-radius: 6px;
+    font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s;
+    box-sizing: border-box;
 }
 
 .submit-btn_su:hover {
-    background-color: #6b9ab8;
+    background-color: #6A6C6F;
 }
 
-/* A4 용지 느낌 추가 */
-.survey-container {
-    page-break-before: always;
-    page-break-after: always;
-    margin-top: 40px;
-}
-
-.survey-container h2 {
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.survey-question_su {
-    margin-bottom: 15px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
-}
-
-@media print {
-    body {
-        background-color: #fff;
-        font-size: 12pt;
-    }
-
-    .survey-container {
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-        margin: 0;
-    }
-
-    .survey-submit {
-        display: none;
-    }
-}
-
-/* 추가된 부분 - 설문결과 화면 스타일 */
+/* 설문 결과 화면 스타일 */
 .survey-results {
     width: 100%;
     border-collapse: collapse;
@@ -148,7 +123,7 @@ hr {
 }
 
 .survey-results th, .survey-results td {
-    padding: 10px;
+    padding: 12px;
     text-align: left;
     border: 1px solid #ddd;
 }
@@ -170,4 +145,84 @@ hr {
 .survey-extra strong {
     font-weight: bold;
     color: #555;
+}
+
+/* 프로세스바 관련 */
+.progress-bar-container {
+    position: relative;
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* 프로세스바 스타일 */
+.progress-bar {
+    height: 20px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    position: relative;
+}
+
+.progress-bar span {
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* 페이지 인쇄시 스타일 */
+@media print {
+    body {
+        background-color: #fff;
+        font-size: 12pt;
+    }
+
+    .survey-container {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .survey-submit {
+        display: none;
+    }
+
+    .submit-btn_su {
+        display: none;
+    }
+}
+
+/* 각 항목별 프로세스바 색상 설정 */
+.progress-bar-container .progress-bar {
+    background-color: #2196F3; /* 예시로 파란색으로 설정 */
+}
+
+/* 프로세스바에 퍼센트 표시 */
+.progress-bar-text {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* 항목 이름을 프로세스바 위에 표시 */
+.progress-bar-label {
+    position: absolute;
+    top: -20px; /* 프로세스바 위에 20px 만큼 띄움 */
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    font-size: 1em;
+}
+
+/* 프로세스바 및 항목 간격을 띄우는 다른 스타일들 */
+.survey-content {
+    margin-bottom: 30px;
 }

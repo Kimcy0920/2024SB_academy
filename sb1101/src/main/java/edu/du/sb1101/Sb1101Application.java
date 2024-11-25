@@ -24,31 +24,31 @@ public class Sb1101Application {
         SpringApplication.run(Sb1101Application.class, args);
     }
 
-    @PostConstruct
-    public void init() {
-
-        IntStream.rangeClosed(1, 50).forEach(i->{
-            Board board = Board.builder()
-                    .title("게시글 제목"+i)
-                    .contents("게시글 내용"+i)
-                    .creatorId("사용자")
-                    .createdDatetime(LocalDateTime.now().toString().substring(0, 18))
-                    .hitCnt(0)
-                    .deletedYn("N")
-                    .build();
-            boardRepository.save(board);
-        });
-
-        IntStream.rangeClosed(1, 50).forEach(i->{
-            Notice notice = Notice.builder()
-                    .title("공지사항 제목"+i)
-                    .content("공지사항 내용"+i)
-                    .username("관리자")
-                    .regdate(LocalDateTime.now())
-                    .build();
-            noticeRepository.save(notice);
-        });
-
-    }
+//    @PostConstruct
+//    public void init() {
+//
+//        IntStream.rangeClosed(1, 50).forEach(i->{
+//            Board board = Board.builder()
+//                    .title("게시글 제목"+i)
+//                    .contents("게시글 내용"+i)
+//                    .creatorId("사용자")
+//                    .createdDatetime(LocalDateTime.now().toString().substring(0, 18))
+//                    .hitCnt(0)
+//                    .deletedYn("N")
+//                    .build();
+//            boardRepository.save(board);
+//        });
+//
+//        IntStream.rangeClosed(1, 50).forEach(i->{
+//            Notice notice = Notice.builder()
+//                    .title("공지사항 제목"+i)
+//                    .content("공지사항 내용"+i)
+//                    .username("관리자")
+//                    .regdate(LocalDateTime.now())
+//                    .build();
+//            noticeRepository.save(notice);
+//        });
+//
+//    }
 
 }

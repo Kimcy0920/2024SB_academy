@@ -70,6 +70,9 @@
   box-sizing: border-box;
 }
 
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(https://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -11322,9 +11325,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   }
 }
 @CHARSET "UTF-8";
-
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 
 html{overflow:scorll;}
 html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {

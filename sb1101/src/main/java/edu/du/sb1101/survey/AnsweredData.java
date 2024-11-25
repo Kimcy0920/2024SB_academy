@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AnsweredData { // AnsweredData 클래스를 두 개로 쪼개놓음
 
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ANSWERED_ID") // line25-29. responses "MEMBER_ID"와 조인됨.
 	private int id;
 
