@@ -1,6 +1,7 @@
 package edu.du.sb1101.notice.controller;
 
 import edu.du.sb1101.notice.entity.Notice;
+import edu.du.sb1101.notice.entity.NoticeDto;
 import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.registerMember.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +63,8 @@ public class NoticeController {
         }
         model.addAttribute("username", member.getUsername());
         model.addAttribute("role", member.getRole());
+        model.addAttribute("noticeDto", new NoticeDto());
+
         if (member.getRole().equals("ADMIN")) {
             return "/notice/noticeWrite";
         } else {
@@ -70,27 +73,37 @@ public class NoticeController {
         }
     }
     @PostMapping("/noticeWrite")
-    public String noticeWrite(@Valid @RequestParam String title,
-                              @Valid @RequestParam String content,
-                              Model model,
-                              HttpSession session) throws Exception {
+    public String noticeWrite(@Valid NoticeDto noticeDto, BindingResult bindingResult,
+                              Model model, HttpSession session) throws Exception {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return "redirect:/sample/login";
         }
-        model.addAttribute("username", member.getUsername());
-        model.addAttribute("role", member.getRole());
+
+        // 유효성 검사에서 오류가 발생한 경우, 다시 폼으로 돌아가서 오류를 표시
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("username", member.getUsername());
+            model.addAttribute("role", member.getRole());
+            return "/notice/noticeWrite"; // 폼을 다시 반환하여 오류 메시지를 표시합니다.
+        }
 
         Notice notice = Notice.builder()
-                .title(title).content(content).username(member.getUsername()).regdate(LocalDateTime.now()).build();
+                .title(noticeDto.getTitle())
+                .content(noticeDto.getContent())
+                .username(member.getUsername())
+                .regdate(LocalDateTime.now())
+                .build();
         noticeRepository.save(notice);
 
         return "redirect:/notice/noticeList";
     }
 
-
     @PostMapping("/noticeUpdate")
-    public String noticeUpdate(@RequestParam("id") Integer id, @RequestParam String title, @RequestParam String content, HttpSession session) throws Exception {
+    public String noticeUpdate(@RequestParam("id") Integer id,
+                               @RequestParam String title,
+                               @RequestParam String content,
+                               HttpSession session,
+                               Model model) throws Exception {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return "redirect:/sample/login";
@@ -98,15 +111,27 @@ public class NoticeController {
 
         Notice notice = noticeRepository.findById(id).orElse(null);
         if (notice != null && member.getRole().equals("ADMIN")) {
-            // 업데이트할 필드 설정
+            if (title.trim().isEmpty() || content.trim().isEmpty()) {
+                // 에러 메시지 설정
+                model.addAttribute("errorMessage", "제목과 내용을 모두 입력해주세요.");
+                model.addAttribute("notice", notice); // 기존 값 유지
+                model.addAttribute("username", member.getUsername());
+                return "/notice/noticeDetail"; // 상세 페이지로 이동
+            }
+
             notice.setTitle(title);
             notice.setContent(content);
             noticeRepository.save(notice);
-            return "redirect:/notice/noticeList"; // 수정 후 리스트로 리다이렉트
+            return "redirect:/notice/noticeList";
         } else {
-            return "redirect:/notice/noticeDetail?id=" + id; // 수정 실패 시 상세페이지로 리다이렉트
+            model.addAttribute("errorMessage", "수정 권한이 없습니다.");
+            model.addAttribute("notice", notice);
+            model.addAttribute("username", member.getUsername());
+            return "/notice/noticeDetail";
         }
     }
+
+
     @PostMapping("/noticeDelete")
     public String noticeDelete(@RequestParam("id") Integer id) throws Exception {
         Notice notice = noticeRepository.findById(id).orElse(null);

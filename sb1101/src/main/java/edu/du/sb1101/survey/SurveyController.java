@@ -56,17 +56,6 @@ public class SurveyController {
 		ansData.setRes(new Respondent());         // Respondent 객체도 초기화
 		model.addAttribute("ansData", ansData);   // 모델에 추가
 
-		// 포인트 적립
-		memberService.addPoints(mem.getUsername(), 50, "설문조사 +50포인트 적립");
-
-		// 업데이트된 Member 객체 가져오기
-		Member updatedMember = memberRepository.findByUsername(mem.getUsername());
-		if (updatedMember == null) {
-			return "redirect:/sample/login"; // 회원 정보를 찾지 못한 경우 로그인 페이지로 리다이렉트
-		}
-		// 세션에 갱신된 Member 저장
-		session.setAttribute("member", updatedMember);
-
 		return "/survey/surveyForm";
 	}
 
@@ -113,6 +102,19 @@ public class SurveyController {
 
 		// 서비스 계층에 저장 위임
 		surveyService.save(data);
+
+		// 포인트 적립 로직 추가
+		// 동일한 설문조사 응답에 대해 중복 적립되지 않도록 로직 추가
+		AnsweredData existingAnswer = ansRepository.findByMemberId(mem.getId());
+		if (existingAnswer == null) {
+			memberService.addPoints(mem.getUsername(), 50, "설문조사 +50포인트 적립");
+
+			// 업데이트된 Member 정보 세션에 반영
+			Member updatedMember = memberRepository.findByUsername(mem.getUsername());
+			if (updatedMember != null) {
+				session.setAttribute("member", updatedMember);
+			}
+		}
 
 		return "/survey/submitted";
 	}

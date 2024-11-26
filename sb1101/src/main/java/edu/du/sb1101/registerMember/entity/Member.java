@@ -32,7 +32,7 @@ public class Member {
     @Column
     private String address;
 
-    @Column
+    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)

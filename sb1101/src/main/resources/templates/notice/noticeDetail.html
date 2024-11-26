@@ -65,6 +65,10 @@
                 </tbody>
             </table>
             <input type="hidden" id="id_nd" name="id" th:value="${notice.id}">
+            <!-- 에러 메시지 출력 -->
+            <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                <span th:text="${errorMessage}"></span>
+            </div>
         </form>
 
         <!-- 버튼 영역 -->

@@ -36,13 +36,6 @@ public class RegisterController {
 
 	@RequestMapping("/register/step1")
 	public String handleStep1(Model model, HttpSession session) {
-		// 세션에서 Member 객체 가져오기
-		Member member = (Member) session.getAttribute("member");
-
-		// 로그인한 경우에만 username을 모델에 추가
-		if (member != null) {
-			model.addAttribute("username", member.getUsername());
-		}
 		return "register/step1";
 	}
 
@@ -50,13 +43,6 @@ public class RegisterController {
 	public String handleStep2(
 			@RequestParam(value = "agree", defaultValue = "false") Boolean agree,
 			Model model, HttpSession session) {
-		// 세션에서 Member 객체 가져오기
-		Member member = (Member) session.getAttribute("member");
-
-		// 로그인한 경우에만 username을 모델에 추가
-		if (member != null) {
-			model.addAttribute("username", member.getUsername());
-		}
 		if (!agree) {
 			return "register/step1";
 		}
@@ -72,14 +58,6 @@ public class RegisterController {
 @PostMapping("/register/step3")
 public String handleStep3(@Validated RegisterRequest regReq, Errors errors,
 						  Model model, HttpSession session) {
-//	new RegisterRequestValidator().validate(regReq, errors);
-	// 세션에서 Member 객체 가져오기
-	Member member = (Member) session.getAttribute("member");
-
-	// 로그인한 경우에만 username을 모델에 추가
-	if (member != null) {
-		model.addAttribute("username", member.getUsername());
-	}
 	if (errors.hasErrors())
 		return "register/step2";
 
@@ -91,9 +69,6 @@ public String handleStep3(@Validated RegisterRequest regReq, Errors errors,
 
 		// 포인트 적립 (회원가입 후 포인트 적립)
 		memberService.addPoints(registeredMember.getUsername(), 100, "회원가입 +100포인트 적립");
-
-		// 포인트 적립 후 세션에 갱신된 Member 객체 저장
-		session.setAttribute("member", registeredMember);
 
 		return "register/step3";
 

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class CommentController {
     @PostMapping("/addComment")
     public String addComment(@RequestParam("content") String content,
                              @RequestParam("boardIdx") Integer boardIdx,
-                             Model model, HttpSession session) {
+                             Model model, HttpSession session) throws UnsupportedEncodingException {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return "redirect:/sample/login";
@@ -44,6 +46,17 @@ public class CommentController {
         if (board == null) {
             model.addAttribute("error", "게시글을 찾을 수 없습니다.");
             return "redirect:/board/openBoardDetail.do";
+        }
+
+        // 공백 검증
+        if (content == null || content.trim().isEmpty()) {
+            model.addAttribute("errorMessage", "댓글 내용을 입력해주세요.");
+            model.addAttribute("board", board);
+            // 댓글 목록을 CommentRepository에서 가져오는 방식 변경
+            List<Comment> commentList = commentRepository.findByBoard(board);
+            model.addAttribute("commentList", commentList);
+            return "redirect:/board/openBoardDetail.do?boardIdx=" + boardIdx + "&errorMessage=" + URLEncoder.encode("댓글 내용을 입력해주세요.", "UTF-8");
+
         }
 
         // 줄바꿈을 <br>로 변경
@@ -56,6 +69,7 @@ public class CommentController {
                 .member(member)
                 .board(board)
                 .build();
+
         commentRepository.save(newComment);
 
         // 포인트 적립

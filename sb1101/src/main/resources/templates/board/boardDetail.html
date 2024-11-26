@@ -103,7 +103,7 @@
 		<!-- 댓글 영역 -->
 		<div class="comment-section" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ddd;">
 			<h3>댓글 <span th:text="'(' + ${commentList.size()} + ')'"></span></h3>
-			<form th:action="@{/comment/addComment}" method="post" class="comment-form">
+			<form th:action="@{/comment/addComment}" method="post" class="comment-form" >
 				<input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
 
 				<!-- 댓글 목록 -->
@@ -147,8 +147,13 @@
 						<th>댓글 작성</th>
 						<td>
 							<div class="input-wrapper">
-								<textarea name="content" id="commentContent" placeholder="댓글을 입력하세요" required maxlength="200"></textarea>
+								<textarea name="content" id="commentContent" placeholder="댓글을 입력하세요" maxlength="200"></textarea>
+								<div th:if="${param.errorMessage}">
+									<p th:text="${param.errorMessage}" style="color:red;"></p>
+								</div>
 								<div id="charCount" class="char-count">0/200</div>
+								<!-- openBoardDetail.html -->
+
 							</div>
 						</td>
 					</tr>

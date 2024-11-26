@@ -47,19 +47,30 @@
 </head>
 <body>
     <div class="login-box"> <!-- 로그인 박스 추가 -->
-        <form method="post" th:action="@{/sample/login}" >
+        <form method="post" th:action="@{/sample/login}" th:object="${loginDto}">
             <div class="form-group">
                 <label class="form-label mt-4">로그인</label>
                 <hr/>
                 <div class="form-floating mb-3">
-                    <input type="email" name="email" class="form-control" id="email" required>
+                    <input type="email" name="email" class="form-control" id="email" th:field="*{email}">
                     <label for="email">아이디(이메일)</label>
+                    <div th:if="${#fields.hasErrors('email')}" class="error-message" style="color: red;">
+                        <span th:errors="*{email}"></span>
+                    </div>
                 </div>
                 <div class="form-floating mb-4">
-                    <input type="password" name="password" class="form-control" id="floatingPassword" required>
+                    <input type="password" name="password" class="form-control" id="floatingPassword" th:field="*{password}">
                     <label for="floatingPassword">비밀번호</label>
+                    <div th:if="${#fields.hasErrors('password')}" class="error-message" style="color: red;">
+                        <span th:errors="*{password}"></span>
+                    </div>
                 </div>
             </div>
+            <!-- 로그인 실패 시 errorMessage 표시 -->
+            <div th:if="${errorMessage != null}" class="alert alert-danger" role="alert">
+                <span th:text="${errorMessage}"></span>
+            </div>
+
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary w-100">로그인</button>
             </div>

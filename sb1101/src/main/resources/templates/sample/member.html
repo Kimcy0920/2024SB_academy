@@ -13,7 +13,7 @@
   <body>
   <div class="container">
     <h2>회원 정보</h2>
-    <form method="post" th:action="@{/sample/infoUpdate}">
+    <form method="post" th:action="@{/sample/infoUpdate}" th:object="${memDto}">
       <table class="notice_detail_nd">
         <colgroup>
           <col class="col1">
@@ -23,13 +23,23 @@
           <th>고유번호</th>
           <td th:text="${id}"></td>
           <th>이메일</th>
-          <td><input type="text" th:value="${email}" name="email" required></td>
+          <td>
+            <input type="text" th:value="${email}" name="email">
+            <div th:if="${#fields.hasErrors('email')}" class="error-message" style="color: red;">
+              <span th:errors="*{email}"></span>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>성명</th>
-          <td><input type="text" th:value="${username}" name="username" required></td>
+          <td>
+            <input type="text" th:value="${username}" name="username">
+            <div th:if="${#fields.hasErrors('username')}" class="error-message" style="color: red;">
+              <span th:errors="*{username}"></span>
+            </div>
+          </td>
           <th>가입일</th>
-          <td><input type="date" th:value="${#temporals.format(regdate, 'yyyy-MM-dd')}" name="regdate" required></td>
+          <td th:text="${#temporals.format(regdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
         <tr>
           <th>직책</th>
@@ -41,16 +51,13 @@
           <th>보유 포인트</th>
           <td th:text="${point}"></td>
         </tr>
-<!--        <tr>-->
-<!--          <th>작성한 게시글 수</th>-->
-<!--          <td><span th:text="${count != null ? count : '0'}"></span></td>-->
-<!--          <th>작성한 댓글 수</th>-->
-<!--          <td><span th:text="${commentCount != null ? commentCount : '0'}"></span></td>-->
-<!--        </tr>-->
         <tr>
           <th colspan="1">주소</th>
           <td colspan="3">
-            <input type="text" th:value="${address}" name="address" required style="width: 100%;">
+            <input type="text" th:value="${address}" name="address" style="width: 100%;">
+            <div th:if="${#fields.hasErrors('address')}" class="error-message" style="color: red;">
+              <span th:errors="*{address}"></span>
+            </div>
           </td>
         </tr>
       </table>
@@ -72,8 +79,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post" th:action="@{/sample/changePwd}" id="changePwdForm">
-            <input type="hidden" th:value="${password}">
+          <form method="post" th:action="@{/sample/changePassword}" id="changePwdForm">
+            <input type="hidden" th:value="${password}" name="password">
             <div class="mb-3">
               <label for="currentPassword" class="form-label">현재 비밀번호</label>
               <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>

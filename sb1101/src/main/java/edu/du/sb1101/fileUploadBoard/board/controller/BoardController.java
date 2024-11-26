@@ -94,6 +94,13 @@ public class BoardController {
 		board.setCreatorId(member.getUsername()); // 먼저 creatorId를 설정합니다.
 		model.addAttribute("username", member.getUsername());
 
+		// 공백 검증
+		if (board.getContents().trim().isEmpty() || board.getTitle().trim().isEmpty()) {
+			model.addAttribute("errorMessage", "제목과 내용을 모두 입력해주세요.");
+			model.addAttribute("board", board); // 작성한 게시글 데이터 다시 넘기기
+			return "/board/openBoardWrite.do"; // 게시글 작성 페이지로 다시 돌아감
+		}
+
 		// 게시글을 데이터베이스에 저장합니다.
 		boardService.insertBoard(board, multipartHttpServletRequest);
 
