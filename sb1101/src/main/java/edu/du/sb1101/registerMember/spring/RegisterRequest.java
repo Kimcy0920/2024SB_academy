@@ -49,9 +49,12 @@ public class RegisterRequest {
 		this.name = name;
 	}
 
-	public String getAddress() { return address; }
-
-	public void setAddress(String address) { this.address = address; }
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public boolean isPasswordEqualToConfirmPassword() {
 		return password.equals(confirmPassword);

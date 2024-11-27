@@ -7,11 +7,12 @@ import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
-public class MemDto2 {
+public class MemDto3 {
 
-    private String email;
+    @NotBlank(message = "현재 비밀번호를 입력해주세요.")
+    private String currentPassword;
 
-    @NotBlank(message = "비밀번호를 입력해주세요.")
+    @NotBlank(message = "새 비밀번호를 입력해주세요.")
     private String newPassword;
 
     @NotBlank(message = "확인 비밀번호를 입력해주세요.")

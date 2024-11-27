@@ -175,7 +175,6 @@ public class SampleController {
         }
     }
 
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 세션 무효화
@@ -184,18 +183,17 @@ public class SampleController {
 
     @GetMapping("/findPwd")
     public String findPwdForm(Model model) {
-        model.addAttribute("memDto", new MemDto2());
+        model.addAttribute("memDto", new MemDto());
         return "sample/findPwd";
     }
     @PostMapping("/findPwd")
-    public String findPwd(@Valid MemDto2 memDto,
+    public String findPwd(@Valid MemDto memDto,
                           BindingResult bindingResult,
-                          HttpSession session,
-                          Model model) {
+                          HttpSession session, Model model) {
         // 유효성 검사 에러 처리
         if (bindingResult.hasErrors()) {
-            model.addAttribute("memDto", memDto);  // 유효성 검사 실패 시 memDto 객체를 다시 모델에 추가
-            return "sample/findPwd";
+            model.addAttribute("memDto", memDto);
+            return "/sample/findPwd";
         }
 
         // 아이디와 성명 데이터베이스 조회
@@ -203,8 +201,7 @@ public class SampleController {
         if (member == null) {
             // 아이디와 성명이 모두 입력되었는데 조회 실패 시 에러 메시지 설정
             model.addAttribute("errorMessage", "아이디 또는 성명이 잘못되었습니다.");
-            model.addAttribute("memDto", memDto);
-            return "sample/findPwd";
+            return "/sample/findPwd";
         }
 
         // 조회 성공 시 세션에 이메일 저장 후 이동
@@ -212,31 +209,48 @@ public class SampleController {
         return "redirect:/sample/changePwd";
     }
 
-
     @GetMapping("/changePwd")
     public String changePwdForm(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
-        System.out.println("Session email: " + email);
         if (email == null) {
-            System.out.println("Session email is null");
             return "redirect:/sample/findPwd";
         }
-        model.addAttribute("email", email);
+        MemDto2 memDto2 = new MemDto2();
+        memDto2.setEmail(email);  // 이메일을 MemDto2에 설정
+        model.addAttribute("memDto2", memDto2);
         return "/sample/changePwd";
     }
     @PostMapping("/changePwd")
-    public String changePwd(@RequestParam String email,
-                            @RequestParam String newPassword,
-                            @RequestParam String confirmPassword) {
+    public String changePwd(@Valid MemDto2 memDto2,
+                            BindingResult bindingResult,
+                            Model model,
+                            HttpSession session) {
+        String newPassword = memDto2.getNewPassword();
+        String confirmPassword = memDto2.getConfirmPassword();
+        String email = memDto2.getEmail();
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("memDto", memDto2);
+            return "/sample/changePwd";
+        }
+
+        // 이메일로 회원 조회
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            // 만약 회원이 존재하지 않으면 에러 메시지 추가
+            model.addAttribute("errorMessage", "해당 이메일에 해당하는 회원이 존재하지 않습니다.");
+            return "/sample/changePwd";
+        }
+
+        // 비밀번호 확인
         if (newPassword.equals(confirmPassword)) {
-            Member member = memberRepository.findByEmail(email);
-            member.setPassword(passwordEncoder.encode(newPassword));
-            memberRepository.save(member);
-            System.out.println("비밀번호 변경");
+            member.setPassword(passwordEncoder.encode(newPassword));  // 비밀번호 암호화 후 저장
+            memberRepository.save(member);  // 변경된 회원 정보 저장
+            log.info("비밀번호 변경 완료");
             return "redirect:/sample/login";
         } else {
-            System.out.println("입력한 비밀번호가 일치하지 않습니다.");
-            return "sample/changePwd";
+            model.addAttribute("errorMessage", "입력한 비밀번호가 일치하지 않습니다.");
+            return "/sample/changePwd";
         }
     }
 

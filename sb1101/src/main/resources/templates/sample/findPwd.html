@@ -12,14 +12,9 @@
     <body>
     <div class="container">
         <h1>비밀번호 찾기</h1>
-
-        <!-- 공통 에러 메시지 -->
-        <div th:if="${errorMessage}" style="color: red; margin-bottom: 20px;">
-            <span th:text="${errorMessage}"></span>
-        </div>
-
         <hr/>
         <form method="post" th:action="@{/sample/findPwd}" th:object="${memDto}">
+            <input type="hidden" value="address" name="address">
             <!-- 이메일 입력 -->
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="email" name="email" th:value="*{email}">
@@ -39,9 +34,15 @@
                     <span th:errors="*{username}"></span>
                 </div>
             </div>
+            <hr/>
+
+            <!-- 공통 에러 메시지 -->
+            <div th:if="${errorMessage}" style="color: red; margin-bottom: 20px;">
+                <span th:text="${errorMessage}"></span>
+            </div>
+
             <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
         </form>
-
 
     </div>
     </body>

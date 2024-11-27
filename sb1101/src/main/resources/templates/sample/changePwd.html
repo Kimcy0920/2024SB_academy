@@ -2,27 +2,37 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
+<div class="container" layout:fragment="content">
 <head>
   <meta charset="UTF-8">
   <title>비밀번호 변경</title>
   <link rel="stylesheet" href="/css/myInfo.css">
 </head>
 <body>
-<div class="container" layout:fragment="content">
 <h1>비밀번호 변경</h1>
 <hr/>
-<form method="post" th:action="@{/sample/changePwd}" id="changePwdForm">
-  <input type="hidden" name="email" th:value="${email}" />
+<form method="post" th:action="@{/sample/changePwd}" id="changePwdForm" th:object="${memDto2}">
+  <input type="hidden" name="email" th:value="${memDto2.email}" />
   <div class="mb-3">
     <label for="newPassword" class="form-label">새 비밀번호</label>
-    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+    <input type="password" class="form-control" id="newPassword" name="newPassword">
+    <div th:if="${#fields.hasErrors('newPassword')}" style="color: red;">
+      <span th:errors="*{newPassword}"></span>
+    </div>
   </div>
   <div class="mb-3">
     <label for="confirmPassword" class="form-label">새 비밀번호 확인</label>
-    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+    <div th:if="${#fields.hasErrors('confirmPassword')}" style="color: red;">
+      <span th:errors="*{confirmPassword}"></span>
+    </div>
+  </div>
+  <hr/>
+  <div th:if="${errorMessage}" style="color: red; margin-bottom: 20px;">
+    <span th:text="${errorMessage}"></span>
   </div>
   <button type="submit" class="btn btn-primary w-100">비밀번호 변경</button>
 </form>
-</div>
 </body>
+</div>
 </html>
