@@ -9,6 +9,7 @@ import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.point.PointLog;
 import edu.du.sb1101.point.PointLogRepository;
 import edu.du.sb1101.registerMember.entity.LoginDto;
+import edu.du.sb1101.registerMember.entity.MemDto2;
 import edu.du.sb1101.registerMember.entity.Member;
 import edu.du.sb1101.registerMember.entity.MemDto;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
@@ -182,25 +183,42 @@ public class SampleController {
     }
 
     @GetMapping("/findPwd")
-    public String findPwdForm() {
+    public String findPwdForm(Model model) {
+        model.addAttribute("memDto", new MemDto2());
         return "sample/findPwd";
     }
     @PostMapping("/findPwd")
-    public String findPwd(@RequestParam String email, @RequestParam String username,
-                          HttpSession session) {
-        Member member = memberRepository.findByEmailAndUsername(email, username);
-        if (member != null) {
-            session.setAttribute("email", email);
-            return "redirect:/sample/changePwd";
-        } else {
-            System.out.println("잘못된 입력값");
+    public String findPwd(@Valid MemDto2 memDto,
+                          BindingResult bindingResult,
+                          HttpSession session,
+                          Model model) {
+        // 유효성 검사 에러 처리
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("memDto", memDto);  // 유효성 검사 실패 시 memDto 객체를 다시 모델에 추가
             return "sample/findPwd";
         }
+
+        // 아이디와 성명 데이터베이스 조회
+        Member member = memberRepository.findByEmailAndUsername(memDto.getEmail(), memDto.getUsername());
+        if (member == null) {
+            // 아이디와 성명이 모두 입력되었는데 조회 실패 시 에러 메시지 설정
+            model.addAttribute("errorMessage", "아이디 또는 성명이 잘못되었습니다.");
+            model.addAttribute("memDto", memDto);
+            return "sample/findPwd";
+        }
+
+        // 조회 성공 시 세션에 이메일 저장 후 이동
+        session.setAttribute("email", memDto.getEmail());
+        return "redirect:/sample/changePwd";
     }
+
+
     @GetMapping("/changePwd")
     public String changePwdForm(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
+        System.out.println("Session email: " + email);
         if (email == null) {
+            System.out.println("Session email is null");
             return "redirect:/sample/findPwd";
         }
         model.addAttribute("email", email);

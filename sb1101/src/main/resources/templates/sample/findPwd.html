@@ -12,18 +12,37 @@
     <body>
     <div class="container">
         <h1>비밀번호 찾기</h1>
+
+        <!-- 공통 에러 메시지 -->
+        <div th:if="${errorMessage}" style="color: red; margin-bottom: 20px;">
+            <span th:text="${errorMessage}"></span>
+        </div>
+
         <hr/>
-        <form method="post" th:action="@{/sample/findPwd}">
+        <form method="post" th:action="@{/sample/findPwd}" th:object="${memDto}">
+            <!-- 이메일 입력 -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="email" name="email" required>
+                <input type="text" class="form-control" id="email" name="email" th:value="*{email}">
                 <label for="email">아이디(이메일) 입력</label>
+                <!-- 이메일 유효성 에러 메시지 -->
+                <div th:if="${#fields.hasErrors('email')}" style="color: red;">
+                    <span th:errors="*{email}"></span>
+                </div>
             </div>
+
+            <!-- 성명 입력 -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" th:value="*{username}">
                 <label for="username">성명 입력</label>
+                <!-- 성명 유효성 에러 메시지 -->
+                <div th:if="${#fields.hasErrors('username')}" style="color: red;">
+                    <span th:errors="*{username}"></span>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
         </form>
+
+
     </div>
     </body>
 </div>

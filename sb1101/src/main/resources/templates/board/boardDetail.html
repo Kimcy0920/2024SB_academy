@@ -78,6 +78,9 @@
 									  th:disabled="${board.creatorId != username}"></textarea>
 							<div id="charCountContents" class="char-count" th:if="${board.creatorId == username}">0/1000</div>
 						</div>
+						<div th:if="${param.errorMessage}">
+							<p th:text="${param.errorMessage}" style="color:red;"></p>
+						</div>
 					</td>
 				</tr>
 				</tbody>

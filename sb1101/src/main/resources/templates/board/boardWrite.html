@@ -47,6 +47,9 @@
 							<textarea id="contents" name="contents" required maxlength="1000"></textarea>
 							<div id="charCountContents" class="char-count">0/1000</div>
 						</div>
+						<div th:if="${param.errorMessage}">
+							<p th:text="${param.errorMessage}" style="color:red;"></p>
+						</div>
 					</td>
 				</tr>
 			</table>

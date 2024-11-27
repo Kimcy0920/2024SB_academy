@@ -42,6 +42,7 @@ public class BoardController {
 
 	@Autowired
 	CommentRepository commentRepository;
+
 	@Autowired
 	BoardRepository boardRepository;
 
@@ -98,7 +99,8 @@ public class BoardController {
 		if (board.getContents().trim().isEmpty() || board.getTitle().trim().isEmpty()) {
 			model.addAttribute("errorMessage", "제목과 내용을 모두 입력해주세요.");
 			model.addAttribute("board", board); // 작성한 게시글 데이터 다시 넘기기
-			return "/board/openBoardWrite.do"; // 게시글 작성 페이지로 다시 돌아감
+			return "redirect:/board/openBoardWrite.do?errorMessage=" +
+					URLEncoder.encode("제목과 내용을 입력해주세요.", "UTF-8");
 		}
 
 		// 게시글을 데이터베이스에 저장합니다.
@@ -144,9 +146,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping("board/updateBoard.do")
-	public String updateBoard(BoardDto board, HttpSession session, Model model) throws Exception{
+	public String updateBoard(@RequestParam("boardIdx") Integer boardIdx, BoardDto board, HttpSession session, Model model) throws Exception{
 		Member member = (Member) session.getAttribute("member");
 		board.setUpdaterId(member.getUsername());
+
+		// 공백 검증
+		if (board.getContents().trim().isEmpty() || board.getTitle().trim().isEmpty()) {
+			model.addAttribute("errorMessage", "제목과 내용을 모두 입력해주세요.");
+			model.addAttribute("board", board); // 작성한 게시글 데이터 다시 넘기기
+			return "redirect:/board/openBoardDetail.do?boardIdx=" + boardIdx +
+					"&errorMessage=" + URLEncoder.encode("제목과 내용을 입력해주세요.", "UTF-8");
+		}
+
 		boardService.updateBoard(board);
 		return "redirect:/board/openBoardList.do";
 	}

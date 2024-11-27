@@ -55,7 +55,8 @@ public class CommentController {
             // 댓글 목록을 CommentRepository에서 가져오는 방식 변경
             List<Comment> commentList = commentRepository.findByBoard(board);
             model.addAttribute("commentList", commentList);
-            return "redirect:/board/openBoardDetail.do?boardIdx=" + boardIdx + "&errorMessage=" + URLEncoder.encode("댓글 내용을 입력해주세요.", "UTF-8");
+            return "redirect:/board/openBoardDetail.do?boardIdx=" + boardIdx +
+                    "&errorMessage=" + URLEncoder.encode("댓글 내용을 입력해주세요.", "UTF-8");
 
         }
 
