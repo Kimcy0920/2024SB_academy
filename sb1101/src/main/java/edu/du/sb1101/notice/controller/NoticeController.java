@@ -4,6 +4,8 @@ import edu.du.sb1101.notice.entity.Notice;
 import edu.du.sb1101.notice.entity.NoticeDto;
 import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.registerMember.entity.Member;
+import edu.du.sb1101.registerMember.entity.Title;
+import edu.du.sb1101.registerMember.repository.TitleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,8 @@ import java.util.List;
 @Controller
 public class NoticeController {
 
+    private final TitleRepository titleRepository;
+
     private final NoticeRepository noticeRepository;
 
     @GetMapping("/noticeList")
@@ -40,6 +44,11 @@ public class NoticeController {
         }
         model.addAttribute("username", member.getUsername());
         model.addAttribute("role", member.getRole());
+
+        // Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+        Title title = titleRepository.findActiveTitleByMemberId(member.getId());
+        // Model에 title과 username 전달
+        model.addAttribute("title", title);
 
         // 키워드 여부에 따라 데이터 조회
         Page<Notice> list;
@@ -149,6 +158,11 @@ public class NoticeController {
             return "redirect:/sample/login";
         }
         model.addAttribute("username", member.getUsername());
+
+        // Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+        Title title = titleRepository.findActiveTitleByMemberId(member.getId());
+        // Model에 title과 username 전달
+        model.addAttribute("title", title);
 
         Notice notice = noticeRepository.findById(id).orElse(null);
         if (notice == null) {

@@ -1,0 +1,140 @@
+/* 기본 스타일 */
+html {
+    overflow: scroll;
+}
+
+html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, submit {
+    margin: 0;
+    outline: 0;
+    border: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    font-family: 'NanumGothic', '나눔고딕', dotum, Arial, sans-serif;
+    font-size: 0.875em;
+    color: #666;
+    min-width: 320px;
+    background-color: #f9f9f9;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    max-width: 1024px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* 제목 스타일 */
+h1 {
+    font-size: 2em;
+    color: #252525;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 테이블 스타일 */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f7f7f7;
+    color: #333;
+    font-weight: bold;
+}
+
+/* tr은 연한 회색 배경, td는 흰색 배경 */
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* 연한 회색 배경 */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #fff; /* 흰색 배경 */
+}
+
+.table td {
+    background-color: #fff; /* td는 흰색 */
+}
+
+/* 버튼 아이콘 스타일 */
+.icon-button {
+    background-color: #666;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1em;
+    color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.icon-button:hover {
+    background-color: #e0e0e0; /* 호버시 색상 변화 */
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .table th, .table td {
+        padding: 8px 10px;
+        font-size: 0.875em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+/* 버튼 기본 스타일 */
+.btn_nd {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #555;  /* 기본 배경색 */
+    color: #fff;  /* 텍스트 색 */
+    border: none;  /* 테두리 제거 */
+    border-radius: 4px;  /* 둥근 모서리 */
+    font-size: 0.875em;  /* 폰트 크기 */
+    cursor: pointer;  /* 마우스 커서가 버튼에 오면 손 모양 */
+    transition: background-color 0.3s ease, transform 0.2s ease;  /* 배경색 변화와 애니메이션 효과 */
+    text-align: center;  /* 텍스트 가운데 정렬 */
+    width: 50%;  /* 버튼의 너비를 100%로 설정 */
+}
+
+/* 버튼 호버 상태 */
+.btn_nd:hover {
+    background-color: #6b9ab8;  /* 호버 시 배경색 변경 */
+    transform: scale(1.05);  /* 호버 시 버튼이 살짝 커지는 효과 */
+}
+
+/* 버튼 클릭 상태 */
+.btn_nd:active {
+    background-color: #4a7583;  /* 클릭 시 배경색 변경 */
+    transform: scale(0.98);  /* 클릭 시 버튼이 작아지는 효과 */
+}
+
+/* 버튼 비활성화 상태 */
+.btn_nd[disabled] {
+    background-color: #ccc;  /* 비활성화된 버튼은 회색 */
+    cursor: not-allowed;  /* 비활성화된 버튼은 클릭 불가 커서 */
+}

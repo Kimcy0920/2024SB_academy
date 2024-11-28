@@ -63,11 +63,34 @@
       </table>
 
       <button type="submit" class="btn btn-primary w-100">수정하기</button>
-      <button type="button" class="btn btn-primary w-100" th:onclick="|location.href='@{/changePassword}'|">비밀번호 변경</button>
+      <hr/>
+      <div class="btn-container_info d-flex justify-content-between">
+        <div class="btn btn-primary w-100">
+          <a href="/sample/changePassword"
+             target="_blank"
+             onclick="window.open(this.href, 'newWindow', 'width=1000,height=600'); return false;"
+             class="full-clickable-link">
+            비밀번호 변경
+          </a>
+        </div>
+        <div class="btn btn-primary w-100">
+          <a href="/sample/points"
+             target="_blank"
+             onclick="window.open(this.href, 'newWindow', 'width=800,height=800'); return false;"
+             class="full-clickable-link">
+            포인트 적립/사용
+          </a>
+        </div>
+        <div class="btn btn-primary w-100">
+          <a href="/sample/title"
+             target="_blank"
+             onclick="window.open(this.href, 'newWindow', 'width=800,height=800'); return false;"
+             class="full-clickable-link">
+            칭호 설정
+          </a>
+        </div>
+      </div>
     </form>
-    <hr/>
-    <a href="/sample/points" target="_blank" onclick="window.open(this.href, 'newWindow', 'width=800,height=800'); return false;">포인트 기록보기</a>
-    <hr/>
   </div>
   </body>
 </div>

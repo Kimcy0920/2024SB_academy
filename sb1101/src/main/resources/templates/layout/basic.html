@@ -50,7 +50,7 @@
                         <span th:if="${username != null}">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span th:text="${username}"></span>님 환영합니다.
+                                <span th:text="${title != null ? '[' + title.name + '] ' + username : username}"></span>님 환영합니다.
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/sample/member">내 정보</a>

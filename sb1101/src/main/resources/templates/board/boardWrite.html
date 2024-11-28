@@ -39,7 +39,10 @@
 				</tr>
 				<tr>
 					<td class="backcolor">작성자</td>
-					<td id="username" name="username" th:text="${username}">작성자</td>
+					<td>
+						<span th:if="${titleName != ''}" th:text="'[' + ${titleName} + ']'"></span>
+						<span th:text="${username}"></span>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">

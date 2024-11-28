@@ -56,7 +56,10 @@
 				</tr>
 				<tr>
 					<th scope="row">작성자</th>
-					<td th:text="${board.creatorId }"></td>
+					<td>
+						<span th:if="${titleName != ''}" th:text="'[' + ${titleName} + ']'"></span>
+						<span th:text="${username}"></span>
+					</td>
 					<th scope="row">작성일</th>
 					<td th:text="${board.createdDatetime }"></td>
 				</tr>
@@ -126,9 +129,12 @@
 					<tbody>
 					<th:block th:each="comment : ${commentList}">
 						<tr>
-							<td th:text="${comment.username}"></td>
+							<td>
+								<span th:text="'[' + ${userTitles[comment.username]} + ']'"></span>
+								<span th:text="${comment.username}"></span>
+							</td>
 							<td class="comment-content" th:utext="${comment.content}"></td>
-							<td th:text="${comment.commentDate}"></td>
+							<td th:text="${comment.formattedCommentDate}"></td>
 						</tr>
 					</th:block>
 					</tbody>

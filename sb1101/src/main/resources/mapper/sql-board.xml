@@ -9,7 +9,7 @@
 				title,
 				creator_id,
 				hit_cnt,
-				DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime
+				DATE_FORMAT(created_datetime, '%Y-%m-%d %H:%i:%s') AS created_datetime
 			FROM
 				t_board
 			WHERE

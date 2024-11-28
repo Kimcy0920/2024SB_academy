@@ -47,7 +47,7 @@
         <td th:text="${notice.id}"></td>
         <td class="title"><a href="/notice/noticeDetail?id=" th:attrappend="href=${notice.id}" th:text="${notice.title}"></a></td>
         <td th:text="${notice.username}"></td>
-        <td th:text="${notice.regdate}"></td>
+        <td th:text="${notice.formattedregdate}"></td>
       </tr>
       <tr th:unless="${#lists.size(noticeList)} > 0">
         <td colspan="4">공지사항이 없습니다.</td>

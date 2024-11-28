@@ -1,7 +1,9 @@
 package edu.du.sb1101.survey;
 
 import edu.du.sb1101.registerMember.entity.Member;
+import edu.du.sb1101.registerMember.entity.Title;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
+import edu.du.sb1101.registerMember.repository.TitleRepository;
 import edu.du.sb1101.registerMember.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/survey")
 public class SurveyController {
+
+	@Autowired
+	TitleRepository titleRepository;
 
 	@Autowired
 	MemberRepository memberRepository;
@@ -48,6 +53,12 @@ public class SurveyController {
 
 		model.addAttribute("username", mem.getUsername());
 		model.addAttribute("role", mem.getRole());
+
+		// Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+		Title title = titleRepository.findActiveTitleByMemberId(mem.getId());
+		// Model에 title과 username 전달
+		model.addAttribute("title", title);
+
 		List<Question> questions = createQuestions();
 		model.addAttribute("questions", questions);
 		// 기본 AnsweredData 객체 생성 및 초기화
@@ -86,6 +97,11 @@ public class SurveyController {
 		model.addAttribute("username", mem.getUsername());
 		model.addAttribute("role", mem.getRole());
 
+		// Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+		Title title = titleRepository.findActiveTitleByMemberId(mem.getId());
+		// Model에 title과 username 전달
+		model.addAttribute("title", title);
+
 		return "/survey/submitted";  // 설문 결과 페이지로 이동
 	}
 	@PostMapping("/submitted")
@@ -99,6 +115,11 @@ public class SurveyController {
 		model.addAttribute("username", mem.getUsername());
 		model.addAttribute("role", mem.getRole());
 		data.setMember(mem); // Member 설정
+
+		// Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+		Title title = titleRepository.findActiveTitleByMemberId(mem.getId());
+		// Model에 title과 username 전달
+		model.addAttribute("title", title);
 
 		// 서비스 계층에 저장 위임
 		surveyService.save(data);

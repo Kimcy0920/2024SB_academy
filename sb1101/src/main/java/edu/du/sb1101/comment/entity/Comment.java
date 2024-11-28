@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @NoArgsConstructor
@@ -38,4 +39,9 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;
+
+    public String getFormattedCommentDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return commentDate.format(formatter);
+    }
 }

@@ -8,11 +8,9 @@ import edu.du.sb1101.notice.entity.Notice;
 import edu.du.sb1101.notice.repository.NoticeRepository;
 import edu.du.sb1101.point.PointLog;
 import edu.du.sb1101.point.PointLogRepository;
-import edu.du.sb1101.registerMember.entity.LoginDto;
-import edu.du.sb1101.registerMember.entity.MemDto2;
-import edu.du.sb1101.registerMember.entity.Member;
-import edu.du.sb1101.registerMember.entity.MemDto;
+import edu.du.sb1101.registerMember.entity.*;
 import edu.du.sb1101.registerMember.repository.MemberRepository;
+import edu.du.sb1101.registerMember.repository.TitleRepository;
 import edu.du.sb1101.registerMember.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,9 @@ import java.util.Optional;
 @RequestMapping("/sample/")
 @Log4j2
 public class SampleController {
+
+    @Autowired
+    private TitleRepository titleRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -82,6 +83,12 @@ public class SampleController {
             model.addAttribute("username", member.getUsername());
             model.addAttribute("role", member.getRole());
 
+            // Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+            Title title = titleRepository.findActiveTitleByMemberId(member.getId());
+
+            // Model에 title과 username 전달
+            model.addAttribute("title", title);
+
             // 최근 게시글 목록 가져오기
             List<BoardDto> recentList = boardService.selectRecentBoardList(5);
             model.addAttribute("recentList", recentList);
@@ -95,25 +102,18 @@ public class SampleController {
         return "sample/all";
     }
 
-    @GetMapping("/points")
-    public String viewPointLogs(HttpSession session, Model model) throws Exception {
-        Member member = (Member) session.getAttribute("member");
-
-        if (member == null) {
-            return "redirect:/sample/login";
-        }
-        List<PointLog> pointLogs = pointLogRepository.findByMemberIdOrderByCreatedAtDesc(member.getId());
-        model.addAttribute("pointLogs", pointLogs);
-
-        return "/sample/pointLogs";
-    }
-
     @GetMapping("/member")
     public String exMember(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return "redirect:/sample/login";
         }
+
+        // Member 객체에 연결된 Title 가져오기 (가장 활성화된 칭호)
+        Title title = titleRepository.findActiveTitleByMemberId(member.getId());
+
+        // Model에 title과 username 전달
+        model.addAttribute("title", title);
 
         addMemberToModel(member, model);  // 중복된 코드 호출
         model.addAttribute("memDto", new MemDto()); // MemDto 객체를 전달
@@ -372,4 +372,68 @@ public class SampleController {
         memberRepository.deleteById(id);
         return "redirect:/sample/admin"; // 변경된 URL로 리다이렉트
     }
+
+    @GetMapping("/points")
+    public String viewPointLogs(HttpSession session, Model model) throws Exception {
+        Member member = (Member) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/sample/login";
+        }
+        List<PointLog> pointLogs = pointLogRepository.findByMemberIdOrderByCreatedAtDesc(member.getId());
+        model.addAttribute("pointLogs", pointLogs);
+
+        return "/sample/pointLogs";
+    }
+
+    @GetMapping("/title")
+    public String icon(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/sample/login";
+        }
+
+        List<Title> titles = titleRepository.findByMemberIdOrderById(member.getId());
+        if (titles.isEmpty()) {
+            model.addAttribute("nullMessage", "현재 보유중인 칭호가 없습니다.");
+        }
+        model.addAttribute("titles", titles);
+        return "/sample/title";
+    }
+    @PostMapping("/title/update")
+    public String updateTitleStatus(@RequestParam("titleId") Long titleId, HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/sample/login";
+        }
+
+        Title title = titleRepository.findById(titleId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid title Id"));
+
+        if (title.getMember().getId().equals(member.getId())) {
+            title.setActive(!title.isActive());  // 활성화 상태를 반전
+
+            // 활성화된 칭호가 있으면, 다른 칭호들은 비활성화 처리
+            if (title.isActive()) {
+                List<Title> otherTitles = titleRepository.findByMemberIdAndActiveTrue(member.getId());
+                for (Title t : otherTitles) {
+                    t.setActive(false);  // 다른 칭호는 비활성화
+                    titleRepository.save(t);  // 저장
+                }
+            }
+
+            titleRepository.save(title);  // 현재 칭호 저장
+        } else {
+            model.addAttribute("nullMessage", "잘못된 접근입니다.");
+            return "redirect:/sample/title";
+        }
+
+        // 최신 상태로 칭호 목록을 다시 전달
+        List<Title> titles = titleRepository.findByMemberIdOrderById(member.getId());
+        model.addAttribute("titles", titles);
+        return "/sample/title";  // 다시 칭호 관리 페이지로 이동
+    }
+
 }

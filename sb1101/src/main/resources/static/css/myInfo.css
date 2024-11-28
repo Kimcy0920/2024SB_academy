@@ -1,100 +1,3 @@
-/*@CHARSET "UTF-8";*/
-
-/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
-/*@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);*/
-
-/*!* 기본 HTML 스타일 초기화 *!*/
-/*html, body, div, h1, h2, h3, a, form, table, caption, thead, tbody, tr, th, td, input {*/
-/*    margin: 0; outline: 0; border: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;*/
-/*}*/
-/*body {*/
-/*    font-size: 0.875em; line-height: 1.5; color: #333; -webkit-text-size-adjust: none; min-width: 320px;*/
-/*    font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-serif;*/
-/*}*/
-
-/*!* 제목 스타일 *!*/
-/*h1 {*/
-/*    font-size: 2em;*/
-/*    margin-bottom: 20px;*/
-/*    color: #252525;*/
-/*    text-align: center;*/
-/*}*/
-
-/*!* 테이블 스타일 *!*/
-/*.input--table {*/
-/*    width: 100%;*/
-/*    border-collapse: collapse;*/
-/*    margin: 20px 0;*/
-/*}*/
-
-/*.input--table td {*/
-/*    background-color: #ffffff; !* 흰색 배경으로 설정 *!*/
-/*    color: #333; !* 기본 텍스트 색상 *!*/
-/*    width: 100%; !* td 너비 100%로 지정 *!*/
-/*}*/
-
-/*.input--table th, .input--table td {*/
-/*    padding: 12px;*/
-/*    border: 1px solid #ddd; !* 테두리 추가 *!*/
-/*    text-align: left;*/
-/*}*/
-
-/*.input--table th {*/
-/*    background-color: #f2f2f2; !* 상단 헤더 배경색 *!*/
-/*    color: #3b3a3a;*/
-/*    font-weight: bold; !* 헤더 글씨 두껍게 *!*/
-/*}*/
-
-/*.input--table tr:nth-child(even) {*/
-/*    background-color: #f9f9f9; !* 짝수 행 배경색 *!*/
-/*}*/
-
-/*.input--table tr:hover {*/
-/*    background-color: #f1f1f1; !* 마우스 오버 시 배경색 *!*/
-/*}*/
-
-/*!* 링크 스타일 *!*/
-/*a {*/
-/*    color: #007bff; !* 링크 색상 *!*/
-/*    text-decoration: none;*/
-/*}*/
-
-/*a:hover {*/
-/*    text-decoration: underline; !* 링크 마우스 오버 시 밑줄 *!*/
-/*}*/
-
-/*!* 중앙 정렬을 위한 Flexbox 설정 *!*/
-/*.d-flex {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: flex-start;*/
-/*}*/
-
-/*!* 기타 스타일 *!*/
-/*.split--div {*/
-/*    margin: 20px 0;*/
-/*    border-top: 2px solid #ccc;*/
-/*}*/
-
-/*!* 버튼 스타일 *!*/
-/*.btn {*/
-/*    margin: 5px;*/
-/*    padding: 5px 11px;*/
-/*    color: #fff !important;*/
-/*    background-color: #7D7F82;*/
-/*    border: none;*/
-/*    border-radius: 4px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.btn:hover {*/
-/*    background: #6b9ab8; !* 버튼 마우스 오버 색상 *!*/
-/*}*/
-
-/*td#td_01 {*/
-/*    text-decoration: underline; !* 텍스트에 밑줄 추가 *!*/
-/*}*/
-
 @charset "UTF-8";
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 @import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
@@ -105,6 +8,10 @@ html, body, div, h1, h2, a, form, table, tr, th, td, input, textarea, button {
     border: 0;
     outline: 0;
     font-family: 'NanumGothic', '나눔고딕', dotum, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.abc {
+    color: #f0f0f0;
 }
 
 body {
@@ -196,4 +103,21 @@ h2 {
 
 .btn_nd:hover {
     background-color: #6b9ab8;
+}
+
+/* a 태그를 부모 div 크기에 맞게 설정 */
+.full-clickable-link {
+    display: block; /* 부모 크기에 맞게 확장 */
+    width: 100%; /* 부모 div의 너비와 동일 */
+    height: 100%; /* 부모 div의 높이와 동일 */
+    text-align: center; /* 텍스트 정렬 */
+    color: #f0f0f0 !important; /* 텍스트 색상 유지 */
+    text-decoration: none; /* 밑줄 제거 */
+    line-height: inherit; /* 부모 요소와 동일한 세로 정렬 유지 */
+}
+
+/* 호버 스타일 */
+.full-clickable-link:hover {
+    text-decoration: underline; /* 호버 시 텍스트 밑줄 */
+    background-color: inherit; /* 배경 색상 유지 */
 }

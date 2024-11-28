@@ -54,6 +54,9 @@ public class Member {
 
     private LocalDate lastPointDate;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Title> titles = new ArrayList<>();  // 회원이 가진 칭호들
+
     public void changePassword(String oldPassword, String newPassword) {
         if (!password.equals(oldPassword))
             throw new WrongIdPasswordException();

@@ -44,7 +44,11 @@
 				<td class="title">
 					<a th:href="@{/board/openBoardDetail.do?boardIdx={boardIdx}(boardIdx=${board.boardIdx})}" th:text="${board.title}"></a>
 				</td>
-				<td th:text="${board.creatorId}"></td>
+<!--				<td th:text="${board.creatorId}"></td>-->
+				<td>
+					<!-- 작성자명 + 칭호 표시 -->
+					<span th:text="${board.creatorId != null ? board.creatorId : '알 수 없음'}"></span>
+				</td>
 				<td th:text="${board.hitCnt}"></td>
 				<td th:text="${board.createdDatetime}"></td>
 			</tr>

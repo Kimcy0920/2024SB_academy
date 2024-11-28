@@ -38,7 +38,7 @@
                         <a th:href="@{/notice/noticeDetail(id=${notice.id})}" class="post-link">
                             <div class="post-content">
                                 <span class="post-title" th:text="${notice.title}">공지사항 제목</span>
-                                <span class="post-date" th:text="${notice.regdate}">2024-01-01</span>
+                                <span class="post-date" th:text="${notice.formattedregdate}">2024-01-01</span>
                             </div>
                         </a>
                     </li>
