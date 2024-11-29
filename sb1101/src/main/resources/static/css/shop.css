@@ -1,0 +1,63 @@
+/* shop.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    margin: 20px 0;
+}
+
+.shop-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+}
+
+.item-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.item-cost {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.buy-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}

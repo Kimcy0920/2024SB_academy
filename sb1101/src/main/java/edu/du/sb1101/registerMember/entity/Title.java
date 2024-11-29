@@ -1,5 +1,6 @@
 package edu.du.sb1101.registerMember.entity;
 
+import edu.du.sb1101.item.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +29,8 @@ public class Title {
     private LocalDateTime regDate;  // 칭호가 적용된 날짜
 
     private boolean active = false;  // 칭호가 활성화된 상태인지 여부
+
+    @OneToOne(mappedBy = "title")
+    private Item item;
 }
 

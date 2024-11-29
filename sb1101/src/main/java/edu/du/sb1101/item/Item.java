@@ -1,5 +1,6 @@
 package edu.du.sb1101.item;
 
+import edu.du.sb1101.registerMember.entity.Title;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,9 @@ public class Item {
 
     private String itemName;
 
-    private int cost;
+    private int cost = 500;
+
+    @OneToOne
+    @JoinColumn(name = "title_id")
+    private Title title;
 }
