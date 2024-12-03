@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.16'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'org.zerock'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
+    // Jackson 라이브러리 추가
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0' // 최신 버전 확인 후 사용
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0' // XML 처리 라이브러리
+
+    // org.json 라이브러리 추가
+    implementation 'org.json:json:20210307' // 최신 버전 확인 후 사용
+}
+
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

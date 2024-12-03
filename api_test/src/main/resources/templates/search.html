@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>병원 검색</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>병원 검색</h1>
+    <form method="post" action="/search">
+        <div class="mb-3">
+            <label for="query" class="form-label">지역 검색</label>
+            <input type="text" id="query" name="query" class="form-control" placeholder="서울특별시" required>
+        </div>
+        <button type="submit" class="btn btn-primary">검색</button>
+    </form>
+
+    <hr>
+    <h2>검색 결과</h2>
+    <div th:if="${result}">
+        <ul>
+            <li th:each="hospital : ${result}">
+                <p th:text="${hospital}"></p>
+            </li>
+        </ul>
+    </div>
+
+    <p th:if="${error}" th:text="${error}" class="text-danger"></p>
+</div>
+</body>
+</html>
