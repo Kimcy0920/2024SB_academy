@@ -28,18 +28,16 @@ public class SearchController {
     @Autowired
     private SearchHistoryRepository searchHistoryRepository;
 
-    @GetMapping("/")
-    public String searchPage() {
-        return "search";
-    }
-
+//    @GetMapping("/search")
+//    public String searchWithPagination(@RequestParam("query") String query,
+//                                       @RequestParam(value = "page", defaultValue = "1") int page,
+//                                       Model model) {
+//        return search(query, page, model);
+//    }
     @GetMapping("/search")
-    public String searchWithPagination(@RequestParam("query") String query,
-                                       @RequestParam(value = "page", defaultValue = "1") int page,
-                                       Model model) {
-        return search(query, page, model);
+    public String searchWithPagination() {
+        return "/search";
     }
-
     @PostMapping("/search")
     public String search(@RequestParam("query") String query,
                          @RequestParam(value = "page", defaultValue = "1") int page,

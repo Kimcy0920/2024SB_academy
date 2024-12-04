@@ -254,6 +254,10 @@ public class SampleController {
         }
     }
 
+    @GetMapping("/changePassword")
+    public String changePassword() {
+        return "sample/changePassword";
+    }
     @PostMapping("/changePassword")
     public String changePassword(@RequestParam String currentPassword,
                                  @RequestParam String newPassword,
