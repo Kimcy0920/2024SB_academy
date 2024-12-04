@@ -2,30 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>병원 검색</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="container mt-5">
-    <h1>병원 검색</h1>
-    <form method="post" action="/search">
-        <div class="mb-3">
-            <label for="query" class="form-label">지역 검색</label>
-            <input type="text" id="query" name="query" class="form-control" placeholder="서울특별시" required>
-        </div>
-        <button type="submit" class="btn btn-primary">검색</button>
-    </form>
+<h1>병원 찾기</h1>
 
-    <hr>
-    <h2>검색 결과</h2>
-    <div th:if="${result}">
-        <ul>
-            <li th:each="hospital : ${result}">
-                <p th:text="${hospital}"></p>
+<form th:action="@{/search}" method="post">
+    <input type="text" id="query" name="query" placeholder="지역, 주소, 병원명 등을 입력하세요." required th:value="${query}">
+    <button type="submit">검색</button>
+</form>
+
+<div th:if="${result}">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>병원명</th>
+            <th>주소</th>
+            <th>전화번호</th>
+            <th>운영시간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hospital : ${result}">
+            <td th:text="${hospital.name}">병원 이름</td>
+            <td th:text="${hospital.address}">병원 주소</td>
+            <td th:text="${hospital.tel}">병원 전화</td>
+            <td th:text="${hospital.hours}">운영 시간</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${totalPages > 1}">
+    <nav>
+        <ul class="pagination">
+            <!-- 처음 페이지 -->
+            <li th:if="${currentPage > 1}">
+                <a th:href="@{/search(query=${query}, page=1)}">&raquo; 처음</a>
+            </li>
+
+            <!-- 이전 페이지 -->
+            <li th:if="${currentPage > 1}">
+                <a th:href="@{/search(query=${query}, page=${currentPage - 1})}">이전</a>
+            </li>
+
+            <!-- 페이지 번호들 (10개씩 표시) -->
+            <li th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                <a th:class="${currentPage == page ? 'active' : ''}"
+                   th:href="@{/search(query=${query}, page=${page})}" th:text="${page}">1</a>
+            </li>
+
+            <!-- 다음 페이지 -->
+            <li th:if="${currentPage < totalPages}">
+                <a th:href="@{/search(query=${query}, page=${currentPage + 1})}">다음</a>
+            </li>
+
+            <!-- 마지막 페이지 -->
+            <li th:if="${currentPage < totalPages}">
+                <a th:href="@{/search(query=${query}, page=${totalPages})}">마지막 &raquo;</a>
             </li>
         </ul>
-    </div>
+    </nav>
+</div>
 
-    <p th:if="${error}" th:text="${error}" class="text-danger"></p>
+<div th:if="${error}">
+    <p style="color:red;" th:text="${error}">오류 메시지</p>
 </div>
 </body>
 </html>

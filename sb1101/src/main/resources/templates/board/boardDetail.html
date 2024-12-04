@@ -130,7 +130,7 @@
 					<th:block th:each="comment : ${commentList}">
 						<tr>
 							<td>
-								<span th:text="'[' + ${userTitles[comment.username]} + ']'"></span>
+								<span th:text="${userTitles[comment.username] != null and userTitles[comment.username] != '' ? '[' + userTitles[comment.username] + ']' : ''}"></span>
 								<span th:text="${comment.username}"></span>
 							</td>
 							<td class="comment-content" th:utext="${comment.content}"></td>

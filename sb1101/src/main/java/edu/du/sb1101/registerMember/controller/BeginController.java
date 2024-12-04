@@ -26,33 +26,33 @@ public class BeginController {
         return "/sample/all";
     }
 
-    @PostConstruct
-    public void init() {
-        LocalDateTime now = LocalDateTime.now(); // 현재 날짜와 시간 가져오기
-
-        Member member = Member.builder()
-                .id(1001L)
-                .username("관리자")
-                .password(passwordEncoder.encode("1234"))
-                .email("admin@mail.com")
-                .address("성남시 수정구 복정동")
-                .regdate(now)
-                .role("ADMIN")
-                .point(100000)
-                .build();
-        memberRepository.save(member);
-
-        member = Member.builder()
-                .id(1002L)
-                .username("사용자")
-                .password(passwordEncoder.encode("1234"))
-                .email("user@mail.com")
-                .address("서울특별시 광진구 자양로44나길 11 스위트빌라")
-                .regdate(now)
-                .role("USER")
-                .point(5000)
-                .build();
-        memberRepository.save(member);
-    }
+//    @PostConstruct
+//    public void init() {
+//        LocalDateTime now = LocalDateTime.now(); // 현재 날짜와 시간 가져오기
+//
+//        Member member = Member.builder()
+//                .id(1001L)
+//                .username("관리자")
+//                .password(passwordEncoder.encode("1234"))
+//                .email("admin@mail.com")
+//                .address("성남시 수정구 복정동")
+//                .regdate(now)
+//                .role("ADMIN")
+//                .point(100000)
+//                .build();
+//        memberRepository.save(member);
+//
+//        member = Member.builder()
+//                .id(1002L)
+//                .username("사용자")
+//                .password(passwordEncoder.encode("1234"))
+//                .email("user@mail.com")
+//                .address("서울특별시 광진구 자양로44나길 11 스위트빌라")
+//                .regdate(now)
+//                .role("USER")
+//                .point(5000)
+//                .build();
+//        memberRepository.save(member);
+//    }
 
 }
