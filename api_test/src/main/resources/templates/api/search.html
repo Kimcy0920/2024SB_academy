@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout/header.html :: frag-header">
     <title>Hospital Search</title>
-    <link rel="stylesheet" href="/css/api/search.css">
 </head>
 <body id="search-page">
-<div th:replace="layout/header.html"></div>
+<header th:replace="/layout/navbar.html :: frag-navbar"></header>
 <h1>Hospital Search</h1>
 
 <form th:action="@{/api/search}" method="post">
@@ -70,6 +69,7 @@
     <p style="color:red;" th:text="${error}">오류 메시지</p>
 </div>
 
-<div th:replace="layout/footer.html"></div>
+<footer th:replace="/layout/footer.html :: frag-footer"></footer>
+<link rel="stylesheet" href="/css/api/search.css">
 </body>
 </html>
