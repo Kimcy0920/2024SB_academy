@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.BufferedReader;
@@ -28,20 +29,24 @@ public class SearchController {
     @Autowired
     private SearchHistoryRepository searchHistoryRepository;
 
-//    @GetMapping("/search")
-//    public String searchWithPagination(@RequestParam("query") String query,
-//                                       @RequestParam(value = "page", defaultValue = "1") int page,
-//                                       Model model) {
-//        return search(query, page, model);
-//    }
-    @GetMapping("/search")
-    public String searchWithPagination() {
-        return "/search";
-    }
-    @PostMapping("/search")
-    public String search(@RequestParam("query") String query,
+    @GetMapping("/api/search")
+    public String search(@RequestParam(value = "query", required = false) String query,
                          @RequestParam(value = "page", defaultValue = "1") int page,
                          Model model) {
+        if (query == null || query.isEmpty()) {
+            return "/api/search"; // 검색어가 없는 경우 검색 페이지만 반환
+        }
+        return performSearch(query, page, model);
+    }
+
+    @PostMapping("/api/search")
+    public String searchPost(@RequestParam("query") String query,
+                             @RequestParam(value = "page", defaultValue = "1") int page,
+                             Model model) {
+        return performSearch(query, page, model);
+    }
+
+    private String performSearch(String query, int page, Model model) {
         try {
             String serviceKey = "SP3wJEpLefDpmxgJzS1VvBxA3KCHo1lMpp8AXy%2F8jjHjSFzPcVzl5r1fO1zOBfyY7XWTzd3QV7FRN7%2FSkM01zg%3D%3D";
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire");
@@ -139,7 +144,7 @@ public class SearchController {
         } catch (Exception e) {
             model.addAttribute("error", "검색 중 오류가 발생했습니다: " + e.getMessage());
         }
-        return "search";
+        return "/api/search";
     }
 
     // 시간 포맷팅 함수
@@ -150,5 +155,4 @@ public class SearchController {
         }
         return time;
     }
-
 }

@@ -1,0 +1,22 @@
+/* header.css */
+.navbar-custom {
+    background-color: #f6f3ee;
+}
+
+.navbar-brand-custom {
+    color: #2e5743;
+    font-weight: bold;
+}
+
+.navbar-link-custom {
+    color: #2e5743;
+    font-weight: bold;
+}
+
+.navbar-link-custom:hover {
+    color: #1c3a29;  /* 호버 시 색상 변경 */
+}
+
+.navbar-toggler-custom {
+    background-color: #2e5743;
+}

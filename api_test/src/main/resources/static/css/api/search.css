@@ -1,5 +1,5 @@
 /* 전체 페이지 기본 스타일 */
-body {
+#search-page {
     font-family: 'Arial', sans-serif;
     background-color: #f6f3ee; /* 베이지색 배경 */
     color: #333333; /* 어두운 텍스트 색 */
@@ -8,7 +8,7 @@ body {
 }
 
 /* 제목 스타일 */
-h1 {
+#search-page h1 {
     text-align: center;
     color: #2e5743; /* 녹색 */
     margin-top: 50px;
@@ -16,21 +16,21 @@ h1 {
 }
 
 /* 폼 스타일 */
-form {
+#search-page form {
     display: flex;
     justify-content: center;
     margin-top: 20px;
     align-items: center; /* 수평, 수직 중앙 정렬 */
 }
 
-label {
+#search-page label {
     font-size: 18px; /* 글씨 크기 증가 */
     color: #2e5743; /* 지역명 녹색 */
     margin-right: 10px;
     font-weight: bold;
 }
 
-input[type="text"] {
+#search-page input[type="text"] {
     padding: 10px;
     font-size: 16px;
     border: 2px solid #2e5743; /* 녹색 테두리 */
@@ -41,7 +41,7 @@ input[type="text"] {
 }
 
 /* 검색 버튼 */
-button {
+#search-page button {
     padding: 10px 20px;
     background-color: #2e5743; /* 녹색 */
     color: white;
@@ -51,12 +51,12 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+#search-page button:hover {
     background-color: #4CAF50; /* 버튼 hover 시 밝은 녹색 */
 }
 
 /* 검색 결과 제목 */
-h2 {
+#search-page h2 {
     text-align: center;
     margin: 30px auto;
     color: #555555;
@@ -65,7 +65,7 @@ h2 {
 }
 
 /* 검색 결과 테이블 */
-table {
+#search-page table {
     width: 80%;
     margin: 30px auto;
     border-collapse: collapse;
@@ -75,27 +75,27 @@ table {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+#search-page th, #search-page td {
     padding: 12px;
     text-align: center;
     font-size: 16px;
 }
 
-th {
+#search-page th {
     background-color: #2e5743; /* 녹색 배경 */
     color: white;
 }
 
-td {
+#search-page td {
     background-color: #f9f9f9;
 }
 
-td:hover {
+#search-page td:hover {
     background-color: #f1f1f1;
 }
 
 /* 페이지네이션 */
-.pagination {
+#search-page .pagination {
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -103,11 +103,11 @@ td:hover {
     padding: 0;
 }
 
-.pagination li {
+#search-page .pagination li {
     margin: 0 5px;
 }
 
-.pagination a {
+#search-page .pagination a {
     padding: 10px 15px;
     background-color: #f1f1f1;
     color: #333;
@@ -115,18 +115,18 @@ td:hover {
     border-radius: 5px;
 }
 
-.pagination a:hover {
+#search-page .pagination a:hover {
     background-color: #2e5743; /* 녹색 hover 효과 */
     color: white;
 }
 
-.pagination a.active {
+#search-page .pagination a.active {
     background-color: #2e5743;
     color: white;
 }
 
 /* 오류 메시지 */
-#error {
+#search-page #error {
     text-align: center;
     font-size: 16px;
     color: #FF6347; /* 오류 메시지 색상 (빨간색) */
