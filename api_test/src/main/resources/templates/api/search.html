@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout/header.html :: frag-header">
-    <title>Hospital Search</title>
 </head>
 <body id="search-page">
 <header th:replace="/layout/navbar.html :: frag-navbar"></header>
+<link rel="stylesheet" href="/css/api/search.css">
+
 <h1>Hospital Search</h1>
 
 <form th:action="@{/api/search}" method="post">
     <input type="text" id="query" name="query" placeholder="지역, 주소, 병원명 등을 입력하세요." required th:value="${query}">
-    <button type="submit">검색</button>
+    <button type="submit" class="search-btn">검색</button>
 </form>
 
 <div th:if="${result}">
@@ -70,6 +71,5 @@
 </div>
 
 <footer th:replace="/layout/footer.html :: frag-footer"></footer>
-<link rel="stylesheet" href="/css/api/search.css">
 </body>
 </html>
