@@ -1,24 +1,22 @@
-package edu.du.sb1101.registerMember.spring;
+package edu.du.proj_g2e.member.service;
 
-import edu.du.sb1101.registerMember.entity.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.du.proj_g2e.member.entity.Member;
+import edu.du.proj_g2e.member.exception.DuplicateMemberException;
+import edu.du.proj_g2e.member.entity.RegisterRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
+@RequiredArgsConstructor
 @Service
-public class MemberRegisterService {
+public class RegisterService {
 
-	@Autowired
-	private MemberDao memberDao;
+	private final PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final MemberService memberService;
 
-	public Long regist(RegisterRequest req) {
-		Member member = memberDao.selectByEmail(req.getEmail());
+	public Long register(RegisterRequest req) {
+		Member member = memberService.selectByEmail(req.getEmail());
 		if (member != null) {
 			throw new DuplicateMemberException("dup email " + req.getEmail());
 		}
@@ -30,14 +28,11 @@ public class MemberRegisterService {
 		Member newMember = Member.builder()
 				.email(req.getEmail())
 				.password(encodePassword)  // 암호화된 비밀번호만 저장
-				.regdate(LocalDateTime.now())
-				.username(req.getName())
-				.address(req.getAddress())
+				.name(req.getName())
 				.role("USER")
-				.point(0)
 				.build();
 
-		memberDao.insert(newMember);
+		memberService.insert(newMember);
 		System.out.println("====>" + newMember);
 		return newMember.getId();
 	}

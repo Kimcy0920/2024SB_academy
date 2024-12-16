@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/header.html :: frag-header">
+    <title th:text="#{member.register}">회원가입 완료</title>
+    <link rel="stylesheet" th:href="@{/css/auth/register.css}"/>
+</head>
+<body>
+  <header th:replace="layout/navbar.html :: frag-navbar"></header>
+  <div class="container">
+    <p></p>
+    <br>
+    <p>
+      <a class="btn-back" th:href="@{/auth/login}">[로그인 하기]</a>
+    </p>
+  </div>
+<footer th:replace="layout/footer.html :: frag-footer"></footer>
+</body>
+</html>

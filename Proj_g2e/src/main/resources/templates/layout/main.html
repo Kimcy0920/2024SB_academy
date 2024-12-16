@@ -1,0 +1,17 @@
+<!-- main.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/header.html :: frag-header">
+  <title>g2e MainPage</title>
+</head>
+
+<body>
+
+<!-- Navbar, body, footer 부분을 layout에서 가져옴 -->
+<header th:replace="layout/navbar.html :: frag-navbar"></header>
+
+<footer th:replace="layout/footer.html :: frag-footer"></footer>
+
+</body>
+</html>

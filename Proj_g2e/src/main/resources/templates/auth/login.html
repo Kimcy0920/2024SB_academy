@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/header.html :: frag-header">
+  <meta charset="UTF-8">
+  <title>로그인</title>
+</head>
+<link rel="stylesheet" th:href="@{/css/auth/login.css}" />
+<body>
+<header th:replace="layout/navbar.html :: frag-navbar"></header>
+<div class="login-box">
+  <!-- 로그인 폼 -->
+  <form method="post">
+    <div class="form-group">
+      <label for="email">아이디(이메일)</label>
+      <input type="email" name="email" class="form-control" id="email" required />
+    </div>
+    <div class="form-group">
+      <label for="password">비밀번호</label>
+      <input type="password" name="password" class="form-control" id="password" required />
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn">로그인</button>
+    </div>
+  </form>
+  <div class="links">
+    <a th:href="@{/findPwd}">비밀번호 찾기</a> |
+    <a th:href="@{/regStep01}">회원가입</a>
+  </div>
+</div>
+<footer th:replace="layout/footer.html :: frag-footer"></footer>
+</body>
+
+</html>
