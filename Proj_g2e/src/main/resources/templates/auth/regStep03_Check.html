@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/header.html :: frag-header">
-    <title th:text="#{member.register}">회원가입(사용자 정보)</title>
+  <title>회원정보입력</title>
     <link rel="stylesheet" th:href="@{/css/auth/register.css}"/>
   </head>
   <body>
   <header th:replace="layout/navbar.html :: frag-navbar"></header>
   <div class="container">
-    <h2 th:text="#{member.info}">Member Info</h2>
+    <h2>의료업회원 정보입력</h2>
     <hr/>
     <form th:action="@{/auth/regStep03_Check}" method="post">
       <div class="form-group">
-        <label for="email" th:text="#{email}">Email</label>
-        <input type="text" th:field="*{email}" id="email" class="form-control"/>
-<!--        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></div>-->
+        <label for="email">아이디(이메일)</label>
+        <input type="text" id="email" name="email" class="form-control" placeholder="아이디(이메일) 입력"/>
+        <button type="button" id="sendEmailBtn" class="btn">인증번호 전송</button>
+        <input type="text" id="e_auth" name="e_auth" class="form-control" placeholder="인증번호 입력"/>
+        <button type="button" id="verifyEmailBtn" class="btn">인증확인</button>
       </div>
 
       <div class="form-group">
-        <label for="name" th:text="#{name}">Name</label>
-        <input type="text" th:field="*{name}" id="name" class="form-control"/>
-<!--        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></div>-->
+        <label for="name" placeholder="성명 입력">성명</label>
+        <input type="text" id="name" class="form-control" name="name"/>
       </div>
 
       <div class="form-group">
         <label for="password" th:text="#{password}">Password</label>
-        <input type="password" th:field="*{password}" id="password" class="form-control"/>
-<!--        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></div>-->
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword" th:text="#{password.confirm}">Confirm Password</label>
-        <input type="password" th:field="*{confirmPassword}" id="confirmPassword" class="form-control"/>
-<!--        <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error-message"></div>-->
+        <input type="password" id="password" class="form-control" placeholder="비밀번호 입력" style="margin-bottom: 3px" name="password"/>
+        <input type="password" id="confirmPassword" class="form-control" placeholder="비밀번호 재입력" name="confirmPassword"/>
       </div>
 
       <input type="submit" th:value="#{register.btn}" class="btn btn-submit"/>
@@ -39,5 +34,50 @@
   </div>
 
   <link rel="stylesheet" th:href="@{/css/auth/register.css}"/>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // 인증번호 전송 버튼 클릭 시
+      $('#sendEmailBtn').click(function() {
+        const email = $('#email').val();
+        if (!email) {
+          alert("이메일을 입력해주세요.");
+          return;
+        }
+        $.ajax({
+          url: '/auth/sendEmail',
+          type: 'POST',
+          data: { email: email },
+          success: function(response) {
+            alert(response);
+          },
+          error: function() {
+            alert("이메일 전송에 실패했습니다.");
+          }
+        });
+      });
+
+      // 인증번호 확인 버튼 클릭 시
+      $('#verifyEmailBtn').click(function() {
+        const verificationCode = $('#e_auth').val();
+        if (!verificationCode) {
+          alert("인증번호를 입력해주세요.");
+          return;
+        }
+        $.ajax({
+          url: '/auth/verifyEmail',
+          type: 'POST',
+          data: { verificationCode: verificationCode },
+          success: function(response) {
+            alert(response);
+          },
+          error: function() {
+            alert("인증에 실패했습니다.");
+          }
+        });
+      });
+    });
+  </script>
   </body>
 </html>

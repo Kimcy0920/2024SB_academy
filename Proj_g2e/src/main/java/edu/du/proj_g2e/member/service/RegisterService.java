@@ -4,16 +4,19 @@ import edu.du.proj_g2e.member.entity.Member;
 import edu.du.proj_g2e.member.exception.DuplicateMemberException;
 import edu.du.proj_g2e.member.entity.RegisterRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+
 @Service
 public class RegisterService {
 
-	private final PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-	private final MemberService memberService;
+	@Autowired
+	private MemberService memberService;
 
 	public Long register(RegisterRequest req) {
 		Member member = memberService.selectByEmail(req.getEmail());

@@ -66,6 +66,9 @@ dependencies {
         // Java 8 날짜/시간 API 확장 기능 - Thymeleaf에서 Java 8의 날짜/시간 API를 지원하기 위한 라이브러리
         implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.4.RELEASE'
 
+        // Spring Mail을 사용하여 이메일 전송을 지원
+        implementation 'org.springframework.boot:spring-boot-starter-mail'
+
         // Spring Security 핵심 라이브러리 - 기본적인 인증 및 권한 부여 기능을 제공
         implementation 'org.springframework.security:spring-security-core' // Bcrypt 암호화만 사용
 

@@ -1,38 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/header.html :: frag-header">
-    <title th:text="#{member.register}">회원가입(사용자 정보)</title>
-  </head>
-  <body>
-  <header th:replace="layout/navbar.html :: frag-navbar"></header>
-  <div class="container">
-    <h2 th:text="#{member.info}">Member Info</h2>
-    <hr/>
-    <form th:action="@{/auth/regStep03_User}" method="post">
-      <div class="form-group">
-        <label for="email" th:text="#{email}">Email</label>
-        <input type="text" id="email" class="form-control"/>
-      </div>
+  <title>회원정보입력</title>
+</head>
+<body>
+<header th:replace="layout/navbar.html :: frag-navbar"></header>
+<div class="container">
+  <h2>일반 회원 정보입력</h2>
+  <hr/>
+  <form th:action="@{/auth/regStep03_User}" method="post">
+    <div class="form-group">
+      <label for="email">아이디(이메일)</label>
+      <input type="text" id="email" class="form-control" placeholder="아이디(이메일) 입력" name="email"/>
+      <button type="button" class="btn" id="sendCodeBtn">인증번호 전송</button>
+      <input type="text" id="e_auth" class="form-control" placeholder="인증번호 입력" name="authCode"/>
+      <button type="button" class="btn" id="verifyCodeBtn">인증확인</button>
+      <span id="verifyMsg"></span> <!-- 인증 확인 메시지 표시 -->
+    </div>
 
-      <div class="form-group">
-        <label for="name" th:text="#{name}">Name</label>
-        <input type="text" id="name" class="form-control"/>
-      </div>
+    <div class="form-group">
+      <label for="name" placeholder="성명 입력">성명</label>
+      <input type="text" id="name" class="form-control" name="name"/>
+    </div>
 
-      <div class="form-group">
-        <label for="password" th:text="#{password}">Password</label>
-        <input type="password" id="password" class="form-control"/>
-      </div>
+    <div class="form-group">
+      <label for="password" th:text="#{password}">Password</label>
+      <input type="password" id="password" class="form-control" placeholder="비밀번호 입력" style="margin-bottom: 3px" name="password"/>
+      <input type="password" id="confirmPassword" class="form-control" placeholder="비밀번호 재입력" name="confirmPassword"/>
+    </div>
 
-      <div class="form-group">
-        <label for="confirmPassword" th:text="#{password.confirm}">Confirm Password</label>
-        <input type="password" id="confirmPassword" class="form-control"/>
-      </div>
+    <input type="submit" th:value="#{register.btn}" class="btn btn-submit"/>
+  </form>
+</div>
 
-      <input type="submit" th:value="#{register.btn}" class="btn btn-submit"/>
-    </form>
-  </div>
+<link rel="stylesheet" th:href="@{/css/auth/register.css}"/>
 
-  <link rel="stylesheet" th:href="@{/css/auth/register.css}"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // 인증번호 전송
+    $('#sendCodeBtn').on('click', function() {
+      var email = $('#email').val();
+      $.ajax({
+        url: '/emailConfirm',
+        type: 'GET',
+        data: { email: email },
+        success: function(response) {
+          if (response === "success") {
+            alert('인증번호가 전송되었습니다.');
+          }
+        },
+        error: function() {
+          alert('이메일 전송에 실패했습니다.');
+        }
+      });
+    });
+
+    // 인증번호 확인
+    $('#verifyCodeBtn').on('click', function() {
+      var email = $('#email').val();
+      var authCode = $('#e_auth').val();
+      $.ajax({
+        url: '/verifyCode',
+        type: 'GET',
+        data: { email: email, authCode: authCode },
+        success: function(response) {
+          if (response === "success") {
+            $('#verifyMsg').text("인증이 완료되었습니다.").css("color", "green");
+          } else {
+            $('#verifyMsg').text("인증번호가 틀렸습니다.").css("color", "red");
+          }
+        },
+        error: function() {
+          alert('인증 확인에 실패했습니다.');
+        }
+      });
+    });
+  });
+
+</script>
 </body>
 </html>

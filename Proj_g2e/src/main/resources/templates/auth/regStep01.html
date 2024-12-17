@@ -2,50 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/header.html :: frag-header">
   <meta charset="UTF-8">
-  <link rel="stylesheet" th:href="@{/css/auth/register.css}" />
   <title>회원가입</title>
-  <style>
-    .container {
-      display: flex;
-      flex-direction: row; /* 가로로 배치 */
-      justify-content: space-between;
-      gap: 30px;
-    }
-
-    .section {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-
-    .section-left {
-      background-color: #f4f4f4; /* 일반 회원 섹션 */
-    }
-
-    .section-right {
-      background-color: #e0f7fa; /* 의료업 회원 섹션 */
-    }
-
-    .btn {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    .btn:hover {
-      background-color: #0056b3;
-    }
-  </style>
 </head>
+  <link rel="stylesheet" th:href="@{/css/auth/register.css}" />
 <body>
 <header th:replace="layout/navbar.html :: frag-navbar"></header>
 
-<div class="container">
+<div class="container_1">
   <!-- 일반 회원 섹션 -->
   <div class="section section-left">
     <h2>일반 회원 가입</h2>
