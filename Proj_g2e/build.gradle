@@ -70,7 +70,7 @@ dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-mail'
 
         // AWS S3 파일 업로드
-        implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
         // Spring Security 핵심 라이브러리 - 기본적인 인증 및 권한 부여 기능을 제공
         implementation 'org.springframework.security:spring-security-core' // Bcrypt 암호화만 사용
