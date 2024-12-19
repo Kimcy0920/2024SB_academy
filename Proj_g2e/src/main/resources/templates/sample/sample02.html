@@ -8,7 +8,7 @@
 <div class="container">
   <h2>일반 회원 정보입력</h2>
   <hr/>
-  <form th:action="@{/regStep04}" method="post">
+  <form action="/regStep04" method="post">
     <input type="hidden" name="roleType" value="USER">
     <div class="form-group">
       <label for="email">아이디(이메일)</label>
@@ -38,6 +38,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
+    // // 서버에서 전달된 'redirect' URL을 받아서 리다이렉트
+    // const redirectUrl = /*[[${redirectUrl}]]*/ ''; // 서버에서 전달된 redirect URL을 받아옵니다.
+    // if (redirectUrl.startsWith("redirect:")) {
+    //   window.location.href = redirectUrl.replace("redirect:", "");
+    // }
+
     // 인증번호 전송 버튼 클릭 시
     $('#sendEmailBtn').click(function() {
       const email = $('#email').val();
