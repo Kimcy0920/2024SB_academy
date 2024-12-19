@@ -1,2 +1,0 @@
-application-private.properties
-test_1219.txt

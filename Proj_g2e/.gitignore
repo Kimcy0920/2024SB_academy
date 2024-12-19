@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Exclude the application-private.properties file
+application-private.properties
