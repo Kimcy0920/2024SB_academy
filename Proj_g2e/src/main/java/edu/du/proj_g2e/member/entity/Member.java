@@ -6,7 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,9 +42,9 @@ public class Member {
     }
 
     @PrePersist
-    public void prePersist() {
+    public void prePersist() { // 현재 시간을 자동으로 설정
         if (this.regDate == null) {
-            this.regDate = LocalDateTime.now();  // 현재 시간을 자동으로 설정
+            this.regDate = LocalDateTime.now();
         }
     }
 }

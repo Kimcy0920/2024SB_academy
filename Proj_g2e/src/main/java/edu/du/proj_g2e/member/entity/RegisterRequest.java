@@ -20,6 +20,8 @@ public class RegisterRequest {
 
 	// 이름 필드
 	@NotEmpty(message = "이름은 필수입니다.")
+	@Pattern(regexp = "^[가-힣a-zA-Z\\s]{2,30}$",
+			message = "성명은 2~30자의 한글, 영문, 공백만 허용됩니다.")
 	private String name;
 
 	@NotEmpty(message = "비밀번호는 필수입니다.")
@@ -30,6 +32,8 @@ public class RegisterRequest {
 	// 비밀번호 확인 필드
 	@NotEmpty(message = "확인 비밀번호는 필수입니다.")
 	private String confirmPassword;
+
+	private String roleType;
 
 	// 비밀번호와 비밀번호 확인이 일치하는지 체크하는 메서드
 	public boolean isPasswordEqualToConfirmPassword() {
