@@ -35,6 +35,10 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime regDate;
 
+    // 약관 동의
+    private boolean agreeTerms;
+    private boolean agreePrivacy;
+
     public void changePassword(String oldPassword, String newPassword) {
         if (!password.equals(oldPassword))
             throw new WrongIdPasswordException();

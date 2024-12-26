@@ -20,6 +20,9 @@ public class RegisterService {
 			throw new DuplicateMemberException("dup email " + req.getEmail());
 		}
 
+		System.out.println("agreeTerms: " + req.isAgreeTerms());
+		System.out.println("agreePrivacy: " + req.isAgreePrivacy());
+
 		// 비밀번호 암호화
 		String encodePassword = passwordEncoder.encode(req.getPassword());
 
@@ -28,7 +31,9 @@ public class RegisterService {
 				.email(req.getEmail())
 				.password(encodePassword)  // 암호화된 비밀번호만 저장
 				.name(req.getName())
-				.role(req.getRoleType())  // 전달된 role 값으로 설정
+				.role(req.getRole())  // 전달된 role 값으로 설정
+				.agreeTerms(req.isAgreeTerms())
+				.agreePrivacy(req.isAgreePrivacy())
 				.build();
 
 		memberService.insert(newMember);

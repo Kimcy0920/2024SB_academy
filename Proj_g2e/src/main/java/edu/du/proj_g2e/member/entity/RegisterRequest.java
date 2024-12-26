@@ -33,7 +33,11 @@ public class RegisterRequest {
 	@NotEmpty(message = "확인 비밀번호는 필수입니다.")
 	private String confirmPassword;
 
-	private String roleType;
+	private String role;
+
+	// 약관 동의
+	private boolean agreeTerms;
+	private boolean agreePrivacy;
 
 	// 비밀번호와 비밀번호 확인이 일치하는지 체크하는 메서드
 	public boolean isPasswordEqualToConfirmPassword() {
