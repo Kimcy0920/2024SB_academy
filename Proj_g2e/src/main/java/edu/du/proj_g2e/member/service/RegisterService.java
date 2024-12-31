@@ -1,8 +1,8 @@
 package edu.du.proj_g2e.member.service;
 
-import edu.du.proj_g2e.member.entity.Member;
+import edu.du.proj_g2e.member.entity_dto.Member;
 import edu.du.proj_g2e.member.exception.DuplicateMemberException;
-import edu.du.proj_g2e.member.entity.RegisterRequest;
+import edu.du.proj_g2e.member.entity_dto.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,6 @@ public class RegisterService {
 		if (member != null) {
 			throw new DuplicateMemberException("dup email " + req.getEmail());
 		}
-
-		System.out.println("agreeTerms: " + req.isAgreeTerms());
-		System.out.println("agreePrivacy: " + req.isAgreePrivacy());
-
 		// 비밀번호 암호화
 		String encodePassword = passwordEncoder.encode(req.getPassword());
 

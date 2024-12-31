@@ -1,4 +1,4 @@
-package edu.du.proj_g2e.member.config;
+package edu.du.proj_g2e.member.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

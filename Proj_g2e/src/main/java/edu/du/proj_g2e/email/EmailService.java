@@ -1,4 +1,4 @@
-package edu.du.proj_g2e.member.email;
+package edu.du.proj_g2e.email;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.mail.javamail.JavaMailSender;

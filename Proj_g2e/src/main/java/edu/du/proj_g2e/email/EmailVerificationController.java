@@ -1,4 +1,4 @@
-package edu.du.proj_g2e.member.email;
+package edu.du.proj_g2e.email;
 
 import edu.du.proj_g2e.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

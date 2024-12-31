@@ -1,6 +1,6 @@
 package edu.du.proj_g2e.member.service;
 
-import edu.du.proj_g2e.member.entity.Member;
+import edu.du.proj_g2e.member.entity_dto.Member;
 import edu.du.proj_g2e.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

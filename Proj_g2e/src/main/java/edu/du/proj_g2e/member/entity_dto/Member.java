@@ -1,4 +1,4 @@
-package edu.du.proj_g2e.member.entity;
+package edu.du.proj_g2e.member.entity_dto;
 
 import edu.du.proj_g2e.member.exception.WrongIdPasswordException;
 import lombok.*;

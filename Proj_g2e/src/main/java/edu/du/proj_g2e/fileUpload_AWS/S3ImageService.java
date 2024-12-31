@@ -64,7 +64,7 @@ public class S3ImageService {
 
     if (!allowedExtensions.contains(extension)) {
       // 허용되지 않은 확장자인 경우 예외 발생
-      throw new IllegalArgumentException("Invalid file extension. Allowed extensions: jpg, jpeg, png, gif.");
+      throw new IllegalArgumentException("Invalid file extension. Allowed extensions: jpg, jpeg, png.");
     }
   }
 

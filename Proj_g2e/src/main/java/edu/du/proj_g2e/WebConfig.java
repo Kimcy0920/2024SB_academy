@@ -1,4 +1,4 @@
-package edu.du.proj_g2e.member.config;
+package edu.du.proj_g2e;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
